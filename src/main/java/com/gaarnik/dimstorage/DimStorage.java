@@ -1,8 +1,14 @@
 package com.gaarnik.dimstorage;
 
 import net.minecraftforge.common.Configuration;
+
+import com.gaarnik.dimstorage.common.BlockDimChest;
+import com.gaarnik.dimstorage.storage.DimStorageManager;
+import com.gaarnik.dimstorage.storage.chest.DimChestPlugin;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -17,10 +23,16 @@ public class DimStorage {
     public static final String MC_VERSION = "1.6.4";
 
 	// ****************************************************************
+    @Instance
+    public static DimStorage instance = new DimStorage();
+    
     @SidedProxy(clientSide="com.gaarnik.dimstorage.client.ClientProxy", serverSide="com.gaarnik.dimstorage.server.ServerProxy")
     public static CommonProxy proxy;
     
     public static Configuration config;
+    
+    // block
+    public static BlockDimChest dimChest;
     
 	// ****************************************************************
     @EventHandler
@@ -33,7 +45,8 @@ public class DimStorage {
     
     @EventHandler
     public void init(FMLInitializationEvent event) {
-
+    	DimStorageManager.registerPlugin(new DimChestPlugin());
+        
     	proxy.init(event);
     }
 

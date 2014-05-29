@@ -1,5 +1,7 @@
 package com.gaarnik.dimstorage.server;
 
-public class ServerProxy {
+import com.gaarnik.dimstorage.CommonProxy;
+
+public class ServerProxy extends CommonProxy {
 
 }

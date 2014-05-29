@@ -1,5 +1,7 @@
 package com.gaarnik.dimstorage.client;
 
-public class ClientProxy {
+import com.gaarnik.dimstorage.CommonProxy;
+
+public class ClientProxy extends CommonProxy {
 
 }
