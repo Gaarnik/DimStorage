@@ -8,6 +8,7 @@ container.dimchest=Coffre Dimensionnel
 
 
 #Items
+item.dimcore.name=Coeur Dimensionnel
 
 #Blocks
 tile.dimchest.name=Coffre Dimensionnel

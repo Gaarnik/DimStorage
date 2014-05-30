@@ -8,6 +8,7 @@ container.dimchest=Dimensional Chest
 
 
 #Items
+item.dimcore.name=Dimensional Core
 
 #Blocks
 tile.dimchest.name=Dimensional Chest

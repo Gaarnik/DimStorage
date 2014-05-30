@@ -22,14 +22,11 @@ public abstract class CommonProxy {
 
 	public void init(FMLInitializationEvent event) {
 		// DimCore
-		DimStorage.dimCore = new ItemDimCore(DimStorage.config.get("item", "DimCore", 1447).getInt());
-		DimStorage.dimCore.setUnlocalizedName("dimcore");
+		DimStorage.dimCore = new ItemDimCore(DimStorage.config.get("item", "DimCore", 1447).getInt()).setUnlocalizedName("dimcore");
 		GameRegistry.registerItem(DimStorage.dimCore, "item_dimcore");
-		MinecraftForge.EVENT_BUS.register(DimStorage.dimCore);
 		
 		// DimChest
-		DimStorage.dimChest = new BlockDimChest(DimStorage.config.get("block", "DimChest", 1547).getInt());
-		DimStorage.dimChest.setUnlocalizedName("dimchest");
+		DimStorage.dimChest = new BlockDimChest(DimStorage.config.get("block", "DimChest", 1547).getInt()).setUnlocalizedName("dimchest");
 		GameRegistry.registerBlock(DimStorage.dimChest, "block_dimchest");
 		MinecraftForge.EVENT_BUS.register(DimStorage.dimChest);
 		

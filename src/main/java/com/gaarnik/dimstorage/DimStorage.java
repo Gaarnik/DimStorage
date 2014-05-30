@@ -1,6 +1,8 @@
 package com.gaarnik.dimstorage;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
@@ -45,10 +47,10 @@ public class DimStorage {
 	};
     
     // block
-    public static BlockDimChest dimChest;
+    public static Block dimChest;
     
     // item
-    public static ItemDimCore dimCore;
+    public static Item dimCore;
     
 	// ****************************************************************
     @EventHandler
