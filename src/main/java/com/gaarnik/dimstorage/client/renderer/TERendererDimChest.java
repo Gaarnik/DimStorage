@@ -49,9 +49,10 @@ public class TERendererDimChest extends TileEntitySpecialRenderer {
 		int l2 = l / 65536;
 		tessellator.setColorOpaque_F(f, f, f);
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)l1, (float)l2); 
-
-		int dir = world.getBlockMetadata(i, j, k);
-
+		int dir = 0;
+		if(entity != null)
+			dir = entity.getDirection();
+		
 		GL11.glPushMatrix();
 		this.bindTexture(texture);
 

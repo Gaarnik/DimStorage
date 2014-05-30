@@ -46,10 +46,14 @@ public class BlockDimChest extends BlockContainer {
 	
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
-//		int direction = MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3;
 		int direction =  (MathHelper.floor_double((double)(player.rotationYaw * 4.0F / 360.0F) + 2.5D) & 3) + 2;
-		
-        world.setBlockMetadataWithNotify(x, y, z, direction, 0);
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		if(te instanceof TEDimChest)
+		{
+			((TEDimChest) te).setDirection((byte)direction);;
+			world.markBlockForUpdate(x, y, z);
+		}
+//        world.setBlockMetadataWithNotify(x, y, z, direction, 0);
 	}
 
 	// ****************************************************************
