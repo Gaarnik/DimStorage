@@ -44,8 +44,8 @@ public abstract class AbstractDimStorage {
     public void setClean() {
         this.dirty = false;
     }
-    
-	// ****************************************************************
+
+    // ****************************************************************
     public abstract String getType();
     
     public abstract void loadFromTag(NBTTagCompound tag);

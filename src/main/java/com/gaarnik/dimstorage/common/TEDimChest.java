@@ -1,5 +1,6 @@
 package com.gaarnik.dimstorage.common;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -36,6 +37,18 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 	public void reloadStorage() {
 		this.storage = (DimChestStorage) DimStorageManager.instance(worldObj.isRemote).getStorage(this.owner, this.freq, DimChestStorage.TYPE);
+	}
+
+	public void swapOwner() {
+		if(!this.worldObj.isRemote)
+			return;
+		
+		if(this.owner.equals("public"))
+			this.owner = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+		else
+			this.owner = "public";
+		
+		this.reloadStorage();
 	}
 
 	// ****************************************************************
@@ -110,6 +123,7 @@ public class TEDimChest extends TileEntity implements IInventory {
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
+		
 		tag.setString("owner", this.owner);
 		tag.setInteger("freq", this.freq);
 	}

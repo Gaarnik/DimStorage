@@ -1,5 +1,7 @@
 package com.gaarnik.dimstorage;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 
 import com.gaarnik.dimstorage.common.BlockDimChest;
@@ -13,6 +15,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = DimStorage.MODID, version = DimStorage.VERSION, acceptedMinecraftVersions=DimStorage.MC_VERSION)
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
@@ -33,11 +37,10 @@ public class DimStorage {
 	
 	public static CreativeTabs tabDimStorage = new CreativeTabs("dimStorage")
 	{
-		@Override
 		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem()
-		{
-			return Item.getItemFromBlock(Blocks.stone); // temporary
+		@Override
+		public ItemStack getIconItemStack() {
+			return new ItemStack(DimStorage.dimChest, 1, 0);
 		}
 	};
     

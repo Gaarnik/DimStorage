@@ -2,20 +2,23 @@ package com.gaarnik.dimstorage.common;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import com.gaarnik.dimstorage.DimStorage;
 import com.gaarnik.dimstorage.DimStorageGUIHandler;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockDimChest extends BlockContainer {
 	// ****************************************************************
-	private IIcon[] top, sides, bottom;
-
 	
 	// ****************************************************************
+	private Icon top, sides, bottom;
 
 	// ****************************************************************
 	public BlockDimChest(int id) {
@@ -41,15 +44,15 @@ public class BlockDimChest extends BlockContainer {
 	}
 
 	// ****************************************************************
-
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	@Override
+	public void registerIcons(IconRegister iconRegister) {
 		top = iconRegister.registerIcon(DimStorage.MODID + ":dim_chesttop_top");
 		sides = iconRegister.registerIcon(DimStorage.MODID + ":dim_chesttop_sides");
 		bottom = iconRegister.registerIcon(DimStorage.MODID + ":dim_chesttop_bottom");
 	}
 
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int metadata) {
+	public Icon getIcon(int side, int metadata) {
 		switch(side) {
 			case 0: return  bottom;
 			case 1: return  top;
