@@ -43,7 +43,8 @@ public class GUIDimCHest extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		
+		this.fontRenderer.drawString(StatCollector.translateToLocal("DimChest"), 8, 6, 4210752);
+		this.fontRenderer.drawString(StatCollector.translateToLocal("Inventory"), 8, 128, 4210752);
 	}
 
 	// ****************************************************************

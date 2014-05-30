@@ -7,9 +7,11 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import com.gaarnik.dimstorage.storage.AbstractDimStorage;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
+import com.gaarnik.dimstorage.util.InventoryUtils;
 
 public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	// ****************************************************************
+	public static final String TYPE = "DimChest";
 
 	// ****************************************************************
 	private ItemStack[] items;
@@ -24,14 +26,13 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 
 	// ****************************************************************
 	public void empty() {
-        this.items = new ItemStack[getSizeInventory()];
+        this.items = new ItemStack[this.getSizeInventory()];
     }
 
 	// ****************************************************************
 	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+	public ItemStack decrStackSize(int slot, int size) {
+		return InventoryUtils.decrStackSize(this, slot, size);
 	}
 	
 	@Override
@@ -43,8 +44,7 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
-		// TODO Auto-generated method stub
-		return null;
+		return InventoryUtils.getStackInSlotOnClosing(this, slot);
 	}
 
 	@Override
@@ -108,21 +108,24 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	// ****************************************************************
 	@Override
 	public void loadFromTag(NBTTagCompound tag) {
-		// TODO Auto-generated method stub
-		
+		this.empty();
+        
+		InventoryUtils.readItemStacksFromTag(this.items, tag.getTagList("items"));
 	}
 
 	@Override
 	public NBTTagCompound saveToTag() {
-		// TODO Auto-generated method stub
-		return null;
+		NBTTagCompound compound = new NBTTagCompound();
+        compound.setTag("items", InventoryUtils.writeItemStacksToTag(this.items));
+
+        return compound;
 	}
 
 	// ****************************************************************
 
 	// ****************************************************************
 	@Override
-	public String getType() { return "chest"; }
+	public String getType() { return TYPE; }
 	
 	public int getOpenCount() { return this.openCount; }
 

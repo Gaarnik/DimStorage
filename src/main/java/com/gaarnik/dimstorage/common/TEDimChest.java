@@ -3,6 +3,7 @@ package com.gaarnik.dimstorage.common;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 
@@ -14,12 +15,13 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 	// ****************************************************************
 	private DimChestStorage storage;
-	
+
 	private String owner;
 	private int freq;
 
 	// ****************************************************************
 	public TEDimChest() {
+		this.owner = "public";
 		this.freq = 1;
 	}
 
@@ -33,7 +35,7 @@ public class TEDimChest extends TileEntity implements IInventory {
 	}
 
 	public void reloadStorage() {
-		this.storage = (DimChestStorage) DimStorageManager.instance(worldObj.isRemote).getStorage(this.owner, this.freq, "DimChest");
+		this.storage = (DimChestStorage) DimStorageManager.instance(worldObj.isRemote).getStorage(this.owner, this.freq, DimChestStorage.TYPE);
 	}
 
 	// ****************************************************************
@@ -41,12 +43,12 @@ public class TEDimChest extends TileEntity implements IInventory {
 	public void openChest() {
 		this.storage.openChest();
 	}
-	
+
 	@Override
 	public void closeChest() {
 		this.storage.closeChest();
 	}
-	
+
 	@Override
 	public ItemStack decrStackSize(int i, int j) {
 		return this.storage.decrStackSize(i, j);
@@ -98,6 +100,19 @@ public class TEDimChest extends TileEntity implements IInventory {
 	}
 
 	// ****************************************************************
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+
+		this.owner = tag.getString("owner");
+		this.freq = tag.getInteger("freq");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		tag.setString("owner", this.owner);
+		tag.setInteger("freq", this.freq);
+	}
 
 	// ****************************************************************
 
