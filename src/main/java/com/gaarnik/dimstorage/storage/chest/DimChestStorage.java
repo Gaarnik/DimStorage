@@ -57,7 +57,9 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) { 
-		return (this.owner.equals("public")) || (this.owner.equals(entityplayer.getDisplayName()));
+		// entityplayer.getCommandSenderName() it's better, 
+		// getDisplayName() could be modify with a forge event
+		return (this.owner.equals("public")) || (this.owner.equals(entityplayer.getCommandSenderName()));
 	}
 
 	@Override

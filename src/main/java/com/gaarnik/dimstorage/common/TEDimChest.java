@@ -114,8 +114,23 @@ public class TEDimChest extends TileEntity implements IInventory {
 		tag.setInteger("freq", this.freq);
 	}
 
+	public void setOwner(String str) {
+		this.owner = str;
+	}
+	
+	public void setFreq(int i) {
+		this.freq = i;
+	}
+	
 	// ****************************************************************
 
+	public String getOwner() {
+		return this.owner;
+	}
+	
+	public int getFreq() {
+		return this.freq;
+	}
 	// ****************************************************************
 
 }
