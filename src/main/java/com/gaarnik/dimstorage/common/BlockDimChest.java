@@ -12,7 +12,9 @@ import com.gaarnik.dimstorage.DimStorageGUIHandler;
 
 public class BlockDimChest extends BlockContainer {
 	// ****************************************************************
+	private IIcon[] top, sides, bottom;
 
+	
 	// ****************************************************************
 
 	// ****************************************************************
@@ -22,7 +24,8 @@ public class BlockDimChest extends BlockContainer {
 		this.setHardness(20F);
 		this.setResistance(100F);
 		this.setStepSound(soundStoneFootstep);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		
+		this.setCreativeTab(DimStorage.tabDimStorage);
 	}
 
 	// ****************************************************************
@@ -39,6 +42,21 @@ public class BlockDimChest extends BlockContainer {
 
 	// ****************************************************************
 
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		top = iconRegister.registerIcon(DimStorage.MODID + ":dim_chesttop_top");
+		sides = iconRegister.registerIcon(DimStorage.MODID + ":dim_chesttop_sides");
+		bottom = iconRegister.registerIcon(DimStorage.MODID + ":dim_chesttop_bottom");
+	}
+
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int metadata) {
+		switch(side) {
+			case 0: return  bottom;
+			case 1: return  top;
+			default: return sides;
+		}
+	}
+	
 	// ****************************************************************
 
 	// ****************************************************************

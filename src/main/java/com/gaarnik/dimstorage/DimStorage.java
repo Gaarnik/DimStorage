@@ -30,6 +30,16 @@ public class DimStorage {
     public static CommonProxy proxy;
     
     public static Configuration config;
+	
+	public static CreativeTabs tabDimStorage = new CreativeTabs("dimStorage")
+	{
+		@Override
+		@SideOnly(Side.CLIENT)
+		public Item getTabIconItem()
+		{
+			return Item.getItemFromBlock(Blocks.stone); // temporary
+		}
+	};
     
     // block
     public static BlockDimChest dimChest;
@@ -55,3 +65,4 @@ public class DimStorage {
 	// ****************************************************************
 
 }
+
