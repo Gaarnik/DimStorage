@@ -5,6 +5,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 
@@ -42,29 +45,29 @@ public class TEDimChest extends TileEntity implements IInventory {
 	public void swapOwner() {
 		if(!this.worldObj.isRemote)
 			return;
-		
+
 		if(this.owner.equals("public"))
 			this.owner = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
 		else
 			this.owner = "public";
-		
+
 		this.reloadStorage();
 	}
 
 	public void downFreq() {
 		if(!this.worldObj.isRemote)
 			return;
-		
+
 		if(this.freq > 1) {
 			this.freq--;
 			this.reloadStorage();
 		}
 	}
-	
+
 	public void upFreq() {
 		if(!this.worldObj.isRemote)
 			return;
-		
+
 		this.freq++;
 		this.reloadStorage();
 	}
@@ -131,6 +134,17 @@ public class TEDimChest extends TileEntity implements IInventory {
 	}
 
 	// ****************************************************************
+	public Packet getDescriptionPacket() {
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		
+		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+	}
+
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+		this.readFromNBT(packet.data);
+	}
+
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 
@@ -141,7 +155,7 @@ public class TEDimChest extends TileEntity implements IInventory {
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
-		
+
 		tag.setString("owner", this.owner);
 		tag.setInteger("freq", this.freq);
 	}

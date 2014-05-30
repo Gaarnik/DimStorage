@@ -2,10 +2,12 @@ package com.gaarnik.dimstorage.common;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.gaarnik.dimstorage.DimStorage;
@@ -18,7 +20,6 @@ public class BlockDimChest extends BlockContainer {
 	// ****************************************************************
 	
 	// ****************************************************************
-	private Icon top, sides, bottom;
 
 	// ****************************************************************
 	public BlockDimChest(int id) {
@@ -42,22 +43,24 @@ public class BlockDimChest extends BlockContainer {
 
 		return true;
 	}
+	
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
+		int dir = MathHelper.floor_double((double)((player.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+        world.setBlockMetadataWithNotify(x, y, z, dir, 0);
+	}
 
 	// ****************************************************************
+	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IconRegister iconRegister) {
-		top = iconRegister.registerIcon(DimStorage.MODID + ":dim_chesttop_top");
-		sides = iconRegister.registerIcon(DimStorage.MODID + ":dim_chesttop_sides");
-		bottom = iconRegister.registerIcon(DimStorage.MODID + ":dim_chesttop_bottom");
+	public boolean shouldSideBeRendered(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int par5) {
+		return false;
 	}
 
 	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int metadata) {
-		switch(side) {
-			case 0: return  bottom;
-			case 1: return  top;
-			default: return sides;
-		}
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
 	}
 	
 	// ****************************************************************
