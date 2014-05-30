@@ -22,7 +22,7 @@ public abstract class CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		DimStorage.dimChest = new BlockDimChest(DimStorage.config.get("block", "DimChest", 1547).getInt());
 		DimStorage.dimChest.setUnlocalizedName("dimchest");
-        GameRegistry.registerBlock(DimStorage.dimChest, "enderChest");
+        GameRegistry.registerBlock(DimStorage.dimChest, "block_dimchest");
         MinecraftForge.EVENT_BUS.register(DimStorage.dimChest);
         
         GameRegistry.registerTileEntity(TEDimChest.class, "TEDimChest");
