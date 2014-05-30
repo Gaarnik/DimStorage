@@ -10,27 +10,28 @@ import com.gaarnik.dimstorage.DimStorage;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class RecipeDimChest implements IRecipe {
+public class RecipeDimCore implements IRecipe {
 	// ****************************************************************
 
 	// ****************************************************************
-    private static boolean init;
+	private static boolean init;
 
 	// ****************************************************************
 	public static void init() {
-        if(init)return;
+		if(init)return;
         init = true;
         
-        RecipeDimCore instance = new RecipeDimCore();
+        RecipeDimChest instance = new RecipeDimChest();
         GameRegistry.addRecipe(instance);
         
-        GameRegistry.addRecipe(new ItemStack(DimStorage.dimChest, 1), new Object[]{
-            "iii",
-            "ici",
-            "iii",
+        GameRegistry.addRecipe(new ItemStack(DimStorage.dimCore, 1), new Object[]{
+            "rir",
+            "iei",
+            "rir",
             'i', Item.ingotIron,
-            'c', DimStorage.dimCore});
-    }
+            'r', Item.redstone,
+            'e', Item.enderPearl});
+	}
 
 	// ****************************************************************
 	@Override
