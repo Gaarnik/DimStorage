@@ -14,14 +14,14 @@ public class ContainerDimChest extends Container {
 	// *******************************************************************
 	public ContainerDimChest(InventoryPlayer inventory, TEDimChest tileEntity) {
 		this.tileEntity = tileEntity;
-
-		int y;
 		
+		int y;
+
 		// chest inventory
 		for (y = 0; y < 6; y++)
 			for (int x = 0; x < 9; x++)
 				this.addSlotToContainer(new Slot(this.tileEntity, x + y * 9, 8 + x * 18, 18 + y * 18));
-		
+
 		// player inventory
 		for (y = 0; y < 3; ++y)
 			for (int x = 0; x < 9; ++x)
@@ -44,3 +44,4 @@ public class ContainerDimChest extends Container {
 	}
 
 }
+

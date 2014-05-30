@@ -17,7 +17,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GUIDimCHest extends GuiContainer {
 	// ****************************************************************
-	private static final int BUTTON_OWNER = 1;
+	private static final int BUTTON_OWNER 		= 1;
+	private static final int BUTTON_FREQ_DOWN 	= 2;
+	private static final int BUTTON_FREQ_UP 	= 3;
 	
 	private static final ResourceLocation background = new ResourceLocation("dimstorage", "gui/dimchest.png");
 
@@ -42,8 +44,14 @@ public class GUIDimCHest extends GuiContainer {
 		
 		this.buttonList.clear();
 		
-		GuiButton ownerButton = new GuiButton(BUTTON_OWNER, 297, 75, 60, 20, "Change");
+		GuiButton ownerButton = new GuiButton(BUTTON_OWNER, 295, 75, 64, 20, "Change");
 		this.buttonList.add(ownerButton);
+		
+		GuiButton freqDownButton = new GuiButton(BUTTON_FREQ_DOWN, 295, 125, 20, 20, "<");
+		this.buttonList.add(freqDownButton);
+		
+		GuiButton freqUpButton = new GuiButton(BUTTON_FREQ_UP, 338, 125, 20, 20, ">");
+		this.buttonList.add(freqUpButton);
 	}
 	
 	@Override
@@ -52,6 +60,14 @@ public class GUIDimCHest extends GuiContainer {
 		
 		case BUTTON_OWNER:
 			this.tileEntity.swapOwner();
+			break;
+			
+		case BUTTON_FREQ_DOWN:
+			this.tileEntity.downFreq();
+			break;
+			
+		case BUTTON_FREQ_UP:
+			this.tileEntity.upFreq();
 			break;
 			
 		}
@@ -78,7 +94,7 @@ public class GUIDimCHest extends GuiContainer {
 
 		// freq
 		this.fontRenderer.drawString(StatCollector.translateToLocal("Freq:"), 180, 100, 4210752);
-		this.fontRenderer.drawString(StatCollector.translateToLocal(""+this.tileEntity.getFreq()), 210, 120, 4210752);
+		this.fontRenderer.drawString(StatCollector.translateToLocal(""+this.tileEntity.getFreq()), 212, 121, 4210752);
 		
 		// lock
 		//TODO add lock checkbox

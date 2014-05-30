@@ -35,8 +35,7 @@ public class DimStorage {
     
     public static Configuration config;
 	
-	public static CreativeTabs tabDimStorage = new CreativeTabs("dimStorage")
-	{
+	public static CreativeTabs tabDimStorage = new CreativeTabs("dimStorage") {
 		@SideOnly(Side.CLIENT)
 		@Override
 		public ItemStack getIconItemStack() {

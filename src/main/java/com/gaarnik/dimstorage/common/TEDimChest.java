@@ -51,6 +51,24 @@ public class TEDimChest extends TileEntity implements IInventory {
 		this.reloadStorage();
 	}
 
+	public void downFreq() {
+		if(!this.worldObj.isRemote)
+			return;
+		
+		if(this.freq > 1) {
+			this.freq--;
+			this.reloadStorage();
+		}
+	}
+	
+	public void upFreq() {
+		if(!this.worldObj.isRemote)
+			return;
+		
+		this.freq++;
+		this.reloadStorage();
+	}
+
 	// ****************************************************************
 	@Override
 	public void openChest() {
