@@ -5,7 +5,11 @@ itemGroup.dimStorage=DimStorage
 #Conatiner
 container.dimchest=Dimensional Chest
 
-
+#Gui
+gui.dimchest.change=Change
+gui.dimchest.owner=Owner :
+gui.dimchest.frequency=Frequency :
+gui.dimchest.locked=Locked
 
 #Items
 item.dimcore.name=Dimensional Core

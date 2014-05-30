@@ -5,6 +5,11 @@ itemGroup.dimStorage=DimStorage
 #Conatiner
 container.dimchest=Coffre Dimensionnel
 
+#Gui
+gui.dimchest.change=Change
+gui.dimchest.owner=Propriétaire :
+gui.dimchest.frequency=Frequence :
+gui.dimchest.locked=verrouillé
 
 
 #Items

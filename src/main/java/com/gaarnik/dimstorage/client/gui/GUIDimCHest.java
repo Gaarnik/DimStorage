@@ -25,6 +25,7 @@ public class GUIDimCHest extends GuiContainer {
 
 	// ****************************************************************
 	private TEDimChest tileEntity;
+	private String change, owner, freq, locked, guiName, inventory;
 	
 	// ****************************************************************
 	public GUIDimCHest(InventoryPlayer player, TEDimChest tileEntity) {
@@ -42,9 +43,17 @@ public class GUIDimCHest extends GuiContainer {
 	public void initGui() {
 		super.initGui();
 		
+		/** Get translation **/
+		this.change = StatCollector.translateToLocal("gui.dimchest.change");
+		this.owner = StatCollector.translateToLocal("gui.dimchest.owner");
+		this.freq = StatCollector.translateToLocal("gui.dimchest.frequency");
+		this.locked = StatCollector.translateToLocal("gui.dimchest.locked");
+		this.guiName = StatCollector.translateToLocal("container.dimchest");
+		this.inventory = StatCollector.translateToLocal("container.inventory");
+		
 		this.buttonList.clear();
 		
-		GuiButton ownerButton = new GuiButton(BUTTON_OWNER, 295, 75, 64, 20, "Change");
+		GuiButton ownerButton = new GuiButton(BUTTON_OWNER, 295, 75, 64, 20, this.change);
 		this.buttonList.add(ownerButton);
 		
 		GuiButton freqDownButton = new GuiButton(BUTTON_FREQ_DOWN, 295, 125, 20, 20, "<");
@@ -84,20 +93,21 @@ public class GUIDimCHest extends GuiContainer {
 	}
 	
 	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		this.fontRenderer.drawString(StatCollector.translateToLocal("DimChest"), 8, 6, 4210752);
-		this.fontRenderer.drawString(StatCollector.translateToLocal("Inventory"), 8, 128, 4210752);
+	protected void drawGuiContainerForegroundLayer(int x, int y) {
+		this.fontRenderer.drawString(StatCollector.translateToLocal(this.guiName), 8, 6, 4210752);
+		this.fontRenderer.drawString(StatCollector.translateToLocal(this.inventory), 8, 128, 4210752);
 		
 		// owner
-		this.fontRenderer.drawString(StatCollector.translateToLocal("Owner:"), 180, 35, 4210752);
+		this.fontRenderer.drawString(StatCollector.translateToLocal(this.owner), 180, 35, 4210752);
 		this.fontRenderer.drawString(StatCollector.translateToLocal(this.tileEntity.getOwner()), 180, 50, 4210752);
 
 		// freq
-		this.fontRenderer.drawString(StatCollector.translateToLocal("Freq:"), 180, 100, 4210752);
+		this.fontRenderer.drawString(StatCollector.translateToLocal(this.freq), 180, 100, 4210752);
 		this.fontRenderer.drawString(StatCollector.translateToLocal(""+this.tileEntity.getFreq()), 212, 121, 4210752);
 		
 		// lock
 		//TODO add lock checkbox
+		// name : this.locked
 	}
 
 	// ****************************************************************
