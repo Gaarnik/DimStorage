@@ -10,6 +10,8 @@ gui.dimchest.change=Change
 gui.dimchest.owner=Owner :
 gui.dimchest.frequency=Frequency :
 gui.dimchest.locked=Locked
+gui.dimchest.yes=Yes
+gui.dimchest.no=No
 
 #Items
 item.dimcore.name=Dimensional Core

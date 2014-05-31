@@ -2,9 +2,5 @@ DimChest UI:
 - synchronisation des actions entre l'interface et la TileEntity
 - positionner les boutons de façon relative
 
-DimChest Rendu:
-- faire en sorte que le model de base soit correctment positionné \ok
-
 Divers:
-- ajouter les différentes chaînes de texte des UI dans le fichier de lang \ DimCore ok
 - préparer une tetxure temporaire pour le DimCore.

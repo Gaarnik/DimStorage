@@ -20,12 +20,16 @@ public class GUIDimCHest extends GuiContainer {
 	private static final int BUTTON_OWNER 		= 1;
 	private static final int BUTTON_FREQ_DOWN 	= 2;
 	private static final int BUTTON_FREQ_UP 	= 3;
+	private static final int BUTTON_LOCKED 		= 4;
 	
 	private static final ResourceLocation background = new ResourceLocation("dimstorage", "gui/dimchest.png");
 
 	// ****************************************************************
 	private TEDimChest tileEntity;
-	private String change, owner, freq, locked, guiName, inventory;
+	
+	private String change, owner, freq, locked, yes, no,guiName, inventory;
+	
+	private GuiButton lockedButton;
 	
 	// ****************************************************************
 	public GUIDimCHest(InventoryPlayer player, TEDimChest tileEntity) {
@@ -48,19 +52,24 @@ public class GUIDimCHest extends GuiContainer {
 		this.owner = StatCollector.translateToLocal("gui.dimchest.owner");
 		this.freq = StatCollector.translateToLocal("gui.dimchest.frequency");
 		this.locked = StatCollector.translateToLocal("gui.dimchest.locked");
+		this.yes = StatCollector.translateToLocal("gui.dimchest.yes");
+		this.no = StatCollector.translateToLocal("gui.dimchest.no");
 		this.guiName = StatCollector.translateToLocal("container.dimchest");
 		this.inventory = StatCollector.translateToLocal("container.inventory");
 		
 		this.buttonList.clear();
 		
-		GuiButton ownerButton = new GuiButton(BUTTON_OWNER, 295, 75, 64, 20, this.change);
+		GuiButton ownerButton = new GuiButton(BUTTON_OWNER, this.width / 2 + 55, this.height / 2 - 50, 64, 20, this.change);
 		this.buttonList.add(ownerButton);
 		
-		GuiButton freqDownButton = new GuiButton(BUTTON_FREQ_DOWN, 295, 125, 20, 20, "<");
+		GuiButton freqDownButton = new GuiButton(BUTTON_FREQ_DOWN, this.width / 2 + 55, this.height / 2 - 1, 20, 20, "<");
 		this.buttonList.add(freqDownButton);
 		
-		GuiButton freqUpButton = new GuiButton(BUTTON_FREQ_UP, 338, 125, 20, 20, ">");
+		GuiButton freqUpButton = new GuiButton(BUTTON_FREQ_UP, this.width / 2 + 99, this.height / 2 - 1, 20, 20, ">");
 		this.buttonList.add(freqUpButton);
+
+		this.lockedButton = new GuiButton(BUTTON_LOCKED, this.width / 2 + 55, this.height / 2 + 45, 64, 20, this.no);
+		this.buttonList.add(this.lockedButton);
 	}
 	
 	@Override
@@ -77,6 +86,11 @@ public class GUIDimCHest extends GuiContainer {
 			
 		case BUTTON_FREQ_UP:
 			this.tileEntity.upFreq();
+			break;
+			
+		case BUTTON_LOCKED:
+			// temp
+			this.lockedButton.displayString = this.lockedButton.displayString.equals(this.yes) ? this.no: this.yes;
 			break;
 			
 		}
@@ -105,9 +119,8 @@ public class GUIDimCHest extends GuiContainer {
 		this.fontRenderer.drawString(StatCollector.translateToLocal(this.freq), 180, 100, 4210752);
 		this.fontRenderer.drawString(StatCollector.translateToLocal(""+this.tileEntity.getFreq()), 212, 121, 4210752);
 		
-		// lock
-		//TODO add lock checkbox
-		// name : this.locked
+		// locked
+		this.fontRenderer.drawString(StatCollector.translateToLocal(this.locked), 180, 145, 4210752);
 	}
 
 	// ****************************************************************

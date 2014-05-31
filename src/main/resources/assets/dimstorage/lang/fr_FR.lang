@@ -10,7 +10,8 @@ gui.dimchest.change=Change
 gui.dimchest.owner=Propriétaire :
 gui.dimchest.frequency=Frequence :
 gui.dimchest.locked=verrouillé
-
+gui.dimchest.yes=Oui
+gui.dimchest.no=Non
 
 #Items
 item.dimcore.name=Coeur Dimensionnel

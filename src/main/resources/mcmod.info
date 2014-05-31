@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "dimstorage",
+  "name": "DimSotage",
+  "description": "DimStorage add a technologic version of ender chest system with owner, frequence selection and lock system.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authors": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authors": ["Gaarnik", "Phenix246"],
+  "credits": "Mod author: Gaarnik, Contributor: Phenix246",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
