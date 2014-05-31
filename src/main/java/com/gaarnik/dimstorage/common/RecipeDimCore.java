@@ -25,9 +25,9 @@ public class RecipeDimCore implements IRecipe {
         GameRegistry.addRecipe(instance);
         
         GameRegistry.addRecipe(new ItemStack(DimStorage.dimCore, 1), new Object[]{
-            "rir",
-            "iei",
-            "rir",
+            "iri",
+            "rer",
+            "iri",
             'i', Item.ingotIron,
             'r', Item.redstone,
             'e', Item.enderPearl});

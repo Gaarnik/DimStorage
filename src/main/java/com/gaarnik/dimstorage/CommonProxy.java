@@ -5,6 +5,7 @@ import net.minecraftforge.common.MinecraftForge;
 import com.gaarnik.dimstorage.common.BlockDimChest;
 import com.gaarnik.dimstorage.common.ItemDimCore;
 import com.gaarnik.dimstorage.common.RecipeDimChest;
+import com.gaarnik.dimstorage.common.RecipeDimCore;
 import com.gaarnik.dimstorage.common.TEDimChest;
 import com.gaarnik.dimstorage.storage.DimStorageManager.DimStorageSaveHandler;
 
@@ -24,17 +25,17 @@ public abstract class CommonProxy {
 		// DimCore
 		DimStorage.dimCore = new ItemDimCore(DimStorage.config.get("item", "DimCore", 1447).getInt()).setUnlocalizedName("dimcore");
 		GameRegistry.registerItem(DimStorage.dimCore, "item_dimcore");
+		RecipeDimCore.init();
 		
 		// DimChest
 		DimStorage.dimChest = new BlockDimChest(DimStorage.config.get("block", "DimChest", 1547).getInt()).setUnlocalizedName("dimchest");
 		GameRegistry.registerBlock(DimStorage.dimChest, "block_dimchest");
 		MinecraftForge.EVENT_BUS.register(DimStorage.dimChest);
+		RecipeDimChest.init();
 		
 		GameRegistry.registerTileEntity(TEDimChest.class, "TEDimChest");
 
 		NetworkRegistry.instance().registerGuiHandler(DimStorage.instance, new DimStorageGUIHandler());
-
-		RecipeDimChest.init();
 	}
 
 }
