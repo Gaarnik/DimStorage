@@ -22,11 +22,13 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 	private String owner;
 	private int freq;
+	private byte direction = 0;
 
 	// ****************************************************************
 	public TEDimChest() {
 		this.owner = "public";
 		this.freq = 1;
+		this.direction = 0;
 	}
 
 	// ****************************************************************
@@ -150,6 +152,8 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 		this.owner = tag.getString("owner");
 		this.freq = tag.getInteger("freq");
+		this.direction = tag.getByte("direction");
+
 	}
 
 	@Override
@@ -158,6 +162,8 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 		tag.setString("owner", this.owner);
 		tag.setInteger("freq", this.freq);
+		tag.setByte("direction", this.direction);
+
 	}
 
 	// ****************************************************************
@@ -169,4 +175,6 @@ public class TEDimChest extends TileEntity implements IInventory {
 	public int getFreq() { return this.freq; }
 	public void setFreq(int freq) { this.freq = freq; }
 
+	public byte getDirection() { return this.direction; }
+	public void setDirection(byte direction) { this.direction = direction; }
 }

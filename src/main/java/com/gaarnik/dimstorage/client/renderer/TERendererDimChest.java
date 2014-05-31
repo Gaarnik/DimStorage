@@ -17,7 +17,7 @@ import com.gaarnik.dimstorage.common.TEDimChest;
 
 public class TERendererDimChest extends TileEntitySpecialRenderer {
 	// ****************************************************************
-	private static final ResourceLocation texture = new ResourceLocation("dimstorage", "texture/dimchest.png");
+	private static final ResourceLocation texture = new ResourceLocation("dimstorage", "textures/models/dimchest.png");
 
 	// ****************************************************************
 	private ModelDimChest model;
@@ -49,17 +49,26 @@ public class TERendererDimChest extends TileEntitySpecialRenderer {
 		int l2 = l / 65536;
 		tessellator.setColorOpaque_F(f, f, f);
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)l1, (float)l2); 
-
-		int dir = world.getBlockMetadata(i, j, k);
-
+		int dir = 0;
+		if(entity != null)
+			dir = entity.getDirection();
+		
 		GL11.glPushMatrix();
-		
-		GL11.glTranslatef(0.5F, 0, 0.5F);
-		//This line actually rotates the renderer.
-		GL11.glRotatef(dir * (-90F), 0F, 1F, 0F);
-		GL11.glTranslatef(-0.5F, 0, -0.5F);
-		
 		this.bindTexture(texture);
+
+		GL11.glTranslatef(0.5F, -0.5F, 0.5F);
+		//This line actually rotates the renderer.
+
+		/** direction **/
+		GL11.glRotatef(dir * (-90F), 0F, 1F, 0F);
+		GL11.glRotatef(180F, 0F, 1F, 0F);
+
+		/** sens **/
+		GL11.glRotatef(180F, 1F, 0F, 0F);
+
+		/** Ajustement **/
+		GL11.glTranslatef(0F, -2F, 0F);
+		
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
 		GL11.glPopMatrix();
