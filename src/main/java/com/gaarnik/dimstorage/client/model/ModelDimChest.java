@@ -7,6 +7,8 @@
 
 package com.gaarnik.dimstorage.client.model;
 
+import com.gaarnik.dimstorage.common.TEDimChest;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -15,6 +17,8 @@ public class ModelDimChest extends ModelBase {
 	// ****************************************************************
 
 	// ****************************************************************
+	private TEDimChest tileEntity;
+	
 	ModelRenderer base;
 	ModelRenderer top1;
 	ModelRenderer top2;
@@ -76,7 +80,9 @@ public class ModelDimChest extends ModelBase {
 		top2.render(f5);
 		top3.render(f5);
 		top4.render(f5);
-		movable.render(f5);
+		
+		this.movable.offsetZ = this.tileEntity.getMovablePartState();
+		this.movable.render(f5);
 	}
 
 	// ****************************************************************
@@ -86,4 +92,7 @@ public class ModelDimChest extends ModelBase {
 		model.rotateAngleZ = z;
 	}
 
+	// ****************************************************************
+	public void setTileEntity(TEDimChest tileEntity) { this.tileEntity = tileEntity; }
+	
 }

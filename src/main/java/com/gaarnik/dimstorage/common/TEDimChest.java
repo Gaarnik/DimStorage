@@ -16,6 +16,10 @@ import com.gaarnik.dimstorage.storage.chest.DimChestStorage;
 
 public class TEDimChest extends TileEntity implements IInventory {
 	// ****************************************************************
+	private static final float MIN_MOVABLE_POSITION = 0f;
+	private static final float MAX_MOVABLE_POSITION = 0.5f;
+	
+	private static final float OPENING_SPEED = 0.05f;
 
 	// ****************************************************************
 	private DimChestStorage storage;
@@ -23,15 +27,41 @@ public class TEDimChest extends TileEntity implements IInventory {
 	private String owner;
 	private int freq;
 	private byte direction = 0;
+	
+	private float movablePartState;
+	private boolean opening;
 
 	// ****************************************************************
 	public TEDimChest() {
 		this.owner = "public";
 		this.freq = 1;
 		this.direction = 0;
+		
+		this.movablePartState = MIN_MOVABLE_POSITION;
+		this.opening = true;
 	}
 
 	// ****************************************************************
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		
+		if(this.opening) {
+			this.movablePartState += OPENING_SPEED;
+			if(this.movablePartState >= MAX_MOVABLE_POSITION) {
+				this.movablePartState = MAX_MOVABLE_POSITION;
+				this.opening = false;
+			}
+		}
+		else {
+			this.movablePartState -= OPENING_SPEED;
+			if(this.movablePartState <= MIN_MOVABLE_POSITION) {
+				this.movablePartState = MIN_MOVABLE_POSITION;
+				this.opening = true;
+			}
+		}
+	}
+	
 	@Override
 	public void validate() {
 		super.validate();
@@ -177,4 +207,7 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 	public byte getDirection() { return this.direction; }
 	public void setDirection(byte direction) { this.direction = direction; }
+	
+	public float getMovablePartState() { return this.movablePartState; }
+	
 }

@@ -41,7 +41,7 @@ public class TERendererDimChest extends TileEntitySpecialRenderer {
 	}
 
 	// ****************************************************************
-	private void renderBlock(TEDimChest entity, World world, int i, int j, int k, Block block) {
+	private void renderBlock(TEDimChest tileEntity, World world, int i, int j, int k, Block block) {
 		Tessellator tessellator = Tessellator.instance;
 		float f = block.getBlockBrightness(world, i, j, k);
 		int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
@@ -49,9 +49,10 @@ public class TERendererDimChest extends TileEntitySpecialRenderer {
 		int l2 = l / 65536;
 		tessellator.setColorOpaque_F(f, f, f);
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)l1, (float)l2); 
+		
 		int dir = 0;
-		if(entity != null)
-			dir = entity.getDirection();
+		if(tileEntity != null)
+			dir = tileEntity.getDirection();
 		
 		GL11.glPushMatrix();
 		this.bindTexture(texture);
@@ -69,6 +70,7 @@ public class TERendererDimChest extends TileEntitySpecialRenderer {
 		/** Ajustement **/
 		GL11.glTranslatef(0F, -2F, 0F);
 		
+		this.model.setTileEntity(tileEntity);
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
 		GL11.glPopMatrix();

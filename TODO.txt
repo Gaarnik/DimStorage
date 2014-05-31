@@ -1,6 +1,8 @@
+DimChest TE:
+- Synchro de l'ouverture du coffre quand au moins un joueur ouvre l'interface (comme les coffres vanilla)
+
 DimChest UI:
 - synchronisation des actions entre l'interface et la TileEntity
-- positionner les boutons de façon relative
 
 Divers:
-- préparer une tetxure temporaire pour le DimCore.
+- préparer une tetxure pour le DimCore.
