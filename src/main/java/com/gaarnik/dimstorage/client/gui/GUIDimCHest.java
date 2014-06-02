@@ -8,6 +8,7 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
+import com.gaarnik.dimstorage.DimStorageNetwork;
 import com.gaarnik.dimstorage.common.ContainerDimChest;
 import com.gaarnik.dimstorage.common.TEDimChest;
 
@@ -94,6 +95,8 @@ public class GUIDimCHest extends GuiContainer {
 			break;
 			
 		}
+		
+		DimStorageNetwork.sendUpdateStorage(this.tileEntity);
 	}
 	
 	@Override

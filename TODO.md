@@ -2,7 +2,7 @@ Gaarnik
 =======
 
 DimChest UI:
-- synchronisation des actions entre l'interface et la TileEntity
+- terminer la synchronisation des actions entre l'interface et la TileEntity
 
 DimChest TE:
 - Intégration de l'API ComputerCraft pour gérer les DimChest
