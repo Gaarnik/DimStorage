@@ -14,6 +14,7 @@ public class ItemDimCore extends Item {
 		super(id);
 		
 		this.setCreativeTab(DimStorage.tabDimStorage);
+		this.setTextureName(DimStorage.MODID + ":dim_core");
 	}
 
 	// ****************************************************************
