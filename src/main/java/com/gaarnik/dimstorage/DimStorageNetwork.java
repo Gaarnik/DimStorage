@@ -37,6 +37,7 @@ public class DimStorageNetwork {
 
 			out.writeUTF(tileEntity.getOwner());
 			out.writeInt(tileEntity.getFreq());
+			out.writeBoolean(tileEntity.isLocked());
 
 			Packet250CustomPayload packet = new Packet250CustomPayload();
 			packet.channel = CHANNEL_DIMCHEST;
@@ -63,6 +64,7 @@ public class DimStorageNetwork {
 
 			String owner = in.readUTF();
 			int freq = in.readInt();
+			boolean locked = in.readBoolean();
 
 			EntityPlayerMP playerMP = (EntityPlayerMP) player;
 			TileEntity tileEntity = playerMP.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord);
@@ -70,8 +72,11 @@ public class DimStorageNetwork {
 			if(tileEntity != null){
 				if(tileEntity instanceof TEDimChest){
 					TEDimChest tileEntityDimChest = (TEDimChest) tileEntity;
+					
 					tileEntityDimChest.setOwner(owner);
 					tileEntityDimChest.setFreq(freq);
+					tileEntityDimChest.setLocked(locked);
+					
 					tileEntityDimChest.reloadStorage();
 					
 					playerMP.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);

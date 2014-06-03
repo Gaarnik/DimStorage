@@ -26,6 +26,8 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 	private String owner;
 	private int freq;
+	private boolean locked;
+	
 	private byte direction = 0;
 	
 	private float movablePartState;
@@ -35,6 +37,8 @@ public class TEDimChest extends TileEntity implements IInventory {
 	public TEDimChest() {
 		this.owner = "public";
 		this.freq = 1;
+		this.locked = false;
+		
 		this.direction = 0;
 		
 		this.movablePartState = MIN_MOVABLE_POSITION;
@@ -101,6 +105,11 @@ public class TEDimChest extends TileEntity implements IInventory {
 			return;
 
 		this.freq++;
+		this.reloadStorage();
+	}
+	
+	public void swapLocked() {
+		this.locked = !this.locked;
 		this.reloadStorage();
 	}
 
@@ -182,8 +191,9 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 		this.owner = tag.getString("owner");
 		this.freq = tag.getInteger("freq");
+		this.locked = tag.getBoolean("locked");
+		
 		this.direction = tag.getByte("direction");
-
 	}
 
 	@Override
@@ -192,8 +202,9 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 		tag.setString("owner", this.owner);
 		tag.setInteger("freq", this.freq);
+		tag.setBoolean("locked", this.locked);
+		
 		tag.setByte("direction", this.direction);
-
 	}
 
 	// ****************************************************************
@@ -204,6 +215,9 @@ public class TEDimChest extends TileEntity implements IInventory {
 
 	public int getFreq() { return this.freq; }
 	public void setFreq(int freq) { this.freq = freq; }
+	
+	public boolean isLocked() { return this.locked; }
+	public void setLocked(boolean locked) { this.locked = locked; }
 
 	public byte getDirection() { return this.direction; }
 	public void setDirection(byte direction) { this.direction = direction; }

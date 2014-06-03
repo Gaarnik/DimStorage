@@ -11,18 +11,16 @@ public abstract class AbstractDimStorage {
 	
 	protected String owner;
 	protected int freq;
-	protected boolean locked;
 	
 	private boolean dirty;
 	private int changeCount;
 
 	// ****************************************************************
-	public AbstractDimStorage(final DimStorageManager manager, String owner, int freq, boolean locked) {
+	public AbstractDimStorage(final DimStorageManager manager, String owner, int freq) {
 		this.manager = manager;
 	
 		this.owner = owner;
 		this.freq = freq;
-		this.locked = locked;
 		
 		this.dirty = false;
 		this.changeCount = 0;

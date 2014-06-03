@@ -18,8 +18,8 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
     private int openCount;
 
 	// ****************************************************************
-	public DimChestStorage(DimStorageManager manager, String owner, int freq, boolean locked) {
-		super(manager, owner, freq, locked);
+	public DimChestStorage(DimStorageManager manager, String owner, int freq) {
+		super(manager, owner, freq);
 		
 		this.empty();
 	}

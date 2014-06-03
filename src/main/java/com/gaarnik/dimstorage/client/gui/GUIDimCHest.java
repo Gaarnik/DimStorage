@@ -90,8 +90,7 @@ public class GUIDimCHest extends GuiContainer {
 			break;
 			
 		case BUTTON_LOCKED:
-			// temp
-			this.lockedButton.displayString = this.lockedButton.displayString.equals(this.yes) ? this.no: this.yes;
+			this.tileEntity.swapLocked();
 			break;
 			
 		}
@@ -124,6 +123,9 @@ public class GUIDimCHest extends GuiContainer {
 		
 		// locked
 		this.fontRenderer.drawString(StatCollector.translateToLocal(this.locked), 180, 145, 4210752);
+
+		// refresh button label
+		this.lockedButton.displayString = this.tileEntity.isLocked() ? this.yes: this.no;
 	}
 
 	// ****************************************************************
