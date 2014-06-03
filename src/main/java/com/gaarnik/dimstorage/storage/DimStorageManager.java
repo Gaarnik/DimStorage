@@ -62,6 +62,14 @@ public class DimStorageManager {
 	public AbstractDimStorage getStorage(String owner, int freq, String type) {
 		if(owner == null)
 			owner = "public";
+		
+		// used for debug
+		/*System.out.println("-------------");
+		System.out.println("getStorage for " + (this.client ? "client": "server"));
+		System.out.println("-------------");
+		System.out.println("owner: " + owner);
+		System.out.println("freq: " + freq);
+		System.out.println("type: " + type);*/
 
 		String key = owner+"|"+freq+"|"+type;
 		AbstractDimStorage storage = this.storageMap.get(key);

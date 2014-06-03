@@ -72,6 +72,7 @@ public class DimStorageNetwork {
 					TEDimChest tileEntityDimChest = (TEDimChest) tileEntity;
 					tileEntityDimChest.setOwner(owner);
 					tileEntityDimChest.setFreq(freq);
+					tileEntityDimChest.reloadStorage();
 					
 					playerMP.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 				}
