@@ -14,7 +14,13 @@ import net.minecraft.world.WorldServer;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.storage.chest.DimChestStorage;
 
-public class TEDimChest extends TileEntity implements IInventory {
+import dan200.computer.api.IComputerAccess;
+import dan200.computer.api.ILuaContext;
+import dan200.computer.api.IPeripheral;
+import cpw.mods.fml.common.Optional.Interface;
+
+@Interface(iface="dan200.computer.api.IPeripheral", modid="ComputerCraft")
+public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	// ****************************************************************
 	private static final float MIN_MOVABLE_POSITION = 0f;
 	private static final float MAX_MOVABLE_POSITION = 0.5f;
@@ -174,6 +180,41 @@ public class TEDimChest extends TileEntity implements IInventory {
 		this.storage.setInventorySlotContents(slot, stack);
 	}
 
+	// ****************************************************************
+	@Override
+	public String[] getMethodNames() {
+		return new String[] {"ping"};
+	}
+
+	@Override
+	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws Exception {
+		switch(method) {
+
+		case 0: // ping
+			return new Object[] {"pong"};
+		
+		default:
+			return null;
+		
+		}
+	}
+
+	@Override
+	public boolean canAttachToSide(int side) {
+		return true;
+	}
+
+	@Override
+	public void attach(IComputerAccess computer) {}
+
+	@Override
+	public void detach(IComputerAccess computer) {}
+
+	@Override
+	public String getType() {
+		return this.storage.getType();
+	}
+	
 	// ****************************************************************
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
