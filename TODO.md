@@ -14,3 +14,4 @@ Gaarnik ou autre
 
 DimChest TE:
 - [ ] Synchro de l'ouverture du coffre quand au moins un joueur ouvre l'interface (comme les coffres vanilla)
+- [ ] Ajouter les raccourcis clavier pour gérer l'inventaire (shitf+clic ...)
