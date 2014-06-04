@@ -3,15 +3,15 @@ Gaarnik
 
 DimChest UI:
 - [X] terminer la synchronisation des actions entre l'interface et la TileEntity
-- [ ] implementer le "lock" du DimChest
+- [ ] implementer le "lock" du DimChest (a tester avec plusieurs joueurs)
 
 DimChest TE:
-- [ ] Intégration de l'API ComputerCraft pour gérer les DimChest
+- [X] Integration de l'API ComputerCraft pour gérer les DimChest
 - [ ] implementer les fonctions pour interagir avec le DimChest
 
 Gaarnik ou autre
 ================
 
-DimChest TE:
+DimChest:
 - [ ] Synchro de l'ouverture du coffre quand au moins un joueur ouvre l'interface (comme les coffres vanilla)
-- [ ] Ajouter les raccourcis clavier pour g�rer l'inventaire (shitf+clic ...)
+- [ ] Ajouter les raccourcis clavier pour gerer l'inventaire (shitf+clic ...)
