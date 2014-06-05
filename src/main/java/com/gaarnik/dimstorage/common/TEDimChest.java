@@ -11,6 +11,7 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 
+import com.gaarnik.dimstorage.DimStorageNetwork;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.storage.chest.DimChestStorage;
 
@@ -24,7 +25,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	// ****************************************************************
 	private static final float MIN_MOVABLE_POSITION = 0f;
 	private static final float MAX_MOVABLE_POSITION = 0.5f;
-	
+
 	private static final float OPENING_SPEED = 0.05f;
 
 	// ****************************************************************
@@ -33,9 +34,9 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	private String owner;
 	private int freq;
 	private boolean locked;
-	
+
 	private byte direction = 0;
-	
+
 	private float movablePartState;
 	private boolean opening;
 
@@ -44,9 +45,9 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		this.owner = "public";
 		this.freq = 1;
 		this.locked = false;
-		
+
 		this.direction = 0;
-		
+
 		this.movablePartState = MIN_MOVABLE_POSITION;
 		this.opening = true;
 	}
@@ -55,7 +56,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		
+
 		if(this.opening) {
 			this.movablePartState += OPENING_SPEED;
 			if(this.movablePartState >= MAX_MOVABLE_POSITION) {
@@ -71,7 +72,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 			}
 		}
 	}
-	
+
 	@Override
 	public void validate() {
 		super.validate();
@@ -96,6 +97,14 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		this.reloadStorage();
 	}
 
+	public void changeOwner(String owner) {
+		if(!this.worldObj.isRemote)
+			return;
+
+		this.owner = owner;
+		this.reloadStorage();
+	}
+
 	public void downFreq() {
 		if(!this.worldObj.isRemote)
 			return;
@@ -113,7 +122,15 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		this.freq++;
 		this.reloadStorage();
 	}
-	
+
+	public void changeFreq(int freq) {
+		if(!this.worldObj.isRemote)
+			return;
+
+		this.freq = freq;
+		this.reloadStorage();
+	}
+
 	public void swapLocked() {
 		this.locked = !this.locked;
 		this.reloadStorage();
@@ -183,19 +200,55 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	// ****************************************************************
 	@Override
 	public String[] getMethodNames() {
-		return new String[] {"ping"};
+		return new String[] {
+				"getOwner", "getFreq", "isLocked",
+				"setOwner", "setPublic", "setFreq"
+		};
 	}
 
 	@Override
 	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws Exception {
 		switch(method) {
 
-		case 0: // ping
-			return new Object[] {"pong"};
-		
+		case 0: // getOwner
+			return new Object[] {this.getOwner()};
+
+		case 1: // getFreq
+			return new Object[] {this.getFreq()};
+
+		case 2: // isLocked
+			return new Object[] {this.isLocked()};
+
+		case 3: // setOwner
+			if(this.isLocked())
+				throw new Exception("DimChest is locked !");
+
+			this.changeOwner((String) arguments[0]);
+			DimStorageNetwork.sendUpdateStorage(this);
+			
+			return new Object[] { true };
+
+		case 4: // setPublic
+			if(this.isLocked())
+				throw new Exception("DimChest is locked !");
+
+			this.changeOwner("public");
+			DimStorageNetwork.sendUpdateStorage(this);
+			
+			return new Object[] { true };
+
+		case 5: // setFreq
+			if(this.isLocked())
+				throw new Exception("DimChest is locked !");
+
+			this.setFreq((Integer) arguments[0]);
+			DimStorageNetwork.sendUpdateStorage(this);
+			
+			return new Object[] { true };
+
 		default:
 			return null;
-		
+
 		}
 	}
 
@@ -214,12 +267,12 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	public String getType() {
 		return this.storage.getType();
 	}
-	
+
 	// ****************************************************************
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);
-		
+
 		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}
 
@@ -233,7 +286,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		this.owner = tag.getString("owner");
 		this.freq = tag.getInteger("freq");
 		this.locked = tag.getBoolean("locked");
-		
+
 		this.direction = tag.getByte("direction");
 	}
 
@@ -244,7 +297,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		tag.setString("owner", this.owner);
 		tag.setInteger("freq", this.freq);
 		tag.setBoolean("locked", this.locked);
-		
+
 		tag.setByte("direction", this.direction);
 	}
 
@@ -256,13 +309,13 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 
 	public int getFreq() { return this.freq; }
 	public void setFreq(int freq) { this.freq = freq; }
-	
+
 	public boolean isLocked() { return this.locked; }
 	public void setLocked(boolean locked) { this.locked = locked; }
 
 	public byte getDirection() { return this.direction; }
 	public void setDirection(byte direction) { this.direction = direction; }
-	
+
 	public float getMovablePartState() { return this.movablePartState; }
-	
+
 }

@@ -7,7 +7,7 @@ DimChest UI:
 
 DimChest TE:
 - [X] Integration de l'API ComputerCraft pour gérer les DimChest
-- [ ] implementer les fonctions pour interagir avec le DimChest
+- [ ] implementer les fonctions pour interagir avec le DimChest (les fonctions set* ne fonctionnent pas)
 
 Gaarnik ou autre
 ================
