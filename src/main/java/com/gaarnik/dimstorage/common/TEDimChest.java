@@ -97,14 +97,6 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		this.reloadStorage();
 	}
 
-	public void changeOwner(String owner) {
-		if(!this.worldObj.isRemote)
-			return;
-
-		this.owner = owner;
-		this.reloadStorage();
-	}
-
 	public void downFreq() {
 		if(!this.worldObj.isRemote)
 			return;
@@ -120,14 +112,6 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 			return;
 
 		this.freq++;
-		this.reloadStorage();
-	}
-
-	public void changeFreq(int freq) {
-		if(!this.worldObj.isRemote)
-			return;
-
-		this.freq = freq;
 		this.reloadStorage();
 	}
 
@@ -223,7 +207,10 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 			if(this.isLocked())
 				throw new Exception("DimChest is locked !");
 
-			this.changeOwner((String) arguments[0]);
+			this.setOwner((String) arguments[0]);
+
+			this.reloadStorage();
+			this.onInventoryChanged();
 			DimStorageNetwork.sendUpdateStorage(this);
 			
 			return new Object[] { true };
@@ -232,7 +219,10 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 			if(this.isLocked())
 				throw new Exception("DimChest is locked !");
 
-			this.changeOwner("public");
+			this.setOwner("public");
+
+			this.reloadStorage();
+			this.onInventoryChanged();
 			DimStorageNetwork.sendUpdateStorage(this);
 			
 			return new Object[] { true };
@@ -241,7 +231,11 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 			if(this.isLocked())
 				throw new Exception("DimChest is locked !");
 
-			this.setFreq((Integer) arguments[0]);
+			Double freq = (Double) arguments[0];
+			this.setFreq(freq.intValue());
+			
+			this.reloadStorage();
+			this.onInventoryChanged();
 			DimStorageNetwork.sendUpdateStorage(this);
 			
 			return new Object[] { true };

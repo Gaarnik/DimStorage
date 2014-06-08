@@ -3,11 +3,11 @@ Gaarnik
 
 DimChest UI:
 - [X] terminer la synchronisation des actions entre l'interface et la TileEntity
-- [ ] implementer le "lock" du DimChest (a tester avec plusieurs joueurs)
+- [ ] implementer le "lock" du DimChest (a tester avec plusieurs joueurs - a deplacer dans AbstractDimStorage)
 
 DimChest TE:
-- [X] Integration de l'API ComputerCraft pour gérer les DimChest
-- [ ] implementer les fonctions pour interagir avec le DimChest (les fonctions set* ne fonctionnent pas)
+- [X] Integration de l'API ComputerCraft pour gerer les DimChest
+- [X] implementer les fonctions pour interagir avec le DimChest
 
 Gaarnik ou autre
 ================
