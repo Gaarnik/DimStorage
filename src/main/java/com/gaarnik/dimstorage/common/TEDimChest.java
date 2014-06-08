@@ -173,7 +173,10 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		return this.storage.isUseableByPlayer(entityplayer);
+		if(this.owner.equals("public") || this.owner.equals(entityplayer.getCommandSenderName()))
+			return true;
+		
+		return !this.locked;
 	}
 
 	@Override

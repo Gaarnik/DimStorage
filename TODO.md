@@ -3,7 +3,7 @@ Gaarnik
 
 DimChest UI:
 - [X] terminer la synchronisation des actions entre l'interface et la TileEntity
-- [ ] implementer le "lock" du DimChest (a tester avec plusieurs joueurs - a deplacer dans AbstractDimStorage)
+- [X] implementer le "lock" du DimChest
 
 DimChest TE:
 - [X] Integration de l'API ComputerCraft pour gerer les DimChest
@@ -11,6 +11,9 @@ DimChest TE:
 
 Gaarnik ou autre
 ================
+
+mcmod.info:
+- [ ] voir pourquoi le numero de version ne se met pas quand on build
 
 DimChest:
 - [ ] Synchro de l'ouverture du coffre quand au moins un joueur ouvre l'interface (comme les coffres vanilla)
