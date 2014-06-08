@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerDimChest extends Container {
 	// *******************************************************************
@@ -14,7 +15,7 @@ public class ContainerDimChest extends Container {
 	// *******************************************************************
 	public ContainerDimChest(InventoryPlayer inventory, TEDimChest tileEntity) {
 		this.tileEntity = tileEntity;
-		
+
 		int y;
 
 		// chest inventory
@@ -32,6 +33,32 @@ public class ContainerDimChest extends Container {
 	}
 
 	// *******************************************************************
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int position) {
+		ItemStack itemstack = null;
+		Slot slot = (Slot) this.inventorySlots.get(position);
+
+		if (slot != null && slot.getHasStack()) {
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
+
+			// chest to inventory
+			if (position < 54) {
+				if (!this.mergeItemStack(itemstack1, 54, this.inventorySlots.size(), true))
+					return null;
+			}
+			// inventory to chest
+			else if (!this.mergeItemStack(itemstack1, 0, 54, false))
+				return null;
+
+			if (itemstack1.stackSize == 0)
+				slot.putStack((ItemStack)null);
+			else
+				slot.onSlotChanged();
+		}
+
+		return itemstack;
+	}
 
 	// *******************************************************************
 

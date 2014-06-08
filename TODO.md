@@ -17,5 +17,5 @@ mcmod.info:
 
 DimChest:
 - [ ] Synchro de l'ouverture du coffre quand au moins un joueur ouvre l'interface (comme les coffres vanilla)
-- [ ] Ajouter les raccourcis clavier pour gerer l'inventaire (shitf+clic ...)
+- [X] Ajouter les raccourcis clavier pour gerer l'inventaire (shitf+clic ...)
 - [X] Bug: en mode release la texture du chest ne s'affiche pas sur le model
