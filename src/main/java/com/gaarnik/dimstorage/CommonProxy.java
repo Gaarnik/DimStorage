@@ -30,7 +30,6 @@ public abstract class CommonProxy {
 		// DimChest
 		DimStorage.dimChest = new BlockDimChest(DimStorage.config.get("block", "DimChest", 1547).getInt()).setUnlocalizedName("dimchest");
 		GameRegistry.registerBlock(DimStorage.dimChest, "block_dimchest");
-		MinecraftForge.EVENT_BUS.register(DimStorage.dimChest);
 		RecipeDimChest.init();
 		
 		GameRegistry.registerTileEntity(TEDimChest.class, "TEDimChest");

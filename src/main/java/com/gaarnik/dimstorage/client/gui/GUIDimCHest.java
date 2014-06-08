@@ -127,7 +127,7 @@ public class GUIDimCHest extends GuiContainer {
 		// refresh button label
 		this.lockedButton.displayString = this.tileEntity.isLocked() ? this.yes: this.no;
 	}
-
+	
 	// ****************************************************************
 
 	// ****************************************************************

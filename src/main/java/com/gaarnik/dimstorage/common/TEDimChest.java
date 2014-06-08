@@ -35,8 +35,9 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	private int freq;
 	private boolean locked;
 
-	private byte direction = 0;
+	private byte direction;
 
+    private int openCount;
 	private float movablePartState;
 	private boolean opening;
 
@@ -49,7 +50,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		this.direction = 0;
 
 		this.movablePartState = MIN_MOVABLE_POSITION;
-		this.opening = true;
+		this.opening = false;
 	}
 
 	// ****************************************************************
@@ -58,18 +59,18 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		super.updateEntity();
 
 		if(this.opening) {
-			this.movablePartState += OPENING_SPEED;
-			if(this.movablePartState >= MAX_MOVABLE_POSITION) {
+			if(this.movablePartState < MAX_MOVABLE_POSITION)
+				this.movablePartState += OPENING_SPEED;
+			
+			if(this.movablePartState > MAX_MOVABLE_POSITION)
 				this.movablePartState = MAX_MOVABLE_POSITION;
-				this.opening = false;
-			}
 		}
 		else {
-			this.movablePartState -= OPENING_SPEED;
-			if(this.movablePartState <= MIN_MOVABLE_POSITION) {
+			if(this.movablePartState > MIN_MOVABLE_POSITION)
+				this.movablePartState -= OPENING_SPEED;
+			
+			if(this.movablePartState < MIN_MOVABLE_POSITION)
 				this.movablePartState = MIN_MOVABLE_POSITION;
-				this.opening = true;
-			}
 		}
 	}
 
@@ -123,12 +124,28 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	// ****************************************************************
 	@Override
 	public void openChest() {
-		this.storage.openChest();
+		if(this.worldObj.isRemote)
+            return;
+
+        synchronized(this) {
+            this.openCount++;
+            
+            if(this.openCount == 1)
+                DimStorageNetwork.sendOpenStorage(this, true);
+        }
 	}
 
 	@Override
 	public void closeChest() {
-		this.storage.closeChest();
+		if(this.worldObj.isRemote)
+            return;
+
+        synchronized(this) {
+            this.openCount--;
+            
+            if(this.openCount == 0)
+                DimStorageNetwork.sendOpenStorage(this, false);
+        }
 	}
 
 	@Override
@@ -285,6 +302,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		this.locked = tag.getBoolean("locked");
 
 		this.direction = tag.getByte("direction");
+		this.opening = tag.getBoolean("opening");
 	}
 
 	@Override
@@ -296,6 +314,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		tag.setBoolean("locked", this.locked);
 
 		tag.setByte("direction", this.direction);
+		tag.setBoolean("opening", this.opening);
 	}
 
 	// ****************************************************************
@@ -313,6 +332,8 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	public byte getDirection() { return this.direction; }
 	public void setDirection(byte direction) { this.direction = direction; }
 
+	public void setOpening(boolean opening) { this.opening = opening; }
+	
 	public float getMovablePartState() { return this.movablePartState; }
 
 }

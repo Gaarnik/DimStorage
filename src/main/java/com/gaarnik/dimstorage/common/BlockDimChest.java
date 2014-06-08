@@ -43,6 +43,7 @@ public class BlockDimChest extends BlockContainer {
 			return false;
 
 		player.openGui(DimStorage.instance, DimStorageGUIHandler.GUI_DIMCHEST, world, x, y, z);
+		((TEDimChest) tileEntity).openChest();
 
 		return true;
 	}

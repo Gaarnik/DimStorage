@@ -60,6 +60,13 @@ public class ContainerDimChest extends Container {
 		return itemstack;
 	}
 
+	@Override
+	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
+		super.onContainerClosed(par1EntityPlayer);
+		
+		this.tileEntity.closeChest();
+	}
+	
 	// *******************************************************************
 
 	// *******************************************************************

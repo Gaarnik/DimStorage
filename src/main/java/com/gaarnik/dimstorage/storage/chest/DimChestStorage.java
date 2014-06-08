@@ -15,7 +15,6 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 
 	// ****************************************************************
 	private ItemStack[] items;
-    private int openCount;
 
 	// ****************************************************************
 	public DimChestStorage(DimStorageManager manager, String owner, int freq) {
@@ -56,29 +55,10 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	}
 
 	@Override
-	public void openChest() {
-		if(this.manager.isClient())
-            return;
-
-        synchronized(this) {
-            this.openCount++;
-            
-            //if(this.open == 1)
-                //EnderStorageSPH.sendOpenUpdateTo(null, owner, freq, true);
-        }
-	}
+	public void openChest() {}
 	
 	@Override
-	public void closeChest() {
-		if(this.manager.isClient())
-            return;
-
-        synchronized(this) {
-            this.openCount--;
-            //if(this.open == 0)
-                //EnderStorageSPH.sendOpenUpdateTo(null, owner, freq, false);
-        }
-	}
+	public void closeChest() {}
 
 	@Override
 	public String getInvName() { return null; }
@@ -124,7 +104,5 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	// ****************************************************************
 	@Override
 	public String getType() { return TYPE; }
-	
-	public int getOpenCount() { return this.openCount; }
 
 }

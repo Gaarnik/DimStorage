@@ -16,6 +16,6 @@ mcmod.info:
 - [X] voir pourquoi le numero de version ne se met pas quand on build
 
 DimChest:
-- [ ] Synchro de l'ouverture du coffre quand au moins un joueur ouvre l'interface (comme les coffres vanilla)
+- [ ] Bug: synchro de l'ouverture du coffre en mode server (packet envoye par le server au lieu du client ?)
 - [X] Ajouter les raccourcis clavier pour gerer l'inventaire (shitf+clic ...)
 - [X] Bug: en mode release la texture du chest ne s'affiche pas sur le model
