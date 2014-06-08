@@ -17,7 +17,7 @@ import com.gaarnik.dimstorage.common.TEDimChest;
 
 public class TERendererDimChest extends TileEntitySpecialRenderer {
 	// ****************************************************************
-	private static final ResourceLocation texture = new ResourceLocation("dimstorage", "textures/models/dimchest.png");
+	private static final ResourceLocation texture = new ResourceLocation("dimstorage", "textures/models/DimChest.png");
 
 	// ****************************************************************
 	private ModelDimChest model;

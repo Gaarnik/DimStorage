@@ -13,9 +13,9 @@ Gaarnik ou autre
 ================
 
 mcmod.info:
-- [ ] voir pourquoi le numero de version ne se met pas quand on build
+- [X] voir pourquoi le numero de version ne se met pas quand on build
 
 DimChest:
 - [ ] Synchro de l'ouverture du coffre quand au moins un joueur ouvre l'interface (comme les coffres vanilla)
 - [ ] Ajouter les raccourcis clavier pour gerer l'inventaire (shitf+clic ...)
-- [ ] Bug: en mode release la texture du chest ne s'affiche pas sur le model
+- [X] Bug: en mode release la texture du chest ne s'affiche pas sur le model
