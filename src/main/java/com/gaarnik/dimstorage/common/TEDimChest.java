@@ -3,6 +3,7 @@ package com.gaarnik.dimstorage.common;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -21,7 +22,7 @@ import dan200.computer.api.IPeripheral;
 import cpw.mods.fml.common.Optional.Interface;
 
 @Interface(iface="dan200.computer.api.IPeripheral", modid="ComputerCraft")
-public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
+public class TEDimChest extends TileEntity implements IInventory, ISidedInventory, IPeripheral {
 	// ****************************************************************
 	private static final float MIN_MOVABLE_POSITION = 0f;
 	private static final float MAX_MOVABLE_POSITION = 0.5f;
@@ -201,6 +202,27 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 		this.storage.setInventorySlotContents(slot, stack);
 	}
 
+	// ****************************************************************
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		return !this.locked;
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		return !this.locked;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		int[] slots = new int[54];
+		
+		for(int i=0;i<54;i++)
+			slots[i] = i;
+		
+		return slots;
+	}
+	
 	// ****************************************************************
 	@Override
 	public String[] getMethodNames() {
