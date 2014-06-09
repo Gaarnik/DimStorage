@@ -16,6 +16,11 @@ mcmod.info:
 - [X] voir pourquoi le numero de version ne se met pas quand on build
 
 DimChest:
-- [ ] Bug: synchro de l'ouverture du coffre en mode server (packet envoye par le server au lieu du client ?)
+- [X] Bug: synchro de l'ouverture du coffre en mode server (packet envoye par le server au lieu du client ?)
 - [X] Ajouter les raccourcis clavier pour gerer l'inventaire (shitf+clic ...)
 - [X] Bug: en mode release la texture du chest ne s'affiche pas sur le model
+
+2 bugs avant la release:
+- [ ] En jouant sur un serveur, si on met a jour le DimChest (freq ou owner) via un ordinateur, l'inventaire est bien mise à jour
+mais l'interface continue d'afficher les anciennes infos.
+- [ ] Toujours sur un serveur, a la connexion du client les coffres sont tout noir (bug de lumiere je suppose)

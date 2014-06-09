@@ -15,6 +15,7 @@ public class ContainerDimChest extends Container {
 	// *******************************************************************
 	public ContainerDimChest(InventoryPlayer inventory, TEDimChest tileEntity) {
 		this.tileEntity = tileEntity;
+		this.tileEntity.openChest();
 
 		int y;
 

@@ -95,7 +95,7 @@ public class GUIDimCHest extends GuiContainer {
 			
 		}
 		
-		DimStorageNetwork.sendUpdateStorage(this.tileEntity);
+		DimStorageNetwork.sendUpdateStorageToServer(this.tileEntity);
 	}
 	
 	@Override

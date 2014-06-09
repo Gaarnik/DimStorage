@@ -124,27 +124,27 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	// ****************************************************************
 	@Override
 	public void openChest() {
-		if(this.worldObj.isRemote)
+		if(this.storage.isClient())
             return;
 
         synchronized(this) {
             this.openCount++;
             
             if(this.openCount == 1)
-                DimStorageNetwork.sendOpenStorage(this, true);
+                DimStorageNetwork.sendOpenStorageToPlayers(this, true);
         }
 	}
 
 	@Override
 	public void closeChest() {
-		if(this.worldObj.isRemote)
+		if(this.storage.isClient())
             return;
 
         synchronized(this) {
             this.openCount--;
             
             if(this.openCount == 0)
-                DimStorageNetwork.sendOpenStorage(this, false);
+                DimStorageNetwork.sendOpenStorageToPlayers(this, false);
         }
 	}
 
@@ -231,7 +231,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 
 			this.reloadStorage();
 			this.onInventoryChanged();
-			DimStorageNetwork.sendUpdateStorage(this);
+			DimStorageNetwork.sendUpdateStorageToServer(this);
 			
 			return new Object[] { true };
 
@@ -243,7 +243,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 
 			this.reloadStorage();
 			this.onInventoryChanged();
-			DimStorageNetwork.sendUpdateStorage(this);
+			DimStorageNetwork.sendUpdateStorageToServer(this);
 			
 			return new Object[] { true };
 
@@ -256,7 +256,7 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 			
 			this.reloadStorage();
 			this.onInventoryChanged();
-			DimStorageNetwork.sendUpdateStorage(this);
+			DimStorageNetwork.sendUpdateStorageToServer(this);
 			
 			return new Object[] { true };
 
@@ -320,6 +320,8 @@ public class TEDimChest extends TileEntity implements IInventory, IPeripheral {
 	// ****************************************************************
 
 	// ****************************************************************
+	public DimChestStorage getStorage() { return this.storage; }
+	
 	public String getOwner() { return this.owner; }
 	public void setOwner(String owner) { this.owner = owner; }
 

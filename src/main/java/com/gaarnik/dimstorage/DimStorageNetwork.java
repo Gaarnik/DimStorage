@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -24,7 +25,7 @@ public class DimStorageNetwork {
 	public static final int ID_STORAGE_UPDATE 	= 2;
 
 	// *******************************************************************
-	public static void sendOpenStorage(TEDimChest tileEntity, boolean open) {
+	public static void sendOpenStorageToPlayers(TEDimChest tileEntity, boolean open) {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
 		DataOutputStream out = new DataOutputStream(bos);
 
@@ -42,23 +43,21 @@ public class DimStorageNetwork {
 			packet.data = bos.toByteArray();
 			packet.length = bos.size();
 
-			PacketDispatcher.sendPacketToServer(packet);
+			PacketDispatcher.sendPacketToAllPlayers(packet);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	private static void receiveOpenStorage(DataInputStream in, Player player) throws Exception {
+	private static void receiveOpenStorageFromServer(DataInputStream in, Player player) throws Exception {
 		int xCoord = in.readInt();
 		int yCoord = in.readInt();
 		int zCoord = in.readInt();
 		
 		boolean open = in.readBoolean();
 		
-		System.out.println("receiveOpenStorage: " + open);
-		
-		EntityPlayerMP playerMP = (EntityPlayerMP) player;
+		EntityClientPlayerMP playerMP = (EntityClientPlayerMP) player;
 		TileEntity tileEntity = playerMP.worldObj.getBlockTileEntity(xCoord, yCoord, zCoord);
 
 		if(tileEntity != null){
@@ -73,7 +72,7 @@ public class DimStorageNetwork {
 	}
 
 	// *******************************************************************
-	public static void sendUpdateStorage(TEDimChest tileEntity) {
+	public static void sendUpdateStorageToServer(TEDimChest tileEntity) {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
 		DataOutputStream out = new DataOutputStream(bos);
 
@@ -100,7 +99,7 @@ public class DimStorageNetwork {
 		}
 	}
 
-	private static void receiveUpdateStorage(DataInputStream in, Player player) throws Exception {
+	private static void receiveUpdateStorageFromPlayer(DataInputStream in, Player player) throws Exception {
 		int xCoord = in.readInt();
 		int yCoord = in.readInt();
 		int zCoord = in.readInt();
@@ -143,11 +142,11 @@ public class DimStorageNetwork {
 				switch(id) {
 
 				case ID_STORAGE_OPEN:
-					receiveOpenStorage(in, player);
+					receiveOpenStorageFromServer(in, player);
 					break;
 
 				case ID_STORAGE_UPDATE:
-					receiveUpdateStorage(in, player);
+					receiveUpdateStorageFromPlayer(in, player);
 					break;
 
 				}

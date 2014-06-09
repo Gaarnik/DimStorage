@@ -54,5 +54,7 @@ public abstract class AbstractDimStorage {
 
 	// ****************************************************************
     public int getChangeCount() { return this.changeCount; }
+    
+    public boolean isClient() { return this.manager.isClient(); }
 
 }
