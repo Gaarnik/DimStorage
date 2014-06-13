@@ -66,7 +66,12 @@ public class DimStorage {
 
 		proxy.init(event);
 	}
-
+	
+	@EventHandler
+	public void postload(FMLPostInitializationEvent event) {
+		config.save();
+	}
+	
 	// ****************************************************************
 
 	// ****************************************************************
