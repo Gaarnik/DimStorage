@@ -1,7 +1,7 @@
 [
 {
   "modid": "dimstorage",
-  "name": "DimSotage",
+  "name": "DimStorage",
   "description": "DimStorage add a technologic version of ender chest system with owner, frequence selection and lock system.",
   "version": "${version}",
   "mcversion": "${mcversion}",
