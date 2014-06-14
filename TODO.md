@@ -1,12 +1,22 @@
+Portage 1.7.2
+=============
+
+- [ ] ajout et craft de l'item DimCore (texture, lang)
+- [ ] ajout et craft du bloc DimChest (texture, model, lang)
+- [ ] fonctionnement solo du DimStorageManager
+- [ ] fonctionnement en multi
+- [ ] integration de l'API ComputerCraft
+
 AUCUNE MODIFICATION NE DOIT ETRE FAITE AVANT LE PORTAGE 1.7 !
 =============================================================
-
 
 evolutions
 ==========
 
-- [ ] mettre des boutons << et >> pour diminuer/augmenter la frequence de 10 en 10.
+- [ ] Remplacer les fleches par une zone de texte pour le choix de frequence.
+- [ ] voir pour un craft un peu plus cher (diamand ?)
 - [ ] permettre de reduire la fenetre de config du chest (un peu comme Thermal Expension mais pas exactement la meme).
+- [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
 
 bugs
 ====
