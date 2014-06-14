@@ -1,8 +1,8 @@
 Portage 1.7.2
 =============
 
-- [ ] ajout et craft de l'item DimCore (texture, lang)
-- [ ] ajout et craft du bloc DimChest (texture, model, lang)
+- [X] ajout et craft de l'item DimCore (texture, lang)
+- [X] ajout et craft du bloc DimChest (texture, model, lang)
 - [ ] fonctionnement solo du DimStorageManager
 - [ ] fonctionnement en multi
 - [ ] integration de l'API ComputerCraft

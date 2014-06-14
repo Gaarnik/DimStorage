@@ -11,6 +11,7 @@ import com.gaarnik.dimstorage.storage.DimStorageManager.DimStorageSaveHandler;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public abstract class CommonProxy {
@@ -33,7 +34,7 @@ public abstract class CommonProxy {
 		
 		GameRegistry.registerTileEntity(TEDimChest.class, "TEDimChest");
 
-		//NetworkRegistry.instance().registerGuiHandler(DimStorage.instance, new DimStorageGUIHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(DimStorage.instance, new DimStorageGUIHandler());
 	}
 
 }
