@@ -50,32 +50,32 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		synchronized(this) {
             this.items[slot] = stack;
-            this.onInventoryChanged();
+            this.markDirty();
         }
 	}
 
 	@Override
-	public void openChest() {}
+	public void openInventory() {}
 	
 	@Override
-	public void closeChest() {}
+	public void closeInventory() {}
 
 	@Override
-	public String getInvName() { return null; }
+	public String getInventoryName() { return null; }
 
 	@Override
 	public int getInventoryStackLimit() { return 64; }
 
 	@Override
 	public int getSizeInventory() { return 54; }
-
+	
 	@Override
-	public void onInventoryChanged() {
+	public void markDirty() {
 		this.setDirty();
 	}
 
 	@Override
-	public boolean isInvNameLocalized() { return true; }
+	public boolean hasCustomInventoryName() { return true; }
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) { return true; }
@@ -88,7 +88,7 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	public void loadFromTag(NBTTagCompound tag) {
 		this.empty();
         
-		InventoryUtils.readItemStacksFromTag(this.items, tag.getTagList("items"));
+		InventoryUtils.readItemStacksFromTag(this.items, tag.getTagList("items", 0));
 	}
 
 	@Override

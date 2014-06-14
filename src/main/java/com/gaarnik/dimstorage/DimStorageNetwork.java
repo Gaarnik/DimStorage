@@ -1,21 +1,9 @@
 package com.gaarnik.dimstorage;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.tileentity.TileEntity;
-
 import com.gaarnik.dimstorage.common.TEDimChest;
-
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
 public class DimStorageNetwork {
 	// *******************************************************************
@@ -38,19 +26,19 @@ public class DimStorageNetwork {
 			
 			out.writeBoolean(open);
 
-			Packet250CustomPayload packet = new Packet250CustomPayload();
+			/*Packet250CustomPayload packet = new Packet250CustomPayload();
 			packet.channel = CHANNEL_DIMCHEST;
 			packet.data = bos.toByteArray();
 			packet.length = bos.size();
 
-			PacketDispatcher.sendPacketToAllPlayers(packet);
+			PacketDispatcher.sendPacketToAllPlayers(packet);*/
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	private static void receiveOpenStorageFromServer(DataInputStream in, Player player) throws Exception {
+	/*private static void receiveOpenStorageFromServer(DataInputStream in, Player player) throws Exception {
 		int xCoord = in.readInt();
 		int yCoord = in.readInt();
 		int zCoord = in.readInt();
@@ -69,7 +57,7 @@ public class DimStorageNetwork {
 				playerMP.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
-	}
+	}*/
 
 	// *******************************************************************
 	public static void sendUpdateStorageToServer(TEDimChest tileEntity) {
@@ -87,19 +75,19 @@ public class DimStorageNetwork {
 			out.writeInt(tileEntity.getFreq());
 			out.writeBoolean(tileEntity.isLocked());
 
-			Packet250CustomPayload packet = new Packet250CustomPayload();
+			/*Packet250CustomPayload packet = new Packet250CustomPayload();
 			packet.channel = CHANNEL_DIMCHEST;
 			packet.data = bos.toByteArray();
 			packet.length = bos.size();
 
-			PacketDispatcher.sendPacketToServer(packet);
+			PacketDispatcher.sendPacketToServer(packet);*/
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	private static void receiveUpdateStorageFromPlayer(DataInputStream in, Player player) throws Exception {
+	/*private static void receiveUpdateStorageFromPlayer(DataInputStream in, Player player) throws Exception {
 		int xCoord = in.readInt();
 		int yCoord = in.readInt();
 		int zCoord = in.readInt();
@@ -124,10 +112,10 @@ public class DimStorageNetwork {
 				playerMP.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			}
 		}
-	}
+	}*/
 
 	// *******************************************************************
-	public static class DimStoragePacketHandler implements IPacketHandler {
+	/*public static class DimStoragePacketHandler implements IPacketHandler {
 
 		@Override
 		public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -156,7 +144,7 @@ public class DimStorageNetwork {
 			}
 		}
 
-	}
+	}*/
 
 	// *******************************************************************
 

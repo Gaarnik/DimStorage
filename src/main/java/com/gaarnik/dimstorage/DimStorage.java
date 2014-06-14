@@ -3,8 +3,7 @@ package com.gaarnik.dimstorage;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.storage.chest.DimChestPlugin;
@@ -16,18 +15,17 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = DimStorage.MODID, version = DimStorage.VERSION, acceptedMinecraftVersions=DimStorage.MC_VERSION)
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, 
-channels={DimStorageNetwork.CHANNEL_DIMCHEST}, packetHandler=DimStorageNetwork.DimStoragePacketHandler.class)
+/*@NetworkMod(clientSideRequired = true, serverSideRequired = true, 
+channels={DimStorageNetwork.CHANNEL_DIMCHEST}, packetHandler=DimStorageNetwork.DimStoragePacketHandler.class)*/
 public class DimStorage {
 	// ****************************************************************
 	public static final String MODID = "dimstorage";
-	public static final String VERSION = "1.0";
-	public static final String MC_VERSION = "1.6.4";
+	public static final String VERSION = "1.1";
+	public static final String MC_VERSION = "1.7.2";
 
 	// ****************************************************************
 	@Instance
@@ -41,8 +39,8 @@ public class DimStorage {
 	public static CreativeTabs tabDimStorage = new CreativeTabs("dimStorage") {
 		@SideOnly(Side.CLIENT)
 		@Override
-		public ItemStack getIconItemStack() {
-			return new ItemStack(DimStorage.dimChest, 1, 0);
+		public Item getTabIconItem() {
+			return Item.getItemFromBlock(DimStorage.dimChest);
 		}
 	};
 

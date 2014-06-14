@@ -15,7 +15,7 @@ public class ContainerDimChest extends Container {
 	// *******************************************************************
 	public ContainerDimChest(InventoryPlayer inventory, TEDimChest tileEntity) {
 		this.tileEntity = tileEntity;
-		this.tileEntity.openChest();
+		this.tileEntity.openInventory();
 
 		int y;
 
@@ -65,7 +65,7 @@ public class ContainerDimChest extends Container {
 	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 		super.onContainerClosed(par1EntityPlayer);
 		
-		this.tileEntity.closeChest();
+		this.tileEntity.closeInventory();
 	}
 	
 	// *******************************************************************

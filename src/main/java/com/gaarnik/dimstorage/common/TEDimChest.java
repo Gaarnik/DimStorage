@@ -6,23 +6,16 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 
-import com.gaarnik.dimstorage.DimStorageNetwork;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.storage.chest.DimChestStorage;
 
-import dan200.computer.api.IComputerAccess;
-import dan200.computer.api.ILuaContext;
-import dan200.computer.api.IPeripheral;
 import cpw.mods.fml.common.Optional.Interface;
 
 @Interface(iface="dan200.computer.api.IPeripheral", modid="ComputerCraft")
-public class TEDimChest extends TileEntity implements IInventory, ISidedInventory, IPeripheral {
+public class TEDimChest extends TileEntity implements IInventory, ISidedInventory {
 	// ****************************************************************
 	private static final float MIN_MOVABLE_POSITION = 0f;
 	private static final float MAX_MOVABLE_POSITION = 0.5f;
@@ -124,28 +117,28 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 
 	// ****************************************************************
 	@Override
-	public void openChest() {
+	public void openInventory() {
 		if(this.storage.isClient())
             return;
 
         synchronized(this) {
             this.openCount++;
             
-            if(this.openCount == 1)
-                DimStorageNetwork.sendOpenStorageToPlayers(this, true);
+            /*if(this.openCount == 1)
+                DimStorageNetwork.sendOpenStorageToPlayers(this, true);*/
         }
 	}
 
 	@Override
-	public void closeChest() {
+	public void closeInventory() {
 		if(this.storage.isClient())
             return;
 
         synchronized(this) {
             this.openCount--;
             
-            if(this.openCount == 0)
-                DimStorageNetwork.sendOpenStorageToPlayers(this, false);
+            /*if(this.openCount == 0)
+                DimStorageNetwork.sendOpenStorageToPlayers(this, false);*/
         }
 	}
 
@@ -155,8 +148,8 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	}
 
 	@Override
-	public String getInvName() {
-		return this.storage.getInvName();
+	public String getInventoryName() {
+		return this.storage.getInventoryName();
 	}
 
 	@Override
@@ -180,10 +173,10 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	}
 
 	@Override
-	public boolean isInvNameLocalized() {
-		return this.storage.isInvNameLocalized();
+	public boolean hasCustomInventoryName() {
+		return this.storage.hasCustomInventoryName();
 	}
-
+	
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return this.storage.isItemValidForSlot(i, itemstack);
@@ -224,7 +217,8 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	}
 	
 	// ****************************************************************
-	@Override
+	// Not used until CC API is released for 1.7.2
+	/*@Override
 	public String[] getMethodNames() {
 		return new String[] {
 				"getOwner", "getFreq", "isLocked",
@@ -302,10 +296,10 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	@Override
 	public String getType() {
 		return this.storage.getType();
-	}
+	}*/
 
 	// ****************************************************************
-	public Packet getDescriptionPacket() {
+	/*public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);
 
@@ -314,7 +308,7 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
 		this.readFromNBT(packet.data);
-	}
+	}*/
 
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);

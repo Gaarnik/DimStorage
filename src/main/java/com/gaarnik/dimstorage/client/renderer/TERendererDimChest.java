@@ -1,8 +1,6 @@
 package com.gaarnik.dimstorage.client.renderer;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -35,20 +33,20 @@ public class TERendererDimChest extends TileEntitySpecialRenderer {
 		GL11.glTranslatef((float)d0, (float)d1, (float)d2);
 
 		TEDimChest tileEntityYour = (TEDimChest) tileentity;
-		this.renderBlock(tileEntityYour, tileentity.worldObj, tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, DimStorage.dimChest);
+		this.renderBlock(tileEntityYour, tileentity.getWorldObj(), tileentity.xCoord, tileentity.yCoord, tileentity.zCoord, DimStorage.dimChest);
 
 		GL11.glPopMatrix();
 	}
 
 	// ****************************************************************
 	private void renderBlock(TEDimChest tileEntity, World world, int i, int j, int k, Block block) {
-		Tessellator tessellator = Tessellator.instance;
+		/*Tessellator tessellator = Tessellator.instance;
 		float f = block.getBlockBrightness(world, i, j, k);
 		int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
 		int l1 = l % 65536;
 		int l2 = l / 65536;
 		tessellator.setColorOpaque_F(f, f, f);
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)l1, (float)l2); 
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)l1, (float)l2); */
 		
 		int dir = 0;
 		if(tileEntity != null)

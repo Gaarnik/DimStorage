@@ -110,19 +110,19 @@ public class GUIDimCHest extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		this.fontRenderer.drawString(StatCollector.translateToLocal(this.guiName), 8, 6, 4210752);
-		this.fontRenderer.drawString(StatCollector.translateToLocal(this.inventory), 8, 128, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.guiName), 8, 6, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.inventory), 8, 128, 4210752);
 		
 		// owner
-		this.fontRenderer.drawString(StatCollector.translateToLocal(this.owner), 180, 35, 4210752);
-		this.fontRenderer.drawString(StatCollector.translateToLocal(this.tileEntity.getOwner()), 180, 50, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.owner), 180, 35, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.tileEntity.getOwner()), 180, 50, 4210752);
 
 		// freq
-		this.fontRenderer.drawString(StatCollector.translateToLocal(this.freq), 180, 100, 4210752);
-		this.fontRenderer.drawString(StatCollector.translateToLocal(""+this.tileEntity.getFreq()), 212, 121, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.freq), 180, 100, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(""+this.tileEntity.getFreq()), 212, 121, 4210752);
 		
 		// locked
-		this.fontRenderer.drawString(StatCollector.translateToLocal(this.locked), 180, 145, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.locked), 180, 145, 4210752);
 
 		// refresh button label
 		this.lockedButton.displayString = this.tileEntity.isLocked() ? this.yes: this.no;

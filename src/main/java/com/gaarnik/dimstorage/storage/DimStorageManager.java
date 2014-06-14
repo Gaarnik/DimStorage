@@ -17,11 +17,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.event.world.WorldEvent.Load;
 import net.minecraftforge.event.world.WorldEvent.Save;
 import net.minecraftforge.event.world.WorldEvent.Unload;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class DimStorageManager {
 	// ****************************************************************
@@ -120,7 +120,7 @@ public class DimStorageManager {
 	private void save(boolean force) {
 		if(!this.dirtyStorage.isEmpty() || force) {
 			for(AbstractDimStorage inv : this.dirtyStorage) {
-				this.saveTag.setCompoundTag(inv.owner+"|"+inv.freq+"|"+inv.getType(), inv.saveToTag());
+				this.saveTag.setTag(inv.owner+"|"+inv.freq+"|"+inv.getType(), inv.saveToTag());
 				inv.setClean();
 			}
 
@@ -175,7 +175,7 @@ public class DimStorageManager {
 	// ****************************************************************
 	public static class DimStorageSaveHandler {
 
-		@ForgeSubscribe
+		@SubscribeEvent
 		public void onWorldLoad(Load event) {
 			DimStorageManager manager = instance(event.world.isRemote);
 
@@ -185,19 +185,19 @@ public class DimStorageManager {
 				reloadManager(false, event.world);
 		}
 
-		@ForgeSubscribe
+		@SubscribeEvent
 		public void onWorldSave(Save event) {
 			if(!event.world.isRemote && instance(false) != null)
 				instance(false).save(false);
 		}
 
-		@ForgeSubscribe
+		@SubscribeEvent
 		public void onChunkDataLoad(ChunkDataEvent.Load event) {
 			if(serverManager == null)
 				reloadManager(false, event.world);
 		}
 
-		@ForgeSubscribe
+		@SubscribeEvent
 		public void onWorldUnload(Unload event) {
 			if(!event.world.isRemote && !MinecraftServer.getServer().isServerRunning())
 				serverManager = null;

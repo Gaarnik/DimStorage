@@ -52,7 +52,8 @@ public class InventoryUtils {
 	 */
 	public static void readItemStacksFromTag(ItemStack[] items, NBTTagList tagList) {
         for (int i = 0; i < tagList.tagCount(); ++i) {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) tagList.tagAt(i);
+            NBTTagCompound nbttagcompound1 = tagList.getCompoundTagAt(i);
+            
             int j = nbttagcompound1.getByte("Slot") & 255;
 
             if (j >= 0 && j < items.length)

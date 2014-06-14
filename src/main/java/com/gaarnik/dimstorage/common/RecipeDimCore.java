@@ -1,7 +1,7 @@
 package com.gaarnik.dimstorage.common;
 
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
@@ -28,9 +28,9 @@ public class RecipeDimCore implements IRecipe {
             "iri",
             "rer",
             "iri",
-            'i', Item.ingotIron,
-            'r', Item.redstone,
-            'e', Item.enderPearl});
+            'i', Items.iron_ingot,
+            'r', Items.redstone,
+            'e', Items.ender_pearl});
 	}
 
 	// ****************************************************************

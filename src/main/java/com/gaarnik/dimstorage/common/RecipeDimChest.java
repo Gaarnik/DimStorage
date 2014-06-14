@@ -1,7 +1,7 @@
 package com.gaarnik.dimstorage.common;
 
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
@@ -28,7 +28,7 @@ public class RecipeDimChest implements IRecipe {
             "iii",
             "ici",
             "iii",
-            'i', Item.ingotIron,
+            'i', Items.iron_ingot,
             'c', DimStorage.dimCore});
     }
 

@@ -7,3 +7,5 @@
 /gradlew
 /gradlew.bat
 /build/
+/eclipse/
+*.txt

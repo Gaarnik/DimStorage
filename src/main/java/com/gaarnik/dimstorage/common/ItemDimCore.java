@@ -1,8 +1,8 @@
 package com.gaarnik.dimstorage.common;
 
-import com.gaarnik.dimstorage.DimStorage;
-
 import net.minecraft.item.Item;
+
+import com.gaarnik.dimstorage.DimStorage;
 
 public class ItemDimCore extends Item {
 	// ****************************************************************
@@ -10,8 +10,8 @@ public class ItemDimCore extends Item {
 	// ****************************************************************
 
 	// ****************************************************************
-	public ItemDimCore(int id) {
-		super(id);
+	public ItemDimCore() {
+		super();
 		
 		this.setCreativeTab(DimStorage.tabDimStorage);
 		this.setTextureName(DimStorage.MODID + ":dim_core");
