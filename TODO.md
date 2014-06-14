@@ -1,3 +1,7 @@
+AUCUNE MODIFICATION NE DOIT ETRE FAITE AVANT LE PORTAGE 1.7 !
+=============================================================
+
+
 evolutions
 ==========
 
