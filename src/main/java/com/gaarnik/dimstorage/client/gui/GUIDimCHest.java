@@ -8,9 +8,9 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.gaarnik.dimstorage.DimStorageNetwork;
 import com.gaarnik.dimstorage.common.ContainerDimChest;
 import com.gaarnik.dimstorage.common.TEDimChest;
+import com.gaarnik.dimstorage.network.PacketHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -95,7 +95,7 @@ public class GUIDimCHest extends GuiContainer {
 			
 		}
 		
-		DimStorageNetwork.sendUpdateStorageToServer(this.tileEntity);
+		PacketHandler.sendUpdateStorageToServer(this.tileEntity);
 	}
 	
 	@Override

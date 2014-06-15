@@ -5,6 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 
+import com.gaarnik.dimstorage.network.PacketHandler;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.storage.chest.DimChestPlugin;
 
@@ -19,8 +20,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = DimStorage.MODID, version = DimStorage.VERSION, acceptedMinecraftVersions=DimStorage.MC_VERSION)
-/*@NetworkMod(clientSideRequired = true, serverSideRequired = true, 
-channels={DimStorageNetwork.CHANNEL_DIMCHEST}, packetHandler=DimStorageNetwork.DimStoragePacketHandler.class)*/
 public class DimStorage {
 	// ****************************************************************
 	public static final String MODID = "dimstorage";
@@ -55,6 +54,8 @@ public class DimStorage {
 	public void preInit(FMLPreInitializationEvent event) {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
+		
+		PacketHandler.init();
 
 		proxy.preInit(event);
 	}
