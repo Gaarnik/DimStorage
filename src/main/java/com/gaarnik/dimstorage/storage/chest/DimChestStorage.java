@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.Constants;
 
 import com.gaarnik.dimstorage.storage.AbstractDimStorage;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
@@ -88,7 +89,7 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	public void loadFromTag(NBTTagCompound tag) {
 		this.empty();
         
-		InventoryUtils.readItemStacksFromTag(this.items, tag.getTagList("items", 0));
+		InventoryUtils.readItemStacksFromTag(this.items, tag.getTagList("items", Constants.NBT.TAG_COMPOUND));
 	}
 
 	@Override

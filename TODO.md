@@ -14,6 +14,7 @@ evolutions
 ==========
 
 - [ ] Remplacer les fleches par une zone de texte pour le choix de frequence.
+= [ ] Limiter la frequence max a 999.
 - [ ] voir pour un craft un peu plus cher (diamand ?)
 - [ ] permettre de reduire la fenetre de config du chest (un peu comme Thermal Expension mais pas exactement la meme).
 - [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
