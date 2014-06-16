@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.gaarnik.dimstorage.common.ContainerDimChest;
 import com.gaarnik.dimstorage.common.TEDimChest;
-import com.gaarnik.dimstorage.network.PacketHandler;
+import com.gaarnik.dimstorage.network.DimStorageNetwork;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -95,7 +95,7 @@ public class GUIDimCHest extends GuiContainer {
 			
 		}
 		
-		PacketHandler.sendUpdateStorageToServer(this.tileEntity);
+		DimStorageNetwork.sendUpdateStorageToServer(this.tileEntity);
 	}
 	
 	@Override

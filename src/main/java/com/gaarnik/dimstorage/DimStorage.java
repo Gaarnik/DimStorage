@@ -5,7 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 
-import com.gaarnik.dimstorage.network.PacketHandler;
+import com.gaarnik.dimstorage.network.DimStorageNetwork;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.storage.chest.DimChestPlugin;
 
@@ -55,7 +55,7 @@ public class DimStorage {
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
 		
-		PacketHandler.init();
+		DimStorageNetwork.init();
 
 		proxy.preInit(event);
 	}

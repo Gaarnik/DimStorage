@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 
+import com.gaarnik.dimstorage.network.DimStorageNetwork;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.storage.chest.DimChestStorage;
 
@@ -124,8 +125,8 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
         synchronized(this) {
             this.openCount++;
             
-            /*if(this.openCount == 1)
-                DimStorageNetwork.sendOpenStorageToPlayers(this, true);*/
+            if(this.openCount == 1)
+                DimStorageNetwork.sendOpenStorageToPlayers(this, true);
         }
 	}
 
@@ -137,8 +138,8 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
         synchronized(this) {
             this.openCount--;
             
-            /*if(this.openCount == 0)
-                DimStorageNetwork.sendOpenStorageToPlayers(this, false);*/
+            if(this.openCount == 0)
+            	DimStorageNetwork.sendOpenStorageToPlayers(this, false);
         }
 	}
 
