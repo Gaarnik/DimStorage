@@ -1,12 +1,3 @@
-Version 1.1
-===========
-
-- Portage 1.7.2:
-- [X] ajout et craft de l'item DimCore (texture, lang)
-- [X] ajout et craft du bloc DimChest (texture, model, lang)
-- [X] fonctionnement solo du DimStorageManager
-- [X] fonctionnement en multi
-
 Version 1.2
 ===========
 
