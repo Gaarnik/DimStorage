@@ -9,7 +9,7 @@ Version 1.2
 - [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
 - [ ] integration de l'API ComputerCraft
 - [ ] ameliorer un peu la texture (effet d'ombre ou autre)
-- 
+
 - bugs:
 - [ ] il semble y avoir une baisse de FPS en ouvrant le coffre, peut etre du a l'animation d'ouverture du coffre
 - [ ] En jouant sur un serveur, si on met a jour le DimChest (freq ou owner) via un ordinateur, l'inventaire est bien mis a jour
