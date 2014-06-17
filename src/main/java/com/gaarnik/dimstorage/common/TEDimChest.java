@@ -6,6 +6,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 
@@ -300,16 +303,18 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	}*/
 
 	// ****************************************************************
-	/*public Packet getDescriptionPacket() {
+	@Override
+	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);
 
-		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}
-
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-		this.readFromNBT(packet.data);
-	}*/
+	
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
+		this.readFromNBT(packet.func_148857_g());
+	}
 
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
