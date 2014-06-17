@@ -6,7 +6,6 @@ Version 1.1
 - [X] ajout et craft du bloc DimChest (texture, model, lang)
 - [ ] fonctionnement solo du DimStorageManager
 - [ ] fonctionnement en multi
-- [ ] integration de l'API ComputerCraft
 
 Version 1.2
 ===========
@@ -17,7 +16,8 @@ Version 1.2
 - [ ] voir pour un craft un peu plus cher (diamand ?)
 - [ ] permettre de reduire la fenetre de config du chest (un peu comme Thermal Expension mais pas exactement la meme).
 - [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
-
+- [ ] integration de l'API ComputerCraft
+- 
 - bugs:
 - [ ] il semble y avoir une baisse de FPS en ouvrant le coffre, peut etre du a l'animation d'ouverture du coffre
 - [ ] En jouant sur un serveur, si on met a jour le DimChest (freq ou owner) via un ordinateur, l'inventaire est bien mise a jour
