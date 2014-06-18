@@ -2,8 +2,8 @@ Version 1.2
 ===========
 
 - evolutions:
-- [ ] Remplacer les fleches par une zone de texte pour le choix de frequence.
-- [ ] Limiter la frequence max a 999.
+- [X] Remplacer les fleches par une zone de texte pour le choix de frequence.
+- [X] Limiter la frequence max a 999.
 - [ ] voir pour un craft un peu plus cher/complique (diamand ?)
 - [ ] si le joueur ne peut pas acceder a un storage, afficher un message dans le chat et ne pas essayer d'ouvrir l'interface.
 - [ ] permettre de reduire la fenetre de config du chest (un peu comme Thermal Expension mais pas exactement la meme).
@@ -11,6 +11,8 @@ Version 1.2
 - [ ] integration de l'API ComputerCraft
 
 - bugs:
+- [ ] PRIORITAIRE: lance une partie, ouvre un coffre, change la frequence: si un stack est identique au precedent stack sur le meme slot alors rien ne s'affiche
+- [ ] PRIORITAIRE: quitter et relancer rapidement ne sauvegarde pas les changements sur le DimChest
 - [ ] il semble y avoir une baisse de FPS en ouvrant le coffre, peut etre du a l'animation d'ouverture du coffre
 - [ ] En jouant sur un serveur, si on met a jour le DimChest (freq ou owner) via un ordinateur, l'inventaire est bien mis a jour
 mais l'interface continue d'afficher les anciennes infos.

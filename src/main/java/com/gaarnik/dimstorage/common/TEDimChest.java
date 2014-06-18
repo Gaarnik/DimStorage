@@ -96,22 +96,14 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		this.reloadStorage();
 	}
 
-	public void downFreq() {
+	public void changeFreq(int freq) {
 		if(!this.worldObj.isRemote)
 			return;
 
-		if(this.freq > 1) {
-			this.freq--;
+		if(freq >= 1 && freq <= 999) {
+			this.freq = freq;
 			this.reloadStorage();
 		}
-	}
-
-	public void upFreq() {
-		if(!this.worldObj.isRemote)
-			return;
-
-		this.freq++;
-		this.reloadStorage();
 	}
 
 	public void swapLocked() {

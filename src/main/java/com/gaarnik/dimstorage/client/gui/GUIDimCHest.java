@@ -1,6 +1,7 @@
 package com.gaarnik.dimstorage.client.gui;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -18,12 +19,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GUIDimCHest extends GuiContainer {
 	// ****************************************************************
-	private static final int BUTTON_OWNER 		= 1;
-	private static final int BUTTON_FREQ_DOWN 	= 2;
-	private static final int BUTTON_FREQ_UP 	= 3;
-	private static final int BUTTON_LOCKED 		= 4;
-	
 	private static final ResourceLocation background = new ResourceLocation("dimstorage", "gui/dimchest.png");
+	
+	private static final int BUTTON_OWNER 		= 1;
+	private static final int BUTTON_FREQ		= 2;
+	private static final int BUTTON_LOCKED 		= 3;
+	
+	private static final String ALLOWED_CHARACTERS = "\b0123456789"; 
 
 	// ****************************************************************
 	private TEDimChest tileEntity;
@@ -31,6 +33,9 @@ public class GUIDimCHest extends GuiContainer {
 	private String change, owner, freq, locked, yes, no,guiName, inventory;
 	
 	private GuiButton lockedButton;
+	private GuiTextField freqTextField;
+	
+	private int currentFreq;
 	
 	// ****************************************************************
 	public GUIDimCHest(InventoryPlayer player, TEDimChest tileEntity) {
@@ -48,7 +53,7 @@ public class GUIDimCHest extends GuiContainer {
 	public void initGui() {
 		super.initGui();
 		
-		/** Get translation **/
+		// Get translation
 		this.change = StatCollector.translateToLocal("gui.dimchest.change");
 		this.owner = StatCollector.translateToLocal("gui.dimchest.owner");
 		this.freq = StatCollector.translateToLocal("gui.dimchest.frequency");
@@ -58,19 +63,29 @@ public class GUIDimCHest extends GuiContainer {
 		this.guiName = StatCollector.translateToLocal("container.dimchest");
 		this.inventory = StatCollector.translateToLocal("container.inventory");
 		
+		// init buttons list
 		this.buttonList.clear();
 		
-		GuiButton ownerButton = new GuiButton(BUTTON_OWNER, this.width / 2 + 55, this.height / 2 - 50, 64, 20, this.change);
+		GuiButton ownerButton = new GuiButton(BUTTON_OWNER, this.width / 2 + 55, this.height / 2 - 52, 64, 20, this.change);
 		this.buttonList.add(ownerButton);
 		
-		GuiButton freqDownButton = new GuiButton(BUTTON_FREQ_DOWN, this.width / 2 + 55, this.height / 2 - 1, 20, 20, "<");
-		this.buttonList.add(freqDownButton);
-		
-		GuiButton freqUpButton = new GuiButton(BUTTON_FREQ_UP, this.width / 2 + 99, this.height / 2 - 1, 20, 20, ">");
-		this.buttonList.add(freqUpButton);
+		GuiButton freqButton = new GuiButton(BUTTON_FREQ, this.width / 2 + 55, this.height / 2 + 9, 64, 20, this.change);
+		this.buttonList.add(freqButton);
 
-		this.lockedButton = new GuiButton(BUTTON_LOCKED, this.width / 2 + 55, this.height / 2 + 45, 64, 20, this.no);
+		this.lockedButton = new GuiButton(BUTTON_LOCKED, this.width / 2 + 55, this.height / 2 + 48, 64, 20, this.no);
 		this.buttonList.add(this.lockedButton);
+		
+		// add Freq textfield
+		this.currentFreq = this.tileEntity.getFreq();
+		this.freqTextField = new GuiTextField(this.fontRendererObj, this.width / 2 + 55, this.height / 2 - 10, 64, 15);
+		this.freqTextField.setMaxStringLength(3);
+		this.freqTextField.setFocused(false);
+		this.freqTextField.setText(""+this.currentFreq);
+	}
+	
+	@Override
+	public void updateScreen() {
+		this.freqTextField.updateCursorCounter();
 	}
 	
 	@Override
@@ -81,12 +96,9 @@ public class GUIDimCHest extends GuiContainer {
 			this.tileEntity.swapOwner();
 			break;
 			
-		case BUTTON_FREQ_DOWN:
-			this.tileEntity.downFreq();
-			break;
-			
-		case BUTTON_FREQ_UP:
-			this.tileEntity.upFreq();
+		case BUTTON_FREQ:
+			int freq = Integer.parseInt(this.freqTextField.getText());
+			this.tileEntity.changeFreq(freq);
 			break;
 			
 		case BUTTON_LOCKED:
@@ -98,6 +110,23 @@ public class GUIDimCHest extends GuiContainer {
 		DimStorageNetwork.sendUpdateStorageToServer(this.tileEntity);
 	}
 	
+	
+	@Override
+	protected void keyTyped(char c, int code) {
+		super.keyTyped(c, code);
+		
+		if(ALLOWED_CHARACTERS.contains(""+c))
+			this.freqTextField.textboxKeyTyped(c, code);
+	}
+	
+	@Override
+	protected void mouseClicked(int par1, int par2, int par3) {
+		super.mouseClicked(par1, par2, par3);
+		
+		this.freqTextField.mouseClicked(par1, par2, par3);
+	}
+
+	// ****************************************************************
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -112,23 +141,32 @@ public class GUIDimCHest extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.guiName), 8, 6, 4210752);
 		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.inventory), 8, 128, 4210752);
-		
-		// owner
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.owner), 180, 35, 4210752);
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.tileEntity.getOwner()), 180, 50, 4210752);
 
+		// owner
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.owner), 185, 35, 4210752);
+        this.drawHorizontalLine(185, 185 + this.fontRendererObj.getStringWidth(this.owner), 44, 0xFF333333);
+		int width = this.fontRendererObj.getStringWidth(this.tileEntity.getOwner());
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.tileEntity.getOwner()), 215 - width / 2, 50, 4210752);
+		
 		// freq
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.freq), 180, 100, 4210752);
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(""+this.tileEntity.getFreq()), 212, 121, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.freq), 185, 90, 4210752);
+		this.drawHorizontalLine(185, 185 + this.fontRendererObj.getStringWidth(this.freq), 99, 0xFF333333);
 		
 		// locked
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.locked), 180, 145, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.locked), 185, 150, 4210752);
+        this.drawHorizontalLine(185, 185 + this.fontRendererObj.getStringWidth(this.locked), 159, 0xFF333333);
 
 		// refresh button label
 		this.lockedButton.displayString = this.tileEntity.isLocked() ? this.yes: this.no;
 	}
 	
-	// ****************************************************************
+	@Override
+	public void drawScreen(int par1, int par2, float par3) {
+		super.drawScreen(par1, par2, par3);
+		
+		// freq
+		this.freqTextField.drawTextBox();
+	}
 
 	// ****************************************************************
 
