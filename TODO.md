@@ -9,7 +9,6 @@ Version 1.2
 - [ ] permettre de reduire la fenetre de config du chest (un peu comme Thermal Expension mais pas exactement la meme).
 - [ ] ameliorer un peu la texture (effet d'ombre / indicateur visuel => vert public, bleu prive, red locked)
 - [ ] integration de l'API ComputerCraft
-- [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
 
 - bugs:
 - [ ] il semble y avoir une baisse de FPS en ouvrant le coffre, peut etre du a l'animation d'ouverture du coffre
@@ -17,3 +16,9 @@ Version 1.2
 mais l'interface continue d'afficher les anciennes infos.
 - [ ] Toujours sur un serveur, a la connexion du client les coffres sont tout noir (bug de lumiere je suppose)
 - [ ] en serveur, ouvrir plusieurs fois le coffre alors qu'il est locked fait crash le client (une erreur est affichee sur le serveur.
+
+Version 1.3
+===========
+
+- [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
+- [ ] DimTank :D 
