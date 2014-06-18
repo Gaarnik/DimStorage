@@ -3,12 +3,13 @@ Version 1.2
 
 - evolutions:
 - [ ] Remplacer les fleches par une zone de texte pour le choix de frequence.
-= [ ] Limiter la frequence max a 999.
-- [ ] voir pour un craft un peu plus cher (diamand ?)
+- [ ] Limiter la frequence max a 999.
+- [ ] voir pour un craft un peu plus cher/complique (diamand ?)
+- [ ] si le joueur ne peut pas acceder a un storage, afficher un message dans le chat et ne pas essayer d'ouvrir l'interface.
 - [ ] permettre de reduire la fenetre de config du chest (un peu comme Thermal Expension mais pas exactement la meme).
-- [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
+- [ ] ameliorer un peu la texture (effet d'ombre / indicateur visuel => vert public, bleu prive, red locked)
 - [ ] integration de l'API ComputerCraft
-- [ ] ameliorer un peu la texture (effet d'ombre ou autre)
+- [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
 
 - bugs:
 - [ ] il semble y avoir une baisse de FPS en ouvrant le coffre, peut etre du a l'animation d'ouverture du coffre
