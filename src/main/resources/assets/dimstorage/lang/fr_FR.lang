@@ -1,6 +1,8 @@
 #Creative tabs
 itemGroup.dimStorage=DimStorage
 
+#TileEntity
+tileentity.dimchest.accessDenied=Acces refuse !
 
 #Conatiner
 container.dimchest=Coffre Dimensionnel

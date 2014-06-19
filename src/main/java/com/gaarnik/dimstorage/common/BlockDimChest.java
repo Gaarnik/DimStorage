@@ -13,7 +13,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.gaarnik.dimstorage.DimStorage;
-import com.gaarnik.dimstorage.DimStorageGUIHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -39,12 +38,10 @@ public class BlockDimChest extends BlockContainer {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what, float these, float are) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-		if (tileEntity == null || player.isSneaking())
+		if (tileEntity == null || tileEntity instanceof TEDimChest == false || player.isSneaking())
 			return false;
 
-		player.openGui(DimStorage.instance, DimStorageGUIHandler.GUI_DIMCHEST, world, x, y, z);
-
-		return true;
+		return ((TEDimChest) tileEntity).activate(world, x, y, z, player);
 	}
 
 	@Override

@@ -10,8 +10,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
+import com.gaarnik.dimstorage.DimStorage;
+import com.gaarnik.dimstorage.DimStorageGUIHandler;
 import com.gaarnik.dimstorage.network.DimStorageNetwork;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.storage.chest.DimChestStorage;
@@ -109,6 +114,21 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	public void swapLocked() {
 		this.locked = !this.locked;
 		this.reloadStorage();
+	}
+	
+	public boolean activate(World world, int x, int y, int z, EntityPlayer player) {
+		if(this.isUseableByPlayer(player)) {
+			if(this.storage.isClient())
+				this.storage.empty();
+			
+			player.openGui(DimStorage.instance, DimStorageGUIHandler.GUI_DIMCHEST, world, x, y, z);
+		}
+		else {
+			if(this.storage.isClient())
+				player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("tileentity.dimchest.accessDenied")));
+		}
+		
+		return true;
 	}
 
 	// ****************************************************************
