@@ -2,6 +2,7 @@ Version 1.2
 ===========
 
 - evolutions:
+- [ ] Re-organiser un peu les fichiers sources pour ne plus avoir lespackages client/server/common.
 - [X] Remplacer les fleches par une zone de texte pour le choix de frequence.
 - [X] Limiter la frequence max a 999.
 - [ ] voir pour un craft un plus cher/complique (le DimCore doit etre entoure de iron pour faire un SolidDimCore qui
