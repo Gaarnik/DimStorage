@@ -48,6 +48,8 @@ public class DimStorage {
 
 	// item
 	public static Item dimCore;
+	public static Item solidDimCore;
+	public static Item dimWall;
 
 	// ****************************************************************
 	@EventHandler
@@ -69,7 +71,8 @@ public class DimStorage {
 	
 	@EventHandler
 	public void postload(FMLPostInitializationEvent event) {
-		config.save();
+		if(config.hasChanged())
+			config.save();
 	}
 	
 	// ****************************************************************

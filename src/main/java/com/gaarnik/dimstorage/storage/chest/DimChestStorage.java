@@ -26,7 +26,9 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 
 	// ****************************************************************
 	public void empty() {
-        this.items = new ItemStack[this.getSizeInventory()];
+		synchronized(this) {
+			this.items = new ItemStack[this.getSizeInventory()];
+		}
     }
 
 	// ****************************************************************

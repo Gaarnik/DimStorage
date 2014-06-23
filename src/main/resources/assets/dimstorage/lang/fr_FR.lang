@@ -17,6 +17,8 @@ gui.dimchest.no=Non
 
 #Items
 item.dimcore.name=Coeur Dimensionnel
+item.soliddimcore.name=Coeur Dimensionnel Solide
+item.soliddimcore.name=Paroie Dimensionnel
 
 #Blocks
 tile.dimchest.name=Coffre Dimensionnel

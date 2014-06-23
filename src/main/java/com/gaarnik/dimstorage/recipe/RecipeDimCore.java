@@ -18,19 +18,21 @@ public class RecipeDimCore implements IRecipe {
 
 	// ****************************************************************
 	public static void init() {
-		if(init)return;
-        init = true;
+		if(init)
+			return;
+        
+		init = true;
         
         RecipeDimChest instance = new RecipeDimChest();
         GameRegistry.addRecipe(instance);
         
         GameRegistry.addRecipe(new ItemStack(DimStorage.dimCore, 1), new Object[]{
             "iri",
-            "rer",
+            "rdr",
             "iri",
             'i', Items.iron_ingot,
             'r', Items.redstone,
-            'e', Items.ender_pearl});
+            'd', Items.diamond});
 	}
 
 	// ****************************************************************

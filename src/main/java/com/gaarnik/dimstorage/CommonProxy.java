@@ -4,8 +4,12 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.gaarnik.dimstorage.block.BlockDimChest;
 import com.gaarnik.dimstorage.item.ItemDimCore;
+import com.gaarnik.dimstorage.item.ItemDimWall;
+import com.gaarnik.dimstorage.item.ItemSolidDimCore;
 import com.gaarnik.dimstorage.recipe.RecipeDimChest;
 import com.gaarnik.dimstorage.recipe.RecipeDimCore;
+import com.gaarnik.dimstorage.recipe.RecipeDimWall;
+import com.gaarnik.dimstorage.recipe.RecipeSolidDimCore;
 import com.gaarnik.dimstorage.storage.DimStorageManager.DimStorageSaveHandler;
 import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
@@ -26,6 +30,16 @@ public abstract class CommonProxy {
 		DimStorage.dimCore = new ItemDimCore().setUnlocalizedName("dimcore");
 		GameRegistry.registerItem(DimStorage.dimCore, "item_dimcore");
 		RecipeDimCore.init();
+
+		// SolidDimCore
+		DimStorage.solidDimCore = new ItemSolidDimCore().setUnlocalizedName("soliddimcore");
+		GameRegistry.registerItem(DimStorage.solidDimCore, "item_soliddimcore");
+		RecipeSolidDimCore.init();
+
+		// DimWall
+		DimStorage.dimWall = new ItemDimWall().setUnlocalizedName("dimwall");
+		GameRegistry.registerItem(DimStorage.dimWall, "item_dimwall");
+		RecipeDimWall.init();
 		
 		// DimChest
 		DimStorage.dimChest = new BlockDimChest().setBlockName("dimchest");

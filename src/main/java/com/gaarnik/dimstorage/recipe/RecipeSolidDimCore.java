@@ -1,5 +1,6 @@
 package com.gaarnik.dimstorage.recipe;
 
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -9,29 +10,29 @@ import com.gaarnik.dimstorage.DimStorage;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class RecipeDimChest implements IRecipe {
+public class RecipeSolidDimCore implements IRecipe {
 	// ****************************************************************
 
 	// ****************************************************************
-    private static boolean init;
+	private static boolean init;
 
 	// ****************************************************************
 	public static void init() {
-        if(init)
-        	return;
+		if(init)
+			return;
         
-        init = true;
+		init = true;
         
-        RecipeDimCore instance = new RecipeDimCore();
+        RecipeDimChest instance = new RecipeDimChest();
         GameRegistry.addRecipe(instance);
         
-        GameRegistry.addRecipe(new ItemStack(DimStorage.dimChest, 1), new Object[]{
-            "www",
-            "wcw",
-            "www",
-            'w', DimStorage.dimWall,
-            'c', DimStorage.solidDimCore});
-    }
+        GameRegistry.addRecipe(new ItemStack(DimStorage.solidDimCore, 1), new Object[]{
+            "iii",
+            "idi",
+            "iii",
+            'i', Items.iron_ingot,
+            'd', DimStorage.dimCore});
+	}
 
 	// ****************************************************************
 	@Override

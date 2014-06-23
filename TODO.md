@@ -2,14 +2,15 @@ Version 1.2
 ===========
 
 - evolutions:
-- [ ] Re-organiser un peu les fichiers sources pour ne plus avoir lespackages client/server/common.
+- [X] Re-organiser un peu les fichiers sources pour ne plus avoir lespackages client/server/common.
 - [X] Remplacer les fleches par une zone de texte pour le choix de frequence.
 - [X] Limiter la frequence max a 999.
-- [ ] voir pour un craft un plus cher/complique (le DimCore doit etre entoure de iron pour faire un SolidDimCore qui
+- [x] voir pour un craft un plus cher/complique (le DimCore doit etre entoure de iron pour faire un SolidDimCore qui
 est lui meme a entourer de DimContainer pour former un DimChest).
 - [X] si le joueur ne peut pas acceder a un storage, afficher un message dans le chat et ne pas essayer d'ouvrir l'interface.
 - [ ] permettre de reduire la fenetre de config du chest (un peu comme Thermal Expension mais pas exactement la meme).
 - [ ] ameliorer un peu la texture (effet d'ombre / indicateur visuel => vert public, bleu prive, red locked)
+- [ ] faire des textures pour le SolidDimCore et DimWall
 - [ ] integration de l'API ComputerCraft
 
 - bugs:

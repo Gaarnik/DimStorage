@@ -17,6 +17,8 @@ gui.dimchest.no=No
 
 #Items
 item.dimcore.name=Dimensional Core
+item.soliddimcore.name=Solid Dimensional Core
+item.dimwall.name=Dimensional Wall
 
 #Blocks
 tile.dimchest.name=Dimensional Chest
