@@ -32,7 +32,9 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	// ****************************************************************
 	@Override
 	public ItemStack decrStackSize(int slot, int size) {
-		return InventoryUtils.decrStackSize(this, slot, size);
+		synchronized(this) {
+			return InventoryUtils.decrStackSize(this, slot, size);
+		}
 	}
 	
 	@Override
@@ -44,7 +46,9 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
-		return InventoryUtils.getStackInSlotOnClosing(this, slot);
+		synchronized(this) {
+			return InventoryUtils.getStackInSlotOnClosing(this, slot);
+		}
 	}
 
 	@Override

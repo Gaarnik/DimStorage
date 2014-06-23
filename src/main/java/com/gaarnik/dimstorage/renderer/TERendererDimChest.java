@@ -1,4 +1,4 @@
-package com.gaarnik.dimstorage.client.renderer;
+package com.gaarnik.dimstorage.renderer;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.gaarnik.dimstorage.DimStorage;
-import com.gaarnik.dimstorage.client.model.ModelDimChest;
-import com.gaarnik.dimstorage.common.TEDimChest;
+import com.gaarnik.dimstorage.model.ModelDimChest;
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 public class TERendererDimChest extends TileEntitySpecialRenderer {
 	// ****************************************************************

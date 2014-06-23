@@ -1,4 +1,4 @@
-package com.gaarnik.dimstorage.common;
+package com.gaarnik.dimstorage.item;
 
 import net.minecraft.item.Item;
 

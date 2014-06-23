@@ -1,9 +1,9 @@
 package com.gaarnik.dimstorage.network;
 
 import com.gaarnik.dimstorage.DimStorage;
-import com.gaarnik.dimstorage.common.TEDimChest;
 import com.gaarnik.dimstorage.network.message.MessageOpenStorage;
 import com.gaarnik.dimstorage.network.message.MessageUpdateStorage;
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;

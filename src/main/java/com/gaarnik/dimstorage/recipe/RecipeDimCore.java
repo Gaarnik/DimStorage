@@ -1,4 +1,4 @@
-package com.gaarnik.dimstorage.common;
+package com.gaarnik.dimstorage.recipe;
 
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;

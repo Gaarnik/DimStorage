@@ -1,4 +1,6 @@
-package com.gaarnik.dimstorage.common;
+package com.gaarnik.dimstorage.container;
+
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

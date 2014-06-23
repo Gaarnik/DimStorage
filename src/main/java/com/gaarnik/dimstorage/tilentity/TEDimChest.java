@@ -1,4 +1,4 @@
-package com.gaarnik.dimstorage.common;
+package com.gaarnik.dimstorage.tilentity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

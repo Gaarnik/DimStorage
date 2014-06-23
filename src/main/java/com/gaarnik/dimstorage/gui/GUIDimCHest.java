@@ -1,4 +1,4 @@
-package com.gaarnik.dimstorage.client.gui;
+package com.gaarnik.dimstorage.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -9,9 +9,9 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.gaarnik.dimstorage.common.ContainerDimChest;
-import com.gaarnik.dimstorage.common.TEDimChest;
+import com.gaarnik.dimstorage.container.ContainerDimChest;
 import com.gaarnik.dimstorage.network.DimStorageNetwork;
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

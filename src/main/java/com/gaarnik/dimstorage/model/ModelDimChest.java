@@ -5,9 +5,9 @@
 // Keep in mind that you still need to fill in some blanks
 // - ZeuX
 
-package com.gaarnik.dimstorage.client.model;
+package com.gaarnik.dimstorage.model;
 
-import com.gaarnik.dimstorage.common.TEDimChest;
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

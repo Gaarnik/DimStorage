@@ -30,7 +30,7 @@ public class DimStorage {
 	@Instance
 	public static DimStorage instance = new DimStorage();
 
-	@SidedProxy(clientSide="com.gaarnik.dimstorage.client.ClientProxy", serverSide="com.gaarnik.dimstorage.server.ServerProxy")
+	@SidedProxy(clientSide="com.gaarnik.dimstorage.ClientProxy", serverSide="com.gaarnik.dimstorage.CommonProxy")
 	public static CommonProxy proxy;
 
 	public static Configuration config;

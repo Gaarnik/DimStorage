@@ -1,4 +1,4 @@
-package com.gaarnik.dimstorage.common;
+package com.gaarnik.dimstorage.block;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -13,6 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.gaarnik.dimstorage.DimStorage;
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

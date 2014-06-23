@@ -1,10 +1,8 @@
-package com.gaarnik.dimstorage.client;
+package com.gaarnik.dimstorage;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import com.gaarnik.dimstorage.CommonProxy;
-import com.gaarnik.dimstorage.DimStorage;
-import com.gaarnik.dimstorage.client.renderer.TERendererDimChest;
+import com.gaarnik.dimstorage.renderer.TERendererDimChest;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -17,7 +15,7 @@ public class ClientProxy extends CommonProxy {
 		
 		MinecraftForge.EVENT_BUS.register(DimStorage.dimChest);
 		
-		ClientRegistry.bindTileEntitySpecialRenderer(com.gaarnik.dimstorage.common.TEDimChest.class, new TERendererDimChest());
+		ClientRegistry.bindTileEntitySpecialRenderer(com.gaarnik.dimstorage.tilentity.TEDimChest.class, new TERendererDimChest());
 	}
 
 }

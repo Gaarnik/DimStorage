@@ -2,12 +2,12 @@ package com.gaarnik.dimstorage;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import com.gaarnik.dimstorage.common.BlockDimChest;
-import com.gaarnik.dimstorage.common.ItemDimCore;
-import com.gaarnik.dimstorage.common.RecipeDimChest;
-import com.gaarnik.dimstorage.common.RecipeDimCore;
-import com.gaarnik.dimstorage.common.TEDimChest;
+import com.gaarnik.dimstorage.block.BlockDimChest;
+import com.gaarnik.dimstorage.item.ItemDimCore;
+import com.gaarnik.dimstorage.recipe.RecipeDimChest;
+import com.gaarnik.dimstorage.recipe.RecipeDimCore;
 import com.gaarnik.dimstorage.storage.DimStorageManager.DimStorageSaveHandler;
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;

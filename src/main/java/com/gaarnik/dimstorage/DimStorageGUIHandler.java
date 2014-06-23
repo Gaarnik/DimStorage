@@ -1,8 +1,8 @@
 package com.gaarnik.dimstorage;
 
-import com.gaarnik.dimstorage.client.gui.GUIDimCHest;
-import com.gaarnik.dimstorage.common.ContainerDimChest;
-import com.gaarnik.dimstorage.common.TEDimChest;
+import com.gaarnik.dimstorage.container.ContainerDimChest;
+import com.gaarnik.dimstorage.gui.GUIDimCHest;
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
