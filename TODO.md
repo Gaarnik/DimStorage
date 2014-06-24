@@ -11,7 +11,6 @@ est lui meme a entourer de DimContainer pour former un DimChest).
 - [ ] permettre de reduire la fenetre de config du chest (un peu comme Thermal Expension mais pas exactement la meme).
 - [X] ameliorer un peu la texture (effet d'ombre / indicateur visuel => vert public, bleu prive, red locked)
 - [ ] faire des textures pour le SolidDimCore et DimWall
-- [ ] integration de l'API ComputerCraft
 
 - bugs:
 - [ ] PRIORITAIRE: lance une partie, ouvre un coffre, change la frequence: si un stack est identique au precedent stack sur le meme slot alors rien ne s'affiche
@@ -27,3 +26,4 @@ Version 1.3
 
 - [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
 - [ ] DimTank :D 
+- [ ] integration de l'API ComputerCraft
