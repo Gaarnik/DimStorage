@@ -42,7 +42,6 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 
     private int openCount;
 	private float movablePartState;
-	private boolean opening;
 
 	// ****************************************************************
 	public TEDimChest() {
@@ -53,7 +52,6 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		this.direction = 0;
 
 		this.movablePartState = MIN_MOVABLE_POSITION;
-		this.opening = false;
 	}
 
 	// ****************************************************************
@@ -61,7 +59,7 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	public void updateEntity() {
 		super.updateEntity();
 
-		if(this.opening) {
+		if(this.openCount > 0) {
 			if(this.movablePartState < MAX_MOVABLE_POSITION)
 				this.movablePartState += OPENING_SPEED;
 			
@@ -141,7 +139,7 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
             this.openCount++;
             
             if(this.openCount == 1)
-                DimStorageNetwork.sendOpenStorageToPlayers(this, true);
+                DimStorageNetwork.sendOpenStorageToPlayers(this);
         }
 	}
 
@@ -154,7 +152,7 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
             this.openCount--;
             
             if(this.openCount == 0)
-            	DimStorageNetwork.sendOpenStorageToPlayers(this, false);
+            	DimStorageNetwork.sendOpenStorageToPlayers(this);
         }
 	}
 
@@ -336,7 +334,6 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		this.locked = tag.getBoolean("locked");
 
 		this.direction = tag.getByte("direction");
-		this.opening = tag.getBoolean("opening");
 	}
 
 	@Override
@@ -348,7 +345,6 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		tag.setBoolean("locked", this.locked);
 
 		tag.setByte("direction", this.direction);
-		tag.setBoolean("opening", this.opening);
 	}
 
 	// ****************************************************************
@@ -368,7 +364,8 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	public byte getDirection() { return this.direction; }
 	public void setDirection(byte direction) { this.direction = direction; }
 
-	public void setOpening(boolean opening) { this.opening = opening; }
+	public int getOpenCount() { return this.openCount; }
+	public void setOpenCount(int count) { this.openCount = count; }
 	
 	public float getMovablePartState() { return this.movablePartState; }
 

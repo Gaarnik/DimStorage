@@ -7,6 +7,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.gaarnik.dimstorage.container.ContainerDimChest;
@@ -25,17 +26,29 @@ public class GUIDimCHest extends GuiContainer {
 	private static final int BUTTON_FREQ		= 2;
 	private static final int BUTTON_LOCKED 		= 3;
 	
-	private static final String ALLOWED_CHARACTERS = "\b0123456789"; 
+	private static final String ALLOWED_CHARACTERS = "\b0123456789";
+	
+	private static final int ANIMATION_SPEED = 10;
+	private static final int SETTINGS_WIDTH = 80;
+	
+	private static enum SettingsState {
+		STATE_CLOSED, STATE_OPENNING, STATE_OPENED, STATE_CLOSING
+	}
 
 	// ****************************************************************
 	private TEDimChest tileEntity;
 	
 	private String change, owner, freq, locked, yes, no,guiName, inventory;
 	
-	private GuiButton lockedButton;
+	private GuiButton ownerButton, freqButton, lockedButton;
 	private GuiTextField freqTextField;
 	
 	private int currentFreq;
+	
+	private SettingsState state;
+	private int animationState;
+	private boolean drawSettings;
+	private boolean settingsButtonOver;
 	
 	// ****************************************************************
 	public GUIDimCHest(InventoryPlayer player, TEDimChest tileEntity) {
@@ -43,8 +56,13 @@ public class GUIDimCHest extends GuiContainer {
 		
 		this.tileEntity = tileEntity;
 		
-		this.xSize = 256;
+		this.xSize = 176;
 		this.ySize = 230;
+		
+		this.state = SettingsState.STATE_CLOSED;
+		this.animationState = 0;
+		this.drawSettings = false;
+		this.settingsButtonOver = false;
 	}
 
 	// ****************************************************************
@@ -66,26 +84,52 @@ public class GUIDimCHest extends GuiContainer {
 		// init buttons list
 		this.buttonList.clear();
 		
-		GuiButton ownerButton = new GuiButton(BUTTON_OWNER, this.width / 2 + 55, this.height / 2 - 52, 64, 20, this.change);
-		this.buttonList.add(ownerButton);
+		this.ownerButton = new GuiButton(BUTTON_OWNER, this.width / 2 + 95, this.height / 2 - 42, 64, 20, this.change);
+		this.buttonList.add(this.ownerButton);
 		
-		GuiButton freqButton = new GuiButton(BUTTON_FREQ, this.width / 2 + 55, this.height / 2 + 9, 64, 20, this.change);
-		this.buttonList.add(freqButton);
+		this.freqButton = new GuiButton(BUTTON_FREQ, this.width / 2 + 95, this.height / 2 + 19, 64, 20, this.change);
+		this.buttonList.add(this.freqButton);
 
-		this.lockedButton = new GuiButton(BUTTON_LOCKED, this.width / 2 + 55, this.height / 2 + 48, 64, 20, this.no);
+		this.lockedButton = new GuiButton(BUTTON_LOCKED, this.width / 2 + 95, this.height / 2 + 58, 64, 20, this.no);
 		this.buttonList.add(this.lockedButton);
 		
 		// add Freq textfield
 		this.currentFreq = this.tileEntity.getFreq();
-		this.freqTextField = new GuiTextField(this.fontRendererObj, this.width / 2 + 55, this.height / 2 - 10, 64, 15);
+		this.freqTextField = new GuiTextField(this.fontRendererObj, this.width / 2 + 95, this.height / 2, 64, 15);
 		this.freqTextField.setMaxStringLength(3);
 		this.freqTextField.setFocused(false);
 		this.freqTextField.setText(""+this.currentFreq);
+
+		this.drawSettings(this.drawSettings);
 	}
 	
 	@Override
 	public void updateScreen() {
 		this.freqTextField.updateCursorCounter();
+		
+		switch(this.state) {
+		
+		case STATE_OPENNING:
+			this.animationState += ANIMATION_SPEED;
+			if(this.animationState >= SETTINGS_WIDTH) {
+				this.animationState = SETTINGS_WIDTH;
+				this.state = SettingsState.STATE_OPENED;
+				this.drawSettings(true);
+			}
+			break;
+			
+		case STATE_CLOSING:
+			this.animationState -= ANIMATION_SPEED;
+			if(this.animationState <= 0) {
+				this.animationState = 0;
+				this.state = SettingsState.STATE_CLOSED;
+			}
+			break;
+
+		default:
+			break;
+			
+		}
 	}
 	
 	@Override
@@ -120,10 +164,53 @@ public class GUIDimCHest extends GuiContainer {
 	}
 	
 	@Override
-	protected void mouseClicked(int par1, int par2, int par3) {
-		super.mouseClicked(par1, par2, par3);
+	protected void mouseClicked(int mouseX, int mouseY, int par3) {
+		super.mouseClicked(mouseX, mouseY, par3);
 		
-		this.freqTextField.mouseClicked(par1, par2, par3);
+		this.freqTextField.mouseClicked(mouseX, mouseY, par3);
+		
+		int x = (this.width - this.xSize) / 2;
+        int y = (this.height - this.ySize) / 2;
+        
+        int buttonX = x + this.xSize;
+        int buttonY = y + 4;
+		
+		boolean over = false;
+		
+		if(mouseX >= buttonX && mouseX <= buttonX + 32)
+			if(mouseY >= buttonY && mouseY <= buttonY + 32)
+				over = true;
+		
+		if(over == false)
+			return;
+		
+		if(this.state == SettingsState.STATE_CLOSED) {
+			this.state = SettingsState.STATE_OPENNING;
+		}
+		else if(this.state == SettingsState.STATE_OPENED) {
+			this.state = SettingsState.STATE_CLOSING;
+			this.drawSettings(false);
+		}
+	}
+	
+	@Override
+	public void handleMouseInput() {
+		super.handleMouseInput();
+		
+		int mouseX = Mouse.getEventX() * this.width / this.mc.displayWidth;
+        int mouseY = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
+        
+        int x = (this.width - this.xSize) / 2;
+        int y = (this.height - this.ySize) / 2;
+        
+        int buttonX = x + this.xSize;
+        int buttonY = y + 4;
+		
+		this.settingsButtonOver = false;
+		
+		if(mouseX >= buttonX && mouseX <= buttonX + 32)
+			if(mouseY >= buttonY && mouseY <= buttonY + 32)
+				this.settingsButtonOver = true;
 	}
 
 	// ****************************************************************
@@ -134,27 +221,53 @@ public class GUIDimCHest extends GuiContainer {
         
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
+        
+        int settingsX = x + (this.xSize- SETTINGS_WIDTH);
+        
+        this.drawTexturedModalRect(settingsX + this.animationState, y, this.xSize, 0, SETTINGS_WIDTH, this.ySize);
+        this.drawTexturedModalRect(x, y, 0, 0, this.xSize, 222);
+        
+        int buttonX = x + this.xSize;
+        int buttonY = y + 4;
+        
+        if(this.state == SettingsState.STATE_CLOSED || this.state == SettingsState.STATE_OPENNING)
+        	this.drawTexturedModalRect(buttonX, buttonY, 0, 222, 32, 32);
+        else if(this.state == SettingsState.STATE_OPENED || this.state == SettingsState.STATE_CLOSING)
+        	this.drawTexturedModalRect(buttonX, buttonY, 32, 222, 32, 32);
+        
+        if(this.settingsButtonOver)
+        	this.drawTexturedModalRect(buttonX, buttonY, 64, 222, 32, 32);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.guiName), 8, 6, 4210752);
 		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.inventory), 8, 128, 4210752);
+		
+		if(!this.drawSettings)
+			return;
 
+		int posY = 45;
+		
 		// owner
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.owner), 185, 35, 4210752);
-        this.drawHorizontalLine(185, 185 + this.fontRendererObj.getStringWidth(this.owner), 44, 0xFF333333);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.owner), 185, posY, 4210752);
+		posY += 9;
+        this.drawHorizontalLine(185, 185 + this.fontRendererObj.getStringWidth(this.owner), posY, 0xFF333333);
+        posY += 6;
 		int width = this.fontRendererObj.getStringWidth(this.tileEntity.getOwner());
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.tileEntity.getOwner()), 215 - width / 2, 50, 4210752);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.tileEntity.getOwner()), 215 - width / 2, posY, 4210752);
+		posY += 40;
 		
 		// freq
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.freq), 185, 90, 4210752);
-		this.drawHorizontalLine(185, 185 + this.fontRendererObj.getStringWidth(this.freq), 99, 0xFF333333);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.freq), 185, posY, 4210752);
+		posY += 9;
+		this.drawHorizontalLine(185, 185 + this.fontRendererObj.getStringWidth(this.freq), posY, 0xFF333333);
+		posY += 51;
 		
 		// locked
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.locked), 185, 150, 4210752);
-        this.drawHorizontalLine(185, 185 + this.fontRendererObj.getStringWidth(this.locked), 159, 0xFF333333);
+		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.locked), 185, posY, 4210752);
+		posY += 9;
+        this.drawHorizontalLine(185, 185 + this.fontRendererObj.getStringWidth(this.locked), posY, 0xFF333333);
 
 		// refresh button label
 		this.lockedButton.displayString = this.tileEntity.isLocked() ? this.yes: this.no;
@@ -169,6 +282,15 @@ public class GUIDimCHest extends GuiContainer {
 	}
 
 	// ****************************************************************
+	private void drawSettings(boolean draw) {
+		this.drawSettings = draw;
+		
+		this.ownerButton.visible = draw;
+		this.freqButton.visible = draw;
+		this.lockedButton.visible = draw;
+		
+		this.freqTextField.setVisible(draw);
+	}
 
 	// ****************************************************************
 

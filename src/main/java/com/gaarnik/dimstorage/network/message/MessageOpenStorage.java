@@ -15,15 +15,15 @@ public class MessageOpenStorage implements IMessage, IMessageHandler<MessageOpen
 	// *******************************************************************
 	private int x, y, z;
 
-	private boolean open;
+	private int openCount;
 
 	// *******************************************************************
-	public MessageOpenStorage(TEDimChest te, boolean open) {
+	public MessageOpenStorage(TEDimChest te) {
 		this.x = te.xCoord;
 		this.y = te.yCoord;
 		this.z = te.zCoord;
-		
-		this.open = open;
+
+		this.openCount = te.getOpenCount();
 	}
 	
 	public MessageOpenStorage() {}
@@ -38,7 +38,7 @@ public class MessageOpenStorage implements IMessage, IMessageHandler<MessageOpen
 		
 		TEDimChest tileEntityDimChest = (TEDimChest) tileEntity;
 
-		tileEntityDimChest.setOpening(message.open);
+		tileEntityDimChest.setOpenCount(message.openCount);
 
 		FMLClientHandler.instance().getClient().theWorld.markBlockForUpdate(message.x, message.y, message.z);
 		
@@ -51,8 +51,8 @@ public class MessageOpenStorage implements IMessage, IMessageHandler<MessageOpen
 		out.writeInt(this.x);
 		out.writeInt(this.y);
 		out.writeInt(this.z);
-		
-		out.writeBoolean(this.open);
+
+		out.writeInt(this.openCount);
 	}
 	
 	@Override
@@ -60,8 +60,8 @@ public class MessageOpenStorage implements IMessage, IMessageHandler<MessageOpen
 		this.x = in.readInt();
 		this.y = in.readInt();
 		this.z = in.readInt();
-		
-		this.open = in.readBoolean();
+
+		this.openCount = in.readInt();
 	}
 
 	// *******************************************************************

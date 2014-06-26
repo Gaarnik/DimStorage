@@ -18,6 +18,8 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 	private String owner;
 	private int freq;
 	private boolean locked;
+	
+	private int openCount;
 
 	// *******************************************************************
 	public MessageUpdateStorage(TEDimChest te) {
@@ -28,6 +30,8 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 		this.owner = te.getOwner();
 		this.freq = te.getFreq();
 		this.locked = te.isLocked();
+		
+		this.openCount = te.getOpenCount();
 	}
 	
 	public MessageUpdateStorage() {}
@@ -45,6 +49,7 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 		tileEntityDimChest.setOwner(message.owner);
 		tileEntityDimChest.setFreq(message.freq);
 		tileEntityDimChest.setLocked(message.locked);
+		tileEntityDimChest.setOpenCount(message.openCount);
 
 		tileEntityDimChest.reloadStorage();
 
@@ -65,6 +70,8 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 		
 		out.writeInt(this.freq);
 		out.writeBoolean(this.locked);
+
+		out.writeInt(this.openCount);
 	}
 	
 	@Override
@@ -79,6 +86,8 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 		
 		this.freq = in.readInt();
 		this.locked = in.readBoolean();
+
+		this.openCount = in.readInt();
 	}
 
 	// *******************************************************************

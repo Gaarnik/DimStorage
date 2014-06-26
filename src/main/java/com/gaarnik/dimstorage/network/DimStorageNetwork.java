@@ -24,8 +24,8 @@ public class DimStorageNetwork {
 		instance.sendToServer(new MessageUpdateStorage(te));
 	}
 
-	public static void sendOpenStorageToPlayers(TEDimChest te, boolean open) {
-		instance.sendToAll(new MessageOpenStorage(te, open));
+	public static void sendOpenStorageToPlayers(TEDimChest te) {
+		instance.sendToAll(new MessageOpenStorage(te));
 	}
 
 }
