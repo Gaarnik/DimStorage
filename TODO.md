@@ -2,10 +2,10 @@ Version 1.3
 ===========
 
 - evolutions:
-- [ ] pouvoir renommer le DimChest comme un coffre
+- [X] pouvoir renommer le DimChest comme un coffre
 - [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
 - [ ] DimTank :D 
-- [ ] integration de l'API ComputerCraft
+- [ ] integration de l'API ComputerCraft ( getOwner, getFreq, isLocked, setOwner, setPublic, setFreq ) + getItemInSlot (savoir quel item est dans quel slot)
 
 - bugs:
 - [ ] PRIORITAIRE: lance une partie, ouvre un coffre, change la frequence: si un stack est identique au precedent stack sur le meme slot alors rien ne s'affiche

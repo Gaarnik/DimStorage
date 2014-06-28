@@ -3,7 +3,9 @@ package com.gaarnik.dimstorage.gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -51,6 +53,8 @@ public class GUIDimCHest extends GuiContainer {
 	private boolean drawSettings;
 	private boolean settingsButtonOver;
 	
+	private IInventory playerInventory;
+
 	// ****************************************************************
 	public GUIDimCHest(InventoryPlayer player, TEDimChest tileEntity) {
 		super(new ContainerDimChest(player, tileEntity));
@@ -249,10 +253,10 @@ public class GUIDimCHest extends GuiContainer {
 	}
 	
 	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.guiName), 8, 6, 4210752);
+	protected void drawGuiContainerForegroundLayer(int x, int y) { //TODO
+        this.fontRendererObj.drawString(this.tileEntity.hasCustomInventoryName() ? this.tileEntity.getInventoryName() : I18n.format(this.tileEntity.getInventoryName()),  8, 6, 4210752);
 		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.inventory), 8, 128, 4210752);
-		
+
 		if(!this.drawSettings)
 			return;
 

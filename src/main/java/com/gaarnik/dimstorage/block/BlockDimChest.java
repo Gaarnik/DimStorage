@@ -51,9 +51,12 @@ public class BlockDimChest extends BlockContainer {
 		TileEntity te = world.getTileEntity(x, y, z);
 
 		if(te != null && te instanceof TEDimChest) {
-			((TEDimChest) te).setDirection((byte)direction);;
+			((TEDimChest) te).setDirection((byte)direction);
+			((TEDimChest) te).setCustomGuiName(stack.getDisplayName());
 			world.markBlockForUpdate(x, y, z);
 		}
+		
+		
 	}
 
 	// ****************************************************************
