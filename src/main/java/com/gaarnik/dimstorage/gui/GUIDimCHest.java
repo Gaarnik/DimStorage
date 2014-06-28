@@ -30,6 +30,7 @@ public class GUIDimCHest extends GuiContainer {
 	
 	private static final int ANIMATION_SPEED = 10;
 	private static final int SETTINGS_WIDTH = 80;
+	private static final int BUTTON_WIDTH = 20;
 	
 	private static enum SettingsState {
 		STATE_CLOSED, STATE_OPENNING, STATE_OPENED, STATE_CLOSING
@@ -173,12 +174,12 @@ public class GUIDimCHest extends GuiContainer {
         int y = (this.height - this.ySize) / 2;
         
         int buttonX = x + this.xSize;
-        int buttonY = y + 4;
+        int buttonY = y + 16;
 		
 		boolean over = false;
 		
-		if(mouseX >= buttonX && mouseX <= buttonX + 32)
-			if(mouseY >= buttonY && mouseY <= buttonY + 32)
+		if(mouseX >= buttonX && mouseX <= buttonX + BUTTON_WIDTH)
+			if(mouseY >= buttonY && mouseY <= buttonY + BUTTON_WIDTH)
 				over = true;
 		
 		if(over == false)
@@ -204,12 +205,12 @@ public class GUIDimCHest extends GuiContainer {
         int y = (this.height - this.ySize) / 2;
         
         int buttonX = x + this.xSize;
-        int buttonY = y + 4;
+        int buttonY = y + 16;
 		
 		this.settingsButtonOver = false;
 		
-		if(mouseX >= buttonX && mouseX <= buttonX + 32)
-			if(mouseY >= buttonY && mouseY <= buttonY + 32)
+		if(mouseX >= buttonX && mouseX <= buttonX + BUTTON_WIDTH)
+			if(mouseY >= buttonY && mouseY <= buttonY + BUTTON_WIDTH)
 				this.settingsButtonOver = true;
 	}
 
@@ -224,19 +225,27 @@ public class GUIDimCHest extends GuiContainer {
         
         int settingsX = x + (this.xSize- SETTINGS_WIDTH);
         
-        this.drawTexturedModalRect(settingsX + this.animationState, y, this.xSize, 0, SETTINGS_WIDTH, this.ySize);
+        this.drawTexturedModalRect(settingsX + this.animationState, y + 36, this.xSize, 36, SETTINGS_WIDTH, this.ySize);
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, 222);
         
         int buttonX = x + this.xSize;
-        int buttonY = y + 4;
+        int buttonY = y + 16;
         
-        if(this.state == SettingsState.STATE_CLOSED || this.state == SettingsState.STATE_OPENNING)
-        	this.drawTexturedModalRect(buttonX, buttonY, 0, 222, 32, 32);
-        else if(this.state == SettingsState.STATE_OPENED || this.state == SettingsState.STATE_CLOSING)
-        	this.drawTexturedModalRect(buttonX, buttonY, 32, 222, 32, 32);
+        // button background
+        this.drawTexturedModalRect(buttonX, buttonY, this.xSize, 16, BUTTON_WIDTH, BUTTON_WIDTH);
         
-        if(this.settingsButtonOver)
-        	this.drawTexturedModalRect(buttonX, buttonY, 64, 222, 32, 32);
+        if(this.state == SettingsState.STATE_CLOSED || this.state == SettingsState.STATE_OPENNING) {
+        	if(this.settingsButtonOver)
+        		this.drawTexturedModalRect(buttonX + 6, buttonY - 3, this.xSize + 28, 16, 8, BUTTON_WIDTH);
+        	else
+        		this.drawTexturedModalRect(buttonX + 6, buttonY - 3, this.xSize + 20, 16, 8, BUTTON_WIDTH);
+        }
+        else if(this.state == SettingsState.STATE_OPENED || this.state == SettingsState.STATE_CLOSING) {
+        	if(this.settingsButtonOver)
+        		this.drawTexturedModalRect(buttonX + 4, buttonY - 3, this.xSize + 44, 16, 8, BUTTON_WIDTH);
+        	else
+        		this.drawTexturedModalRect(buttonX + 4, buttonY - 3, this.xSize + 36, 16, 8, BUTTON_WIDTH);
+        }
 	}
 	
 	@Override
