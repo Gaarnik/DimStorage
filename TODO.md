@@ -11,7 +11,7 @@ est lui meme a entourer de DimContainer pour former un DimChest).
 - [X] permettre de reduire la fenetre de config du chest (un peu comme Thermal Expension mais pas exactement la meme).
 - [X] ameliorer un peu la texture (effet d'ombre / indicateur visuel => vert public, bleu prive, red locked)
 - [X] faire des textures pour le SolidDimCore et DimWall.
-- [ ] remplacer le package recipe par registry (les Recipe.. deviennent Registry..., retirer IRecipe et ajouter init du block) 
+- [X] remplacer le package recipe par registry (les Recipe.. deviennent Registry..., retirer IRecipe et ajouter init du block) 
 
 - bugs:
 - [ ] PRIORITAIRE: lance une partie, ouvre un coffre, change la frequence: si un stack est identique au precedent stack sur le meme slot alors rien ne s'affiche
