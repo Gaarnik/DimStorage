@@ -1,16 +1,14 @@
-package com.gaarnik.dimstorage.recipe;
+package com.gaarnik.dimstorage.registry;
 
 import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.world.World;
 
 import com.gaarnik.dimstorage.DimStorage;
+import com.gaarnik.dimstorage.item.ItemDimWall;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class RecipeDimWall implements IRecipe {
+public class RegistryDimWall {
 	// ****************************************************************
 
 	// ****************************************************************
@@ -23,9 +21,9 @@ public class RecipeDimWall implements IRecipe {
         
 		init = true;
         
-        RecipeDimChest instance = new RecipeDimChest();
-        GameRegistry.addRecipe(instance);
-        
+		DimStorage.dimWall = new ItemDimWall().setUnlocalizedName("dimwall");
+		GameRegistry.registerItem(DimStorage.dimWall, "item_dimwall");
+		
         GameRegistry.addRecipe(new ItemStack(DimStorage.dimWall, 1), new Object[]{
             "iri",
             "rer",
@@ -36,16 +34,5 @@ public class RecipeDimWall implements IRecipe {
 	}
 
 	// ****************************************************************
-	@Override
-	public boolean matches(InventoryCrafting inventorycrafting, World world) { return false; }
-	
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventorycrafting) { return null; }
-
-	@Override
-	public ItemStack getRecipeOutput() { return null; }
-
-	@Override
-	public int getRecipeSize() { return 6; }
 
 }

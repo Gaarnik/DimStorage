@@ -2,14 +2,10 @@ package com.gaarnik.dimstorage;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import com.gaarnik.dimstorage.block.BlockDimChest;
-import com.gaarnik.dimstorage.item.ItemDimCore;
-import com.gaarnik.dimstorage.item.ItemDimWall;
-import com.gaarnik.dimstorage.item.ItemSolidDimCore;
-import com.gaarnik.dimstorage.recipe.RecipeDimChest;
-import com.gaarnik.dimstorage.recipe.RecipeDimCore;
-import com.gaarnik.dimstorage.recipe.RecipeDimWall;
-import com.gaarnik.dimstorage.recipe.RecipeSolidDimCore;
+import com.gaarnik.dimstorage.registry.RegistryDimChest;
+import com.gaarnik.dimstorage.registry.RegistryDimCore;
+import com.gaarnik.dimstorage.registry.RegistryDimWall;
+import com.gaarnik.dimstorage.registry.RegistrySolidDimCore;
 import com.gaarnik.dimstorage.storage.DimStorageManager.DimStorageSaveHandler;
 import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
@@ -21,33 +17,22 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public abstract class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new RecipeDimChest());
 		MinecraftForge.EVENT_BUS.register(new DimStorageSaveHandler());
 	}
 
 	public void init(FMLInitializationEvent event) {
-		// DimCore
-		DimStorage.dimCore = new ItemDimCore().setUnlocalizedName("dimcore");
-		GameRegistry.registerItem(DimStorage.dimCore, "item_dimcore");
-		RecipeDimCore.init();
-
-		// SolidDimCore
-		DimStorage.solidDimCore = new ItemSolidDimCore().setUnlocalizedName("soliddimcore");
-		GameRegistry.registerItem(DimStorage.solidDimCore, "item_soliddimcore");
-		RecipeSolidDimCore.init();
-
-		// DimWall
-		DimStorage.dimWall = new ItemDimWall().setUnlocalizedName("dimwall");
-		GameRegistry.registerItem(DimStorage.dimWall, "item_dimwall");
-		RecipeDimWall.init();
+		// Items
+		RegistryDimCore.init();
+		RegistrySolidDimCore.init();
+		RegistryDimWall.init();
 		
-		// DimChest
-		DimStorage.dimChest = new BlockDimChest().setBlockName("dimchest");
-		GameRegistry.registerBlock(DimStorage.dimChest, "block_dimchest");
-		RecipeDimChest.init();
+		// Blocks
+		RegistryDimChest.init();
 		
+		// Entities
 		GameRegistry.registerTileEntity(TEDimChest.class, "TEDimChest");
 
+		// GUI Handler
 		NetworkRegistry.INSTANCE.registerGuiHandler(DimStorage.instance, new DimStorageGUIHandler());
 	}
 
