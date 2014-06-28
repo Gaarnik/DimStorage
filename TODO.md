@@ -2,6 +2,7 @@ Version 1.3
 ===========
 
 - evolutions:
+- [ ] pouvoir renommer le DimChest comme un coffre
 - [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
 - [ ] DimTank :D 
 - [ ] integration de l'API ComputerCraft
