@@ -27,8 +27,8 @@ public class DimStorage {
 	public static final String MC_VERSION = "1.7.2";
 
 	// ****************************************************************
-	@Instance
-	public static DimStorage instance = new DimStorage();
+	@Instance(DimStorage.MODID)
+	public static DimStorage instance;
 
 	@SidedProxy(clientSide="com.gaarnik.dimstorage.ClientProxy", serverSide="com.gaarnik.dimstorage.CommonProxy")
 	public static CommonProxy proxy;
