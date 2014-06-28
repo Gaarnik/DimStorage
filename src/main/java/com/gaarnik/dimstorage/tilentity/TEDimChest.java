@@ -42,6 +42,8 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 
     private int openCount;
 	private float movablePartState;
+	
+	private String customName;
 
 	// ****************************************************************
 	public TEDimChest() {
@@ -161,9 +163,10 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		return this.storage.decrStackSize(i, j);
 	}
 
-	@Override
+	@Override //TODO
 	public String getInventoryName() {
-		return this.storage.getInventoryName();
+//		return this.storage.getInventoryName();
+		return this.hasCustomInventoryName() ? this.customName : "container.dimchest";
 	}
 
 	@Override
@@ -186,9 +189,10 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		return this.storage.getStackInSlotOnClosing(slot);
 	}
 
-	@Override
+	@Override // TODO
 	public boolean hasCustomInventoryName() {
-		return this.storage.hasCustomInventoryName();
+		return this.customName != null && this.customName.length() > 0;
+//		return this.storage.hasCustomInventoryName();
 	}
 	
 	@Override
@@ -334,6 +338,9 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		this.locked = tag.getBoolean("locked");
 
 		this.direction = tag.getByte("direction");
+		
+		if(tag.hasKey("CustomName"))
+			this.customName = tag.getString("CustomName");
 	}
 
 	@Override
@@ -345,6 +352,8 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		tag.setBoolean("locked", this.locked);
 
 		tag.setByte("direction", this.direction);
+		if(this.hasCustomInventoryName())
+			tag.setString("CustomName", this.customName);
 	}
 
 	// ****************************************************************
@@ -368,5 +377,9 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	public void setOpenCount(int count) { this.openCount = count; }
 	
 	public float getMovablePartState() { return this.movablePartState; }
+	
+	public void setCustomGuiName(String name) {
+		this.customName = name;
+	}
 
 }
