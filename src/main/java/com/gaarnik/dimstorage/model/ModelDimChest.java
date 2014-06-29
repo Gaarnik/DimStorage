@@ -70,7 +70,7 @@ public class ModelDimChest extends ModelBase {
 
 		this.top5 = new ModelRenderer(this, 72, 32);
 		this.top5.addBox(0F, 0F, 0F, 12, 2, 6);
-		this.top5.setRotationPoint(-6F, 8.5F, 0F);
+		this.top5.setRotationPoint(-6F, 8F, 0F);
 		this.top5.setTextureSize(128, 128);
 		this.top5.mirror = true;
 		this.setRotation(this.top5, 0F, 0F, 0F);
@@ -136,7 +136,7 @@ public class ModelDimChest extends ModelBase {
 	private ModelRenderer createIndicator(int offsetY) {
 		ModelRenderer indicator = new ModelRenderer(this, 0, offsetY);
 		indicator.addBox(0F, 0F, 0F, 2, 1, 1);
-		indicator.setRotationPoint(-5F, 8F, 4F);
+		indicator.setRotationPoint(-5F, 7.5F, 4F);
 		indicator.setTextureSize(128, 128);
 		indicator.mirror = true;
 		setRotation(indicator, 0F, 0F, 0F);
