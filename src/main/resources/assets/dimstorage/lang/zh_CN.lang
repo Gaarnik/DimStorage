@@ -1,0 +1,24 @@
+#Creative tabs
+itemGroup.dimStorage=维度存储
+
+#TileEntity
+tileentity.dimchest.accessDenied=拒绝访问!
+
+#Conatiner
+container.dimchest=维度箱子
+
+#Gui
+gui.dimchest.change=改变
+gui.dimchest.owner=所有者:
+gui.dimchest.frequency=频带:
+gui.dimchest.locked=锁定
+gui.dimchest.yes=是
+gui.dimchest.no=否
+
+#Items
+item.dimcore.name=维度核
+item.soliddimcore.name=维度实心
+item.dimwall.name=维度挡板
+
+#Blocks
+tile.dimchest.name=维度箱子
