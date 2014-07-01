@@ -1,7 +1,11 @@
 DimStorage 1.3 for MC 1.7.2
 ===========================
 
-
+- Fixed: crash on server start.
+- Fixed: backspace key not working to change frequency.
+- Fixed: model not properly rendered.
+- You can now use an Anvil to rename DimChest like vanilla chest.
+- CN translation.
 
 DimStorage 1.2 for MC 1.7.2
 ===========================

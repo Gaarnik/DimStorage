@@ -5,7 +5,6 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -28,8 +27,6 @@ public class GUIDimCHest extends GuiContainer {
 	private static final int BUTTON_FREQ		= 2;
 	private static final int BUTTON_LOCKED 		= 3;
 	
-	private static final String ALLOWED_CHARACTERS = "\b0123456789";
-	
 	private static final int ANIMATION_SPEED = 10;
 	private static final int SETTINGS_WIDTH = 80;
 	private static final int BUTTON_WIDTH = 20;
@@ -41,7 +38,7 @@ public class GUIDimCHest extends GuiContainer {
 	// ****************************************************************
 	private TEDimChest tileEntity;
 	
-	private String change, owner, freq, locked, yes, no,guiName, inventory;
+	private String change, owner, freq, locked, yes, no, inventory;
 	
 	private GuiButton ownerButton, freqButton, lockedButton;
 	private GuiTextField freqTextField;
@@ -53,8 +50,6 @@ public class GUIDimCHest extends GuiContainer {
 	private boolean drawSettings;
 	private boolean settingsButtonOver;
 	
-	private IInventory playerInventory;
-
 	// ****************************************************************
 	public GUIDimCHest(InventoryPlayer player, TEDimChest tileEntity) {
 		super(new ContainerDimChest(player, tileEntity));
@@ -83,7 +78,6 @@ public class GUIDimCHest extends GuiContainer {
 		this.locked = StatCollector.translateToLocal("gui.dimchest.locked");
 		this.yes = StatCollector.translateToLocal("gui.dimchest.yes");
 		this.no = StatCollector.translateToLocal("gui.dimchest.no");
-		this.guiName = StatCollector.translateToLocal("container.dimchest");
 		this.inventory = StatCollector.translateToLocal("container.inventory");
 		
 		// init buttons list
@@ -146,8 +140,13 @@ public class GUIDimCHest extends GuiContainer {
 			break;
 			
 		case BUTTON_FREQ:
-			int freq = Integer.parseInt(this.freqTextField.getText());
-			this.tileEntity.changeFreq(freq);
+			try {
+				int freq = Integer.parseInt(this.freqTextField.getText());
+				this.tileEntity.changeFreq(freq);	
+			}
+			catch(Exception e) {
+				this.freqTextField.setText(""+this.currentFreq);
+			}
 			break;
 			
 		case BUTTON_LOCKED:
@@ -164,8 +163,7 @@ public class GUIDimCHest extends GuiContainer {
 	protected void keyTyped(char c, int code) {
 		super.keyTyped(c, code);
 		
-		if(ALLOWED_CHARACTERS.contains(""+c))
-			this.freqTextField.textboxKeyTyped(c, code);
+		this.freqTextField.textboxKeyTyped(c, code);
 	}
 	
 	@Override
@@ -253,7 +251,7 @@ public class GUIDimCHest extends GuiContainer {
 	}
 	
 	@Override
-	protected void drawGuiContainerForegroundLayer(int x, int y) { //TODO
+	protected void drawGuiContainerForegroundLayer(int x, int y) {
         this.fontRendererObj.drawString(this.tileEntity.hasCustomInventoryName() ? this.tileEntity.getInventoryName() : I18n.format(this.tileEntity.getInventoryName()),  8, 6, 4210752);
 		this.fontRendererObj.drawString(StatCollector.translateToLocal(this.inventory), 8, 128, 4210752);
 

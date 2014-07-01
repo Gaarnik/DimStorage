@@ -163,9 +163,8 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		return this.storage.decrStackSize(i, j);
 	}
 
-	@Override //TODO
+	@Override
 	public String getInventoryName() {
-//		return this.storage.getInventoryName();
 		return this.hasCustomInventoryName() ? this.customName : "container.dimchest";
 	}
 
@@ -189,10 +188,9 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		return this.storage.getStackInSlotOnClosing(slot);
 	}
 
-	@Override // TODO
+	@Override
 	public boolean hasCustomInventoryName() {
 		return this.customName != null && this.customName.length() > 0;
-//		return this.storage.hasCustomInventoryName();
 	}
 	
 	@Override
