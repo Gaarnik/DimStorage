@@ -2,7 +2,6 @@ Version 1.4
 ===========
 
 - evolutions:
-- [X] pouvoir renommer le DimChest comme un coffre
 - [ ] objet d'acces a distance d'un DimChest (ender poutch like) (a reflechir)
 - [ ] DimTank :D 
 - [ ] integration de l'API ComputerCraft ( getOwner, getFreq, isLocked, setOwner, setPublic, setFreq ) + getItemInSlot (savoir quel item est dans quel slot)
