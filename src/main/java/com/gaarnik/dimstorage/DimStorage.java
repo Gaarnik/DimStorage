@@ -50,6 +50,7 @@ public class DimStorage {
 	public static Item dimCore;
 	public static Item solidDimCore;
 	public static Item dimWall;
+	public static Item dimChestController;
 
 	// ****************************************************************
 	@EventHandler

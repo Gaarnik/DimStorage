@@ -3,6 +3,7 @@ package com.gaarnik.dimstorage;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.gaarnik.dimstorage.registry.RegistryDimChest;
+import com.gaarnik.dimstorage.registry.RegistryDimChestController;
 import com.gaarnik.dimstorage.registry.RegistryDimCore;
 import com.gaarnik.dimstorage.registry.RegistryDimWall;
 import com.gaarnik.dimstorage.registry.RegistrySolidDimCore;
@@ -25,6 +26,7 @@ public class CommonProxy {
 		RegistryDimCore.init();
 		RegistrySolidDimCore.init();
 		RegistryDimWall.init();
+		RegistryDimChestController.init();
 		
 		// Blocks
 		RegistryDimChest.init();
