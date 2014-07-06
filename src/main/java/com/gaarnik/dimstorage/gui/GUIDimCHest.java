@@ -50,8 +50,10 @@ public class GUIDimCHest extends GuiContainer {
 	private boolean drawSettings;
 	private boolean settingsButtonOver;
 	
+	private boolean noConfig;
+	
 	// ****************************************************************
-	public GUIDimCHest(InventoryPlayer player, TEDimChest tileEntity) {
+	public GUIDimCHest(InventoryPlayer player, TEDimChest tileEntity, boolean noConfig) {
 		super(new ContainerDimChest(player, tileEntity));
 		
 		this.tileEntity = tileEntity;
@@ -63,6 +65,8 @@ public class GUIDimCHest extends GuiContainer {
 		this.animationState = 0;
 		this.drawSettings = false;
 		this.settingsButtonOver = false;
+		
+		this.noConfig = noConfig;
 	}
 
 	// ****************************************************************
@@ -170,6 +174,9 @@ public class GUIDimCHest extends GuiContainer {
 	protected void mouseClicked(int mouseX, int mouseY, int par3) {
 		super.mouseClicked(mouseX, mouseY, par3);
 		
+		if(this.noConfig)
+			return;
+		
 		this.freqTextField.mouseClicked(mouseX, mouseY, par3);
 		
 		int x = (this.width - this.xSize) / 2;
@@ -224,10 +231,11 @@ public class GUIDimCHest extends GuiContainer {
         
         int x = (this.width - this.xSize) / 2;
         int y = (this.height - this.ySize) / 2;
-        
         int settingsX = x + (this.xSize- SETTINGS_WIDTH);
+
+        if(!this.noConfig)
+        	this.drawTexturedModalRect(settingsX + this.animationState, y + 36, this.xSize, 36, SETTINGS_WIDTH, this.ySize);
         
-        this.drawTexturedModalRect(settingsX + this.animationState, y + 36, this.xSize, 36, SETTINGS_WIDTH, this.ySize);
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, 222);
         
         int buttonX = x + this.xSize;

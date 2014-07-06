@@ -4,8 +4,9 @@ Version 1.4
 - evolutions:
 - [ ] DimChestController
 	- [X] creer l'item
-	- [ ] fonctionnement: link a un DimCHest (voir comment recuperer une tileentity depuis x, y, z ET dimensionId)
-		Si trop complique, juste linker le controller sur la meme frequence/owner au moment du clic droit.
+	- [x] fonctionnement de base
+	- [ ] linker un DimChest avec shift+clic droit
+	- [ ] ne pas ouvrir la fenetre si le DimChest est locked
 	- [ ] texture
 - [ ] DimTank :D 
 - [ ] integration de l'API ComputerCraft ( getOwner, getFreq, isLocked, setOwner, setPublic, setFreq ) + getItemInSlot (savoir quel item est dans quel slot)

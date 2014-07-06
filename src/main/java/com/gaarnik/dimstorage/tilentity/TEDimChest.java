@@ -47,8 +47,18 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 
 	// ****************************************************************
 	public TEDimChest() {
-		this.owner = "public";
-		this.freq = 1;
+		this.init("public", 1);
+	}
+	
+	public TEDimChest(EntityPlayer player) {
+		this.init("public", 1);
+		this.worldObj = player.worldObj;
+		this.reloadStorage();
+	}
+	
+	private void init(String owner, int freq) {
+		this.owner = owner;
+		this.freq = freq;
 		this.locked = false;
 
 		this.direction = 0;
