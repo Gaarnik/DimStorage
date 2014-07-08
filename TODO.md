@@ -9,7 +9,6 @@ Version 1.4
 	- [ ] ne pas ouvrir la fenetre si le DimChest est locked
 	- [ ] texture
 - [ ] DimTank :D 
-- [ ] integration de l'API ComputerCraft ( getOwner, getFreq, isLocked, setOwner, setPublic, setFreq ) + getItemInSlot (savoir quel item est dans quel slot)
 
 - bugs:
 - [ ] PRIORITAIRE: lance une partie, ouvre un coffre, change la frequence: si un stack est identique au precedent stack sur le meme slot alors rien ne s'affiche
@@ -18,3 +17,11 @@ Version 1.4
 - [ ] En jouant sur un serveur, si on met a jour le DimChest (freq ou owner) via un ordinateur, l'inventaire est bien mis a jour
 mais l'interface continue d'afficher les anciennes infos.
 - [ ] Toujours sur un serveur, a la connexion du client les coffres sont tout noir (bug de lumiere je suppose).
+
+Version 1.5
+===========
+
+- evolutions:
+- [ ] RF power requirement (avec option dans la config)
+- [ ] NEI plugin/InventoryTweaks integration
+- [ ] integration de l'API ComputerCraft ( getOwner, getFreq, isLocked, setOwner, setPublic, setFreq ) + getItemInSlot (savoir quel item est dans quel slot)
