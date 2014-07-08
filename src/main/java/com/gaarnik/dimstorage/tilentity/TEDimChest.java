@@ -389,5 +389,11 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	public void setCustomGuiName(String name) {
 		this.customName = name;
 	}
+	
+	public String getCustomGuiName() { 
+		if(! this.customName.isEmpty() && this.customName != null)
+			return this.customName; 
+		return "";
+	}
 
 }
