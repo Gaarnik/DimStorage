@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.gaarnik.dimstorage.DimStorage;
@@ -34,7 +33,7 @@ public class ItemDimChestController extends Item {
 	// ****************************************************************
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-//		this.displayGUI(world, player);
+		this.displayGUI(world, player);
 		return stack;
 	}
 	
@@ -43,7 +42,8 @@ public class ItemDimChestController extends Item {
 		return this.linkStorage(stack, world, x, y, z, player);
 	}
 
-    @SideOnly(Side.CLIENT)
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
 		if(stack.hasTagCompound()) {
 			list.add("");
