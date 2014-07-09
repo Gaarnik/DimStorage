@@ -8,6 +8,7 @@ import net.minecraftforge.common.config.Configuration;
 import com.gaarnik.dimstorage.network.DimStorageNetwork;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.storage.chest.DimChestPlugin;
+import com.gaarnik.dimstorage.storage.tank.DimTankPlugin;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -45,6 +46,7 @@ public class DimStorage {
 
 	// block
 	public static Block dimChest;
+	public static Block dimTank;
 
 	// item
 	public static Item dimCore;
@@ -66,6 +68,7 @@ public class DimStorage {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		DimStorageManager.registerPlugin(new DimChestPlugin());
+		DimStorageManager.registerPlugin(new DimTankPlugin());
 
 		proxy.init(event);
 	}

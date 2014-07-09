@@ -14,7 +14,7 @@ public class DimChestPlugin implements IDimStoragePlugin {
 
 	// ****************************************************************
 	@Override
-	public AbstractDimStorage createEnderStorage(DimStorageManager manager, String owner, int freq) {
+	public AbstractDimStorage createStorage(DimStorageManager manager, String owner, int freq) {
 		return new DimChestStorage(manager, owner, freq);
 	}
 

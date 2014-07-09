@@ -75,7 +75,7 @@ public class DimStorageManager {
 		AbstractDimStorage storage = this.storageMap.get(key);
 
 		if(storage == null) {
-			storage = plugins.get(type).createEnderStorage(this, owner, freq);
+			storage = plugins.get(type).createStorage(this, owner, freq);
 
 			if(!this.client && this.saveTag.hasKey(key))
 				storage.loadFromTag(this.saveTag.getCompoundTag(key));

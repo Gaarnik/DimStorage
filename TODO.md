@@ -8,7 +8,7 @@ Version 1.4
 	- [ ] linker un DimChest avec shift+clic droit
 	- [ ] ne pas ouvrir la fenetre si le DimChest est locked
 	- [ ] texture
-- [ ] DimTank :D 
+- [ ] DimTank
 
 - bugs:
 - [ ] PRIORITAIRE: lance une partie, ouvre un coffre, change la frequence: si un stack est identique au precedent stack sur le meme slot alors rien ne s'affiche

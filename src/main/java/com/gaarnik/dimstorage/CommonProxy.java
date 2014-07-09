@@ -5,10 +5,12 @@ import net.minecraftforge.common.MinecraftForge;
 import com.gaarnik.dimstorage.registry.RegistryDimChest;
 import com.gaarnik.dimstorage.registry.RegistryDimChestController;
 import com.gaarnik.dimstorage.registry.RegistryDimCore;
+import com.gaarnik.dimstorage.registry.RegistryDimTank;
 import com.gaarnik.dimstorage.registry.RegistryDimWall;
 import com.gaarnik.dimstorage.registry.RegistrySolidDimCore;
 import com.gaarnik.dimstorage.storage.DimStorageManager.DimStorageSaveHandler;
 import com.gaarnik.dimstorage.tilentity.TEDimChest;
+import com.gaarnik.dimstorage.tilentity.TEDimTank;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -30,9 +32,11 @@ public class CommonProxy {
 		
 		// Blocks
 		RegistryDimChest.init();
+		RegistryDimTank.init();
 		
 		// Entities
 		GameRegistry.registerTileEntity(TEDimChest.class, "TEDimChest");
+		GameRegistry.registerTileEntity(TEDimTank.class, "TEDimTank");
 
 		// GUI Handler
 		NetworkRegistry.INSTANCE.registerGuiHandler(DimStorage.instance, new DimStorageGUIHandler());

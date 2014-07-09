@@ -3,15 +3,15 @@ package com.gaarnik.dimstorage.block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.gaarnik.dimstorage.tilentity.TEDimChest;
+import com.gaarnik.dimstorage.tilentity.TEDimTank;
 
-public class BlockDimChest extends BlockDimStorage {
+public class BlockDimTank extends BlockDimStorage {
 	// ****************************************************************
 
 	// ****************************************************************
 
 	// ****************************************************************
-	public BlockDimChest() {
+	public BlockDimTank() {
 		super();
 	}
 
@@ -19,15 +19,15 @@ public class BlockDimChest extends BlockDimStorage {
 
 	// ****************************************************************
 	@Override
-	public String getTopIcon() { return "dimchest_top"; }
+	public String getTopIcon() { return "dimtank_top"; }
 
 	@Override
-	public String getSidesIcon() { return "dimchest_sides"; }
+	public String getSidesIcon() { return "dimtank_sides"; }
 	
 	// ****************************************************************
 
 	// ****************************************************************
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) { return new TEDimChest(); }
+	public TileEntity createNewTileEntity(World world, int metadata) { return new TEDimTank(); }
 
 }

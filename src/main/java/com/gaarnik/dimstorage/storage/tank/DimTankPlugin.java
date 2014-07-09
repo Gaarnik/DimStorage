@@ -1,33 +1,29 @@
-package com.gaarnik.dimstorage.block;
+package com.gaarnik.dimstorage.storage.tank;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import com.gaarnik.dimstorage.storage.AbstractDimStorage;
+import com.gaarnik.dimstorage.storage.DimStorageManager;
+import com.gaarnik.dimstorage.storage.IDimStoragePlugin;
 
-import com.gaarnik.dimstorage.tilentity.TEDimChest;
-
-public class BlockDimChest extends BlockDimStorage {
+public class DimTankPlugin implements IDimStoragePlugin {
 	// ****************************************************************
 
 	// ****************************************************************
 
 	// ****************************************************************
-	public BlockDimChest() {
-		super();
+	public DimTankPlugin() {}
+
+	// ****************************************************************
+	@Override
+	public AbstractDimStorage createStorage(DimStorageManager manager, String owner, int freq) {
+		return null;
 	}
 
 	// ****************************************************************
 
 	// ****************************************************************
-	@Override
-	public String getTopIcon() { return "dimchest_top"; }
-
-	@Override
-	public String getSidesIcon() { return "dimchest_sides"; }
-	
-	// ****************************************************************
 
 	// ****************************************************************
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) { return new TEDimChest(); }
+	public String identifer() { return "DimTank"; }
 
 }

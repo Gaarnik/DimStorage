@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -24,7 +23,7 @@ import com.gaarnik.dimstorage.storage.chest.DimChestStorage;
 import cpw.mods.fml.common.Optional.Interface;
 
 @Interface(iface="dan200.computer.api.IPeripheral", modid="ComputerCraft")
-public class TEDimChest extends TileEntity implements IInventory, ISidedInventory {
+public class TEDimChest extends TEDimStorage implements IInventory, ISidedInventory {
 	// ****************************************************************
 	private static final float MIN_MOVABLE_POSITION = 0f;
 	private static final float MAX_MOVABLE_POSITION = 0.5f;
@@ -38,13 +37,9 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	private int freq;
 	private boolean locked;
 
-	private byte direction;
-
     private int openCount;
 	private float movablePartState;
 	
-	private String customName;
-
 	// ****************************************************************
 	public TEDimChest() {
 		this.init("public", 1);
@@ -52,16 +47,17 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	
 	public TEDimChest(EntityPlayer player) {
 		this.init("public", 1);
+		
 		this.worldObj = player.worldObj;
 		this.reloadStorage();
 	}
 	
 	private void init(String owner, int freq) {
+		super.init();
+		
 		this.owner = owner;
 		this.freq = freq;
 		this.locked = false;
-
-		this.direction = 0;
 
 		this.movablePartState = MIN_MOVABLE_POSITION;
 	}
@@ -126,6 +122,7 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 		this.reloadStorage();
 	}
 	
+	@Override
 	public boolean activate(World world, int x, int y, int z, EntityPlayer player) {
 		if(this.isUseableByPlayer(player)) {
 			if(this.storage.isClient())
@@ -378,22 +375,9 @@ public class TEDimChest extends TileEntity implements IInventory, ISidedInventor
 	public boolean isLocked() { return this.locked; }
 	public void setLocked(boolean locked) { this.locked = locked; }
 
-	public byte getDirection() { return this.direction; }
-	public void setDirection(byte direction) { this.direction = direction; }
-
 	public int getOpenCount() { return this.openCount; }
 	public void setOpenCount(int count) { this.openCount = count; }
 	
 	public float getMovablePartState() { return this.movablePartState; }
 	
-	public void setCustomGuiName(String name) {
-		this.customName = name;
-	}
-	
-	public String getCustomGuiName() { 
-		if(! this.customName.isEmpty() && this.customName != null)
-			return this.customName; 
-		return "";
-	}
-
 }
