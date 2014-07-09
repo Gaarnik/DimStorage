@@ -17,7 +17,7 @@ Version 1.4
 - [ ] En jouant sur un serveur, si on met a jour le DimChest (freq ou owner) via un ordinateur, l'inventaire est bien mis a jour
 mais l'interface continue d'afficher les anciennes infos.
 - [ ] Toujours sur un serveur, a la connexion du client les coffres sont tout noir (bug de lumiere je suppose).
-- [ ] pixel blanc sur la texture du bouton rouge
+- [X] pixel blanc sur la texture du bouton rouge
 
 Version 1.5
 ===========
