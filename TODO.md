@@ -2,13 +2,23 @@ Version 1.4
 ===========
 
 - evolutions:
-- [ ] DimChestController
-	- [X] creer l'item
+- [ ] faire en sorte que le paramètre locked soit un paramètre du storage et non de la TE.
+- [ ] DimChestController (toruver un autre nom car le DimController va permettre de configurer les DimChest/DimTank)
+	- [X] creer l'item.
 	- [x] fonctionnement de base
 	- [ ] linker un DimChest avec shift+clic droit
 	- [ ] ne pas ouvrir la fenetre si le DimChest est locked
 	- [ ] texture
-- [ ] DimTank
+- [ ] DimController: telecommande permettant de configurer un DimChest/DimTank:
+	- [ ] Les storages n'ont plus de fenetre de config, elle doit etre affichee via cet outil.
+	- [ ] faire un clic droit avec cet item permet donc d'ouvrir une interface de config pour le DimStorage cible.
+	- [ ] faire les fenetres de config pour le DimChest et le DimTank (pourra peut etre la meme pour les 2)
+	- [ ] retirer l'overlay de config dans la GUI du DimChest et le remplacer par un overlay d'info.
+- [ ] DimTank:
+	- [ ] Terminer l'implementation de la tileentity TEDimTank
+	- [ ] fonctionnement general
+	- [ ] creer le model qui affichera le contenu du tank (avec une jauge pour voir le liquide)
+	- [ ] GUI pour afficher le detail du Tank (liquide + info overlay)
 
 - bugs:
 - [ ] PRIORITAIRE: lance une partie, ouvre un coffre, change la frequence: si un stack est identique au precedent stack sur le meme slot alors rien ne s'affiche
