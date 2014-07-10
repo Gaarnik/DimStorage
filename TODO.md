@@ -8,7 +8,8 @@ Version 1.4
 	- [ ] faire un clic droit avec cet item permet donc d'ouvrir une interface de config pour le DimStorage cible.
 	- [ ] faire les fenetres de config pour le DimChest et le DimTank (pourra peut etre la meme pour les 2)
 	- [ ] retirer l'overlay de config dans la GUI du DimChest et le remplacer par un overlay d'info.
-- [ ] DimChestController (toruver un autre nom car le DimController va permettre de configurer les DimChest/DimTank)
+- [ ] PortableDimChest
+	- [ ] changer le nom dans le code (anciennement DimChestController)
 	- [X] creer l'item.
 	- [x] fonctionnement de base
 	- [ ] linker un DimChest avec shift+clic droit
