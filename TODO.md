@@ -2,7 +2,7 @@ Version 1.4
 ===========
 
 - evolutions:
-- [ ] le craft des DimWall donne 2 exemplaires de l'item par craft (reduit un peu le cout)
+- [ ] le craft des DimWall donne 4 exemplaires de l'item par craft (reduit un peu le cout)
 - [ ] faire en sorte que le paramètre locked soit un paramètre du storage et non de la TE.
 - [ ] DimController: telecommande permettant de configurer un DimChest/DimTank:
 	- [ ] Les storages n'ont plus de fenetre de config, elle doit etre affichee via cet outil.
