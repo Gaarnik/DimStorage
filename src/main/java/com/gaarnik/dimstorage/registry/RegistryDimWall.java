@@ -24,7 +24,7 @@ public class RegistryDimWall {
 		DimStorage.dimWall = new ItemDimWall().setUnlocalizedName("dimwall");
 		GameRegistry.registerItem(DimStorage.dimWall, "item_dimwall");
 		
-        GameRegistry.addRecipe(new ItemStack(DimStorage.dimWall, 1), new Object[]{
+        GameRegistry.addRecipe(new ItemStack(DimStorage.dimWall, 2), new Object[]{
             "iri",
             "rer",
             "iri",

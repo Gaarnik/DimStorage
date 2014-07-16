@@ -1,7 +1,7 @@
 DimStorage 1.4 for MC 1.7.2
 ===========================
 
-
+- Changed: DimWall recipe now gives 2 items by craft.
 
 DimStorage 1.3 for MC 1.7.2
 ===========================
