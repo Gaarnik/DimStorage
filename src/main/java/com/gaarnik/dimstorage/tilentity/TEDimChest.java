@@ -33,10 +33,6 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
 	// ****************************************************************
 	private DimChestStorage storage;
 
-	private String owner;
-	private int freq;
-	private boolean locked;
-
     private int openCount;
 	private float movablePartState;
 	
@@ -52,13 +48,10 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
 		this.reloadStorage();
 	}
 	
-	private void init(String owner, int freq) {
-		super.init();
+	@Override
+	protected void init(String owner, int freq) {
+		super.init(owner, freq);
 		
-		this.owner = owner;
-		this.freq = freq;
-		this.locked = false;
-
 		this.movablePartState = MIN_MOVABLE_POSITION;
 	}
 
@@ -118,7 +111,7 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
 	}
 
 	public void swapLocked() {
-		this.locked = !this.locked;
+		this.storage.swapLocked(this);
 		this.reloadStorage();
 	}
 	
@@ -148,7 +141,7 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
             this.openCount++;
             
             if(this.openCount == 1)
-                DimStorageNetwork.sendOpenStorageToPlayers(this);
+                DimStorageNetwork.sendOpenStorageToClients(this);
         }
 	}
 
@@ -161,7 +154,7 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
             this.openCount--;
             
             if(this.openCount == 0)
-            	DimStorageNetwork.sendOpenStorageToPlayers(this);
+            	DimStorageNetwork.sendOpenStorageToClients(this);
         }
 	}
 
@@ -207,10 +200,7 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		if(this.owner.equals("public") || this.owner.equals(entityplayer.getCommandSenderName()))
-			return true;
-		
-		return !this.locked;
+		return this.storage.isUseableByPlayer(entityplayer);
 	}
 
 	@Override
@@ -221,22 +211,17 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
 	// ****************************************************************
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		return !this.locked;
+		return this.storage.canExtractItem(i, itemstack, j);
 	}
 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		return !this.locked;
+		return this.storage.canInsertItem(i, itemstack, j);
 	}
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		int[] slots = new int[54];
-		
-		for(int i=0;i<54;i++)
-			slots[i] = i;
-		
-		return slots;
+		return this.storage.getAccessibleSlotsFromSide(var1);
 	}
 	
 	// ****************************************************************
@@ -340,7 +325,6 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
 
 		this.owner = tag.getString("owner");
 		this.freq = tag.getInteger("freq");
-		this.locked = tag.getBoolean("locked");
 
 		this.direction = tag.getByte("direction");
 		
@@ -354,7 +338,6 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
 
 		tag.setString("owner", this.owner);
 		tag.setInteger("freq", this.freq);
-		tag.setBoolean("locked", this.locked);
 
 		tag.setByte("direction", this.direction);
 		if(this.hasCustomInventoryName())
@@ -372,12 +355,13 @@ public class TEDimChest extends TEDimStorage implements IInventory, ISidedInvent
 	public int getFreq() { return this.freq; }
 	public void setFreq(int freq) { this.freq = freq; }
 
-	public boolean isLocked() { return this.locked; }
-	public void setLocked(boolean locked) { this.locked = locked; }
-
 	public int getOpenCount() { return this.openCount; }
 	public void setOpenCount(int count) { this.openCount = count; }
 	
 	public float getMovablePartState() { return this.movablePartState; }
+
+	public boolean isLocked() { return this.storage.isLocked(); }
+
+	public String getStorageType() { return this.storage.getType(); }
 	
 }

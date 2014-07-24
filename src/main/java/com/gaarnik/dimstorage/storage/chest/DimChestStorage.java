@@ -2,6 +2,7 @@ package com.gaarnik.dimstorage.storage.chest;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants;
@@ -10,7 +11,7 @@ import com.gaarnik.dimstorage.storage.AbstractDimStorage;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.util.InventoryUtils;
 
-public class DimChestStorage extends AbstractDimStorage implements IInventory {
+public class DimChestStorage extends AbstractDimStorage implements IInventory, ISidedInventory {
 	// ****************************************************************
 	public static final String TYPE = "DimChest";
 
@@ -88,19 +89,46 @@ public class DimChestStorage extends AbstractDimStorage implements IInventory {
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) { return true; }
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityplayer) { return true; }
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		if(this.owner.equals("public") || this.owner.equals(entityplayer.getCommandSenderName()))
+			return true;
+		
+		return !this.locked;
+	}
+
+	// ****************************************************************
+	@Override
+	public boolean canExtractItem(int var1, ItemStack var2, int var3) {
+		return !this.locked;
+	}
 	
+	@Override
+	public boolean canInsertItem(int var1, ItemStack var2, int var3) {
+		return !this.locked;
+	}
+	
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		int[] slots = new int[54];
+		
+		for(int i=0;i<54;i++)
+			slots[i] = i;
+		
+		return slots;
+	}
+
 	// ****************************************************************
 	@Override
 	public void loadFromTag(NBTTagCompound tag) {
+		super.loadFromTag(tag);
+		
 		this.empty();
-        
 		InventoryUtils.readItemStacksFromTag(this.items, tag.getTagList("items", Constants.NBT.TAG_COMPOUND));
 	}
 
 	@Override
 	public NBTTagCompound saveToTag() {
-		NBTTagCompound compound = new NBTTagCompound();
+		NBTTagCompound compound = super.saveToTag();
         compound.setTag("items", InventoryUtils.writeItemStacksToTag(this.items));
 
         return compound;

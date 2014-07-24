@@ -1,5 +1,8 @@
 package com.gaarnik.dimstorage.storage;
 
+import com.gaarnik.dimstorage.network.DimStorageNetwork;
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
+
 import net.minecraft.nbt.NBTTagCompound;
 
 
@@ -11,6 +14,7 @@ public abstract class AbstractDimStorage {
 	
 	protected String owner;
 	protected int freq;
+	protected boolean locked;
 	
 	private boolean dirty;
 	private int changeCount;
@@ -21,12 +25,19 @@ public abstract class AbstractDimStorage {
 	
 		this.owner = owner;
 		this.freq = freq;
+		this.locked = false;
 		
 		this.dirty = false;
 		this.changeCount = 0;
 	}
 	
 	// ****************************************************************
+	public void swapLocked(TEDimChest te) {
+		this.locked = !this.locked;
+		
+		DimStorageNetwork.sendUpdateStorageToServer(te);
+	}
+	
 	public void setDirty() {
         if(this.manager.isClient())
             return;
@@ -44,11 +55,19 @@ public abstract class AbstractDimStorage {
     }
 
     // ****************************************************************
-    public abstract String getType();
-    
-    public abstract void loadFromTag(NBTTagCompound tag);
+    public void loadFromTag(NBTTagCompound tag) {
+    	this.locked = tag.getBoolean("locked");
+    }
 
-    public abstract NBTTagCompound saveToTag();
+    public NBTTagCompound saveToTag() {
+    	NBTTagCompound tag = new NBTTagCompound();
+
+    	tag.setBoolean("locked", this.locked);
+    	
+        return tag;
+    }
+    
+    public abstract String getType();
 
 	// ****************************************************************
 
@@ -56,5 +75,11 @@ public abstract class AbstractDimStorage {
     public int getChangeCount() { return this.changeCount; }
     
     public boolean isClient() { return this.manager.isClient(); }
+
+	public boolean isLocked() { return this.locked; }
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+		this.setDirty();
+	}
 
 }

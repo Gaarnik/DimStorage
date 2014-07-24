@@ -12,6 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.gaarnik.dimstorage.util.LogUtils;
+
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
@@ -60,16 +62,16 @@ public class DimStorageManager {
 
 	// ****************************************************************
 	public AbstractDimStorage getStorage(String owner, int freq, String type) {
+		LogUtils.in("DimStorageManager", "getStorage");
+		
 		if(owner == null)
 			owner = "public";
 		
 		// used for debug
-		/*System.out.println("-------------");
-		System.out.println("getStorage for " + (this.client ? "client": "server"));
-		System.out.println("-------------");
-		System.out.println("owner: " + owner);
-		System.out.println("freq: " + freq);
-		System.out.println("type: " + type);*/
+		LogUtils.log("getStorage for " + (this.client ? "client": "server"));
+		LogUtils.log("owner: " + owner);
+		LogUtils.log("freq: " + freq);
+		LogUtils.log("type: " + type);
 
 		String key = owner+"|"+freq+"|"+type;
 		AbstractDimStorage storage = this.storageMap.get(key);
@@ -84,6 +86,9 @@ public class DimStorageManager {
 			this.storageList.get(type).add(storage);
 		}
 
+		LogUtils.log("Storage locked: " + storage.isLocked());
+		
+		LogUtils.out();
 		return storage;
 	}
 

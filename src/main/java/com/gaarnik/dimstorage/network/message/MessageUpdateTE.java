@@ -9,7 +9,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUpdateStorage, IMessage> {
+public class MessageUpdateTE implements IMessage, IMessageHandler<MessageUpdateTE, IMessage> {
 	// *******************************************************************
 
 	// *******************************************************************
@@ -17,28 +17,26 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 	
 	private String owner;
 	private int freq;
-	private boolean locked;
 	
 	private int openCount;
 
 	// *******************************************************************
-	public MessageUpdateStorage(TEDimChest te) {
+	public MessageUpdateTE(TEDimChest te) {
 		this.x = te.xCoord;
 		this.y = te.yCoord;
 		this.z = te.zCoord;
 		
 		this.owner = te.getOwner();
 		this.freq = te.getFreq();
-		this.locked = te.isLocked();
 		
 		this.openCount = te.getOpenCount();
 	}
 	
-	public MessageUpdateStorage() {}
+	public MessageUpdateTE() {}
 
 	// *******************************************************************
 	@Override
-	public IMessage onMessage(MessageUpdateStorage message, MessageContext context) {
+	public IMessage onMessage(MessageUpdateTE message, MessageContext context) {
 		EntityPlayerMP playerMP = context.getServerHandler().playerEntity;
 		TileEntity tileEntity = playerMP.worldObj.getTileEntity(message.x, message.y, message.z);
 		
@@ -48,7 +46,6 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 		TEDimChest tileEntityDimChest = (TEDimChest) tileEntity;
 		tileEntityDimChest.setOwner(message.owner);
 		tileEntityDimChest.setFreq(message.freq);
-		tileEntityDimChest.setLocked(message.locked);
 		tileEntityDimChest.setOpenCount(message.openCount);
 
 		tileEntityDimChest.reloadStorage();
@@ -69,7 +66,6 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 		out.writeBytes(this.owner.getBytes());
 		
 		out.writeInt(this.freq);
-		out.writeBoolean(this.locked);
 
 		out.writeInt(this.openCount);
 	}
@@ -85,7 +81,6 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 		this.owner = new String(buffer);
 		
 		this.freq = in.readInt();
-		this.locked = in.readBoolean();
 
 		this.openCount = in.readInt();
 	}

@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 public class TEDimTank extends TEDimStorage implements IFluidHandler {
 
 	public TEDimTank() {
-		this.init();
+		this.init("", 1);
 	}
 	
 	@Override

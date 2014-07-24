@@ -3,6 +3,7 @@ package com.gaarnik.dimstorage.network;
 import com.gaarnik.dimstorage.DimStorage;
 import com.gaarnik.dimstorage.network.message.MessageOpenStorage;
 import com.gaarnik.dimstorage.network.message.MessageUpdateStorage;
+import com.gaarnik.dimstorage.network.message.MessageUpdateTE;
 import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -15,16 +16,23 @@ public class DimStorageNetwork {
 
 	// *******************************************************************
 	public static void init() {
-		instance.registerMessage(MessageUpdateStorage.class, MessageUpdateStorage.class, 0, Side.SERVER);
+		instance.registerMessage(MessageUpdateTE.class, MessageUpdateTE.class, 0, Side.SERVER);
+		instance.registerMessage(MessageUpdateStorage.class, MessageUpdateStorage.class, 2, Side.CLIENT);
+		
 		instance.registerMessage(MessageOpenStorage.class, MessageOpenStorage.class, 1, Side.CLIENT);
 	}
 
 	// *******************************************************************
+	public static void sendUpdateTEToServer(TEDimChest te) {
+		instance.sendToServer(new MessageUpdateTE(te));
+	}
+	
 	public static void sendUpdateStorageToServer(TEDimChest te) {
 		instance.sendToServer(new MessageUpdateStorage(te));
 	}
 
-	public static void sendOpenStorageToPlayers(TEDimChest te) {
+	// *******************************************************************
+	public static void sendOpenStorageToClients(TEDimChest te) {
 		instance.sendToAll(new MessageOpenStorage(te));
 	}
 

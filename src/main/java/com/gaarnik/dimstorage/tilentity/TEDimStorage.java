@@ -8,12 +8,18 @@ public abstract class TEDimStorage extends TileEntity {
 	// ****************************************************************
 
 	// ****************************************************************
+	protected String owner;
+	protected int freq;
+	
 	protected byte direction;
 	
 	protected String customName;
 
 	// ****************************************************************
-	public void init() {
+	protected void init(String owner, int freq) {
+		this.owner = owner;
+		this.freq = freq;
+		
 		this.direction = 0;
 	}
 

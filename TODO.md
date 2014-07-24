@@ -3,7 +3,7 @@ Version 1.4
 
 - evolutions:
 - [X] le craft des DimWall donne 2 exemplaires de l'item par craft (reduit un peu le cout)
-- [ ] faire en sorte que le paramètre locked soit un paramètre du storage et non de la TE.
+- [ ] faire en sorte que le parametre locked soit un parametre du storage et non de la TE.
 - [ ] DimController: telecommande permettant de configurer un DimChest/DimTank:
 	- [ ] Les storages n'ont plus de fenetre de config, elle doit etre affichee via cet outil.
 	- [ ] faire un clic droit avec cet item permet donc d'ouvrir une interface de config pour le DimStorage cible.
