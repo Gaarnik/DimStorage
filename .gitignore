@@ -3,9 +3,6 @@
 /.settings/
 /bin/
 /.gradle/
-/gradle/
-/gradlew
-/gradlew.bat
 /build/
 /eclipse/
 *.txt
