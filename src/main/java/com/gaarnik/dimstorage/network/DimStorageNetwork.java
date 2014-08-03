@@ -4,6 +4,7 @@ import com.gaarnik.dimstorage.DimStorage;
 import com.gaarnik.dimstorage.network.message.MessageOpenStorage;
 import com.gaarnik.dimstorage.network.message.MessageUpdateStorage;
 import com.gaarnik.dimstorage.network.message.MessageUpdateTE;
+import com.gaarnik.dimstorage.storage.AbstractDimStorage;
 import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -28,12 +29,16 @@ public class DimStorageNetwork {
 	}
 	
 	public static void sendUpdateStorageToServer(TEDimChest te) {
-		instance.sendToServer(new MessageUpdateStorage(te));
+		instance.sendToServer(new MessageUpdateStorage(te, true));
 	}
 
 	// *******************************************************************
 	public static void sendOpenStorageToClients(TEDimChest te) {
 		instance.sendToAll(new MessageOpenStorage(te));
+	}
+
+	public static void sendUpdateStorageToClients(AbstractDimStorage storage) {
+		instance.sendToServer(new MessageUpdateStorage(storage, false));
 	}
 
 }

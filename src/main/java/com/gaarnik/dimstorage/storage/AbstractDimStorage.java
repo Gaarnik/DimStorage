@@ -1,9 +1,8 @@
 package com.gaarnik.dimstorage.storage;
 
-import com.gaarnik.dimstorage.network.DimStorageNetwork;
-import com.gaarnik.dimstorage.tilentity.TEDimChest;
-
 import net.minecraft.nbt.NBTTagCompound;
+
+import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
 
 public abstract class AbstractDimStorage {
@@ -34,8 +33,6 @@ public abstract class AbstractDimStorage {
 	// ****************************************************************
 	public void swapLocked(TEDimChest te) {
 		this.locked = !this.locked;
-		
-		DimStorageNetwork.sendUpdateStorageToServer(te);
 	}
 	
 	public void setDirty() {
@@ -72,6 +69,9 @@ public abstract class AbstractDimStorage {
 	// ****************************************************************
 
 	// ****************************************************************
+    public String getOwner() { return this.owner; }
+    public int getFreq() { return this.freq; }
+    
     public int getChangeCount() { return this.changeCount; }
     
     public boolean isClient() { return this.manager.isClient(); }

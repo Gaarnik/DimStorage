@@ -2,6 +2,7 @@ package com.gaarnik.dimstorage.network.message;
 
 import io.netty.buffer.ByteBuf;
 
+import com.gaarnik.dimstorage.network.DimStorageNetwork;
 import com.gaarnik.dimstorage.storage.AbstractDimStorage;
 import com.gaarnik.dimstorage.storage.DimStorageManager;
 import com.gaarnik.dimstorage.tilentity.TEDimChest;
@@ -19,14 +20,26 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 	private String type;
 	
 	private boolean locked;
+	
+	private boolean fromClient;
 
 	// *******************************************************************
-	public MessageUpdateStorage(TEDimChest te) {
-		this.owner = te.getOwner();
-		this.freq = te.getFreq();
-		this.type = te.getStorageType();
+	public MessageUpdateStorage(String owner, int freq, String type, boolean locked, boolean fromClient) {
+		this.owner = owner;
+		this.freq = freq;
+		this.type = type;
 		
-		this.locked = te.isLocked();
+		this.locked = locked;
+		
+		this.fromClient = fromClient;
+	}
+	
+	public MessageUpdateStorage(TEDimChest te, boolean fromClient) {
+		this(te.getOwner(), te.getFreq(), te.getStorageType(), te.isLocked(), fromClient);
+	}
+
+	public MessageUpdateStorage(AbstractDimStorage storage, boolean fromClient) {
+		this(storage.getOwner(), storage.getFreq(), storage.getType(), storage.isLocked(), fromClient);
 	}
 	
 	public MessageUpdateStorage() {}
@@ -34,11 +47,14 @@ public class MessageUpdateStorage implements IMessage, IMessageHandler<MessageUp
 	// *******************************************************************
 	@Override
 	public IMessage onMessage(MessageUpdateStorage message, MessageContext ctx) {
-		DimStorageManager manager = DimStorageManager.instance(false);
+		DimStorageManager manager = DimStorageManager.instance(!this.fromClient);
 		
 		AbstractDimStorage storage = manager.getStorage(message.owner, message.freq, message.type);
 		storage.setLocked(message.locked);
 		storage.setDirty();
+		
+		if(this.fromClient)
+			DimStorageNetwork.sendUpdateStorageToClients(storage);
 		
 		return null;
 	}

@@ -141,12 +141,14 @@ public class GUIDimCHest extends GuiContainer {
 		
 		case BUTTON_OWNER:
 			this.tileEntity.swapOwner();
+			DimStorageNetwork.sendUpdateTEToServer(this.tileEntity);
 			break;
 			
 		case BUTTON_FREQ:
 			try {
 				int freq = Integer.parseInt(this.freqTextField.getText());
-				this.tileEntity.changeFreq(freq);	
+				this.tileEntity.changeFreq(freq);
+				DimStorageNetwork.sendUpdateTEToServer(this.tileEntity);
 			}
 			catch(Exception e) {
 				this.freqTextField.setText(""+this.currentFreq);
@@ -155,11 +157,10 @@ public class GUIDimCHest extends GuiContainer {
 			
 		case BUTTON_LOCKED:
 			this.tileEntity.swapLocked();
+			DimStorageNetwork.sendUpdateStorageToServer(this.tileEntity);
 			break;
 			
 		}
-		
-		DimStorageNetwork.sendUpdateTEToServer(this.tileEntity);
 	}
 	
 	
