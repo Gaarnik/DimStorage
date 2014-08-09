@@ -4,11 +4,7 @@ Version 1.4
 - evolutions:
 - [X] le craft des DimWall donne 2 exemplaires de l'item par craft (reduit un peu le cout)
 - [ ] faire en sorte que le parametre locked soit un parametre du storage et non de la TE.
-- [ ] DimController: telecommande permettant de configurer un DimChest/DimTank:
-	- [ ] Les storages n'ont plus de fenetre de config, elle doit etre affichee via cet outil.
-	- [ ] faire un clic droit avec cet item permet donc d'ouvrir une interface de config pour le DimStorage cible.
-	- [ ] faire les fenetres de config pour le DimChest et le DimTank (pourra peut etre la meme pour les 2)
-	- [ ] retirer l'overlay de config dans la GUI du DimChest et le remplacer par un overlay d'info.
+- [ ] retirer l'overlay d'information => faire un shift+clic droit affiche une fenetre de config
 - [ ] PortableDimChest
 	- [ ] changer le nom dans le code (anciennement DimChestController)
 	- [X] creer l'item.
