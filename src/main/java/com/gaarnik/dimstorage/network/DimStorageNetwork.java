@@ -1,44 +1,39 @@
 package com.gaarnik.dimstorage.network;
 
-import com.gaarnik.dimstorage.DimStorage;
-import com.gaarnik.dimstorage.network.message.MessageOpenStorage;
-import com.gaarnik.dimstorage.network.message.MessageUpdateStorage;
-import com.gaarnik.dimstorage.network.message.MessageUpdateTE;
+import com.gaarnik.dimstorage.network.packet.PacketOpenDimChest;
+import com.gaarnik.dimstorage.network.packet.PacketUpdateStorage;
+import com.gaarnik.dimstorage.network.packet.PacketUpdateTE;
 import com.gaarnik.dimstorage.storage.AbstractDimStorage;
 import com.gaarnik.dimstorage.tilentity.TEDimChest;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
-
 public class DimStorageNetwork {
 	// *******************************************************************
-	public static final SimpleNetworkWrapper instance = NetworkRegistry.INSTANCE.newSimpleChannel(DimStorage.MODID);
-
+	private static final PacketManager packetManager = new PacketManager();
+	
 	// *******************************************************************
 	public static void init() {
-		instance.registerMessage(MessageUpdateTE.class, MessageUpdateTE.class, 0, Side.SERVER);
-		instance.registerMessage(MessageUpdateStorage.class, MessageUpdateStorage.class, 2, Side.CLIENT);
+		packetManager.registerPacket(PacketOpenDimChest.class, 0);
 		
-		instance.registerMessage(MessageOpenStorage.class, MessageOpenStorage.class, 1, Side.CLIENT);
+		packetManager.registerPacket(PacketUpdateStorage.class, 1);
+		packetManager.registerPacket(PacketUpdateTE.class, 2);
 	}
 
 	// *******************************************************************
-	public static void sendUpdateTEToServer(TEDimChest te) {
-		instance.sendToServer(new MessageUpdateTE(te));
+	public static void sendUpdateStorageToServer(TEDimChest te) {
+		packetManager.sendToServer(new PacketUpdateStorage(te));
 	}
 	
-	public static void sendUpdateStorageToServer(TEDimChest te) {
-		instance.sendToServer(new MessageUpdateStorage(te, true));
+	public static void sendUpdateTEToServer(TEDimChest te) {
+		packetManager.sendToServer(new PacketUpdateTE(te));
 	}
 
 	// *******************************************************************
-	public static void sendOpenStorageToClients(TEDimChest te) {
-		instance.sendToAll(new MessageOpenStorage(te));
-	}
-
 	public static void sendUpdateStorageToClients(AbstractDimStorage storage) {
-		instance.sendToServer(new MessageUpdateStorage(storage, false));
+		packetManager.sendToAll(new PacketUpdateStorage(storage));
+	}
+	
+	public static void sendOpenStorageToClients(TEDimChest te) {
+		packetManager.sendToAll(new PacketOpenDimChest(te));
 	}
 
 }
